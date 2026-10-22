@@ -599,15 +599,16 @@ public static class ModMain
     /// <param name="button2">显示的第二个按钮，默认为空。</param>
     /// <param name="isWarn">是否为警告弹窗，若为 True，弹窗配色和背景会变为红色。</param>
     public static int? MyMsgBoxSelect(List<IMyRadio> selections, string? title = null, string? button1 = null,
-        string? button2 = "", bool isWarn = false)
+        string? button2 = "", bool isWarn = false, string? button3 = "")
     {
         title ??= GetDefaultDialogTitle();
         button1 ??= GetDefaultConfirmText();
         button2 ??= "";
+        button3 ??= "";
         // 将弹窗列入队列
         var converter = new MyMsgBoxConverter
         {
-            Type = MyMsgBoxType.Select, Button1 = button1, Button2 = button2, Content = selections, IsWarn = isWarn,
+            Type = MyMsgBoxType.Select, Button1 = button1, Button2 = button2, Button3 = button3, Content = selections, IsWarn = isWarn,
             Title = title
         };
         WaitingMyMsgBox.Add(converter);

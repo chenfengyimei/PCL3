@@ -191,11 +191,14 @@ public static class ProfileUi
     public static void CreateProfile()
     {
         int? selected = null;
+        var includeOthers = CanCreateOtherProfile();
         ModBase.RunInUiWait(() =>
         {
-            var includeOthers = CanCreateOtherProfile();
+            // PCL CY Edition：首次正版验证门槛触发时提供"跳过"按钮，跳过门槛直接创建离线档案
+            var skipText = includeOthers ? null : Lang.Text("Launch.Account.Profile.SkipMicrosoftHint");
             selected = ModMain.MyMsgBoxSelect(_GetAvailableProfileSelection(includeOthers),
-                Lang.Text("Launch.Account.Profile.Create.SelectAuthType.Title"), Lang.Text("Common.Action.Continue"), Lang.Text("Common.Action.Cancel"));
+                Lang.Text("Launch.Account.Profile.Create.SelectAuthType.Title"), Lang.Text("Common.Action.Continue"), Lang.Text("Common.Action.Cancel"),
+                button3: skipText);
         });
         if (selected is null) return;
         ProfileService.IsCreatingProfile = true;
@@ -203,6 +206,8 @@ public static class ProfileUi
         {
             0 => ModLaunch.McLoginType.Ms,
             1 => ModLaunch.McLoginType.Auth,
+            // 3 = 点击"跳过"按钮：跳过正版验证门槛，直接创建离线档案
+            3 => ModLaunch.McLoginType.Legacy,
             _ => ModLaunch.McLoginType.Legacy
         };
         if (type == ModLaunch.McLoginType.Auth)

@@ -22,10 +22,12 @@ public partial class MyMsgSelect
             InitializeComponent();
             AppendUniqueNameSuffix(Btn1);
             AppendUniqueNameSuffix(Btn2);
+            AppendUniqueNameSuffix(Btn3);
             myConverter = converter;
             LabTitle.Text = converter.Title;
             ConfigurePrimaryButton(converter.Button1, converter.IsWarn);
-            ConfigureSecondaryButton(converter.Button2);
+            ConfigureSecondaryButton(Btn2, converter.Button2);
+            ConfigureSecondaryButton(Btn3, converter.Button3);
             ShapeLine.StrokeThickness = ModBase.GetWPFSize(1d);
             InitializeSelectionList(converter.Content);
         }
@@ -42,6 +44,7 @@ public partial class MyMsgSelect
         Loaded += Load;
         Btn1.Click += Btn1_Click;
         Btn2.Click += Btn2_Click;
+        Btn3.Click += Btn3_Click;
         LabTitle.MouseLeftButtonDown += Drag;
         PanBorder.MouseLeftButtonDown += Drag;
     }
@@ -61,10 +64,10 @@ public partial class MyMsgSelect
         }
     }
 
-    private void ConfigureSecondaryButton(string text)
+    private void ConfigureSecondaryButton(MyButton button, string text)
     {
-        Btn2.Text = text;
-        Btn2.Visibility = string.IsNullOrEmpty(text) ? Visibility.Collapsed : Visibility.Visible;
+        button.Text = text;
+        button.Visibility = string.IsNullOrEmpty(text) ? Visibility.Collapsed : Visibility.Visible;
     }
 
     private void InitializeSelectionList(object content)
@@ -195,6 +198,22 @@ public partial class MyMsgSelect
         myConverter.IsExited = true;
         myConverter.Result = null;
         Close();
+    }
+
+    public void Btn3_Click(object sender, MouseButtonEventArgs e)
+    {
+        if (myConverter.IsExited)
+            return;
+        if (myConverter.Button3Action is not null)
+        {
+            myConverter.Button3Action();
+        }
+        else
+        {
+            myConverter.IsExited = true;
+            myConverter.Result = 3;
+            Close();
+        }
     }
 
     private void OnChecked(IMyRadio sender, EventArgs e)
