@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using PCL.Core.App;
@@ -14,13 +14,11 @@ public static class UpdateManager
 
     public static UpdatesWrapperModel remoteServer = new(new List<IUpdateSource>
     {
-        new UpdatesMirrorChyanModel(),
-        new UpdatesRandomModel(new[]
-        {
-            new UpdatesMinioModel("https://s3.pysio.online/pcl2-ce/", "Pysio"),
-            new UpdatesMinioModel("https://staticassets.naids.com/resources/pclce/", "Naids")
-        }),
-        new UpdatesMinioModel("https://github.com/PCL-Community/PCL2_CE_Server/raw/main/", "GitHub")
+        // PCL3：已移除 PCL CE 官方更新渠道，防止用户被自动更新回官方版本。
+        // 接入自有更新源时，参考下列写法替换 UpdatesNoopModel（必须免费提供）：
+        //   new UpdatesMinioModel("https://<你的服务器>/<路径>/", "自定义源"),
+        //   new UpdatesMirrorChyanModel(),
+        new UpdatesNoopModel()
     });
 
     public static bool IsCurrentVersionBeta
@@ -72,7 +70,7 @@ public static class UpdateManager
 
     public static void UpdateStart(UpdateEnums.UpdateType type, string receivedKey = null, bool forceValidated = false)
     {
-        var dlTargetPath = ModBase.exePath + @"PCL\Plain Craft Launcher Community Edition.exe";
+        var dlTargetPath = ModBase.exePath + @"PCL\PCL3.exe";
         ModBase.RunInNewThread(() =>
         {
             try
@@ -167,7 +165,7 @@ public static class UpdateManager
     {
         try
         {
-            var fileName = ModBase.exePath + @"PCL\Plain Craft Launcher Community Edition.exe";
+            var fileName = ModBase.exePath + @"PCL\PCL3.exe";
             if (!File.Exists(fileName))
             {
                 ModBase.Log("[System] 更新失败：未找到更新文件");
@@ -206,7 +204,7 @@ public static class UpdateManager
     internal static void DownloadLatestPCL(ModLoader.LoaderBase loaderToSyncProgress = null)
     {
         // 注意：如果要自行实现这个功能，请换用另一个文件路径，以免与官方版本冲突
-        var latestPCLPath = Path.Combine(ModBase.pathTemp, "CE-Latest.exe");
+        var latestPCLPath = Path.Combine(ModBase.pathTemp, "PCL3-Latest.exe");
         var target = remoteServer.GetLatestVersion(UpdateChannel.stable,
             SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64);
         if (target is null)
@@ -214,6 +212,13 @@ public static class UpdateManager
         if (File.Exists(latestPCLPath) && (ModBase.GetFileSHA256(latestPCLPath) ?? "") == (target.Sha256 ?? ""))
         {
             ModBase.Log("[System] 最新版 PCL 已存在，跳过下载");
+            return;
+        }
+
+        // 无自有更新源时（UpdatesNoopModel），“最新版”即当前版本，直接打包当前 exe
+        if (target.VersionCode <= ModBase.versionCode)
+        {
+            ModBase.CopyFile(Basics.ExecutablePath, latestPCLPath);
             return;
         }
 

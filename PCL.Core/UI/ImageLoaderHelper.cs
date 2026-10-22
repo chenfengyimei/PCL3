@@ -19,7 +19,7 @@ public static class ImageLoaderHelper {
     /// <returns></returns>
     public static async Task SetServerLogoAsync(string base64String, Image imageElement, string? defaultImageUri = null) {
         await SetImageFromBase64Async(base64String, imageElement, 
-            defaultImageUri ?? "pack://application:,,,/Plain Craft Launcher 2;component/Images/Icons/DefaultServer.png");
+            defaultImageUri ?? "pack://application:,,,/PCL3;component/Images/Icons/DefaultServer.png");
     }
 
     /// <summary>

@@ -24,12 +24,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <ApplicationIcon>Images\icon.ico</ApplicationIcon>
-        <AssemblyTitle>Plain Craft Launcher Community Edition</AssemblyTitle>
-        <Description>Minecraft 启动器 (作者: 龙腾猫跃; 经社区二次开发版本)</Description>
-        <Product>Plain Craft Launcher Community Edition</Product>
-        <Copyright>Copyright © 龙腾猫跃 2016. All Rights Reserved.</Copyright>
-        <AssemblyVersion>2.15.1.0</AssemblyVersion>
-        <FileVersion>2.15.1.0</FileVersion>
+        <AssemblyName>PCL3</AssemblyName>
+        <AssemblyTitle>PCL3</AssemblyTitle>
+        <Description>PCL3 是一款开源的 Minecraft 启动器，基于 PCL Community Edition 二次开发 (原作者: 龙腾猫跃)</Description>
+        <Product>PCL3</Product>
+        <Copyright>Copyright © 龙腾猫跃 2016. All Rights Reserved. PCL3 基于 PCL Community Edition 二次开发</Copyright>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <FileVersion>3.0.0.0</FileVersion>
+        <Version>3.0.0</Version>
         <NoWarn>
             41999;42016;42017;42018;42019;42020;42021;42022;42032;42036;42314;
             VSTHRD002;VSTHRD003;VSTHRD110;VSTHRD200

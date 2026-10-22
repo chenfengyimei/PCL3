@@ -37,14 +37,6 @@ public partial class PageSetupAbout
             .Replace("%VERSIONCODE%", ModBase.versionCode.ToString()).Replace("%BRANCH%", ModBase.versionBranchName)
             .Replace("%COMMIT_HASH%", ModBase.commitHashShort);
 
-        if (!Lang.IsChineseMainland)
-        {
-            ItemMcmod.Visibility = Visibility.Collapsed;
-            BtnMcmod.Visibility = Visibility.Collapsed;
-            ImgMcmod.Visibility = Visibility.Collapsed;
-            RowMcmod.Height = new GridLength(0);
-        }
-
         LoadContributersAsync();
     }
 
@@ -53,7 +45,7 @@ public partial class PageSetupAbout
         try
         {
             using (var response = await HttpRequest
-                       .Create("https://api.github.com/repos/PCL-Community/PCL2-CE/contributors").SendAsync())
+                       .Create("https://api.github.com/repos/chenfengyimei/PCL3/contributors").SendAsync())
             {
                 response.EnsureSuccessStatusCode();
                 var cos = await response.AsJsonAsync<List<GitHubContributor>>(JsonCompat.SerializerOptions);

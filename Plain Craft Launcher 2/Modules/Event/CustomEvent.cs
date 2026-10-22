@@ -96,6 +96,9 @@ namespace PCL
             [EventType.ModifyVariable] = _WriteVariable,
             [EventType.WriteVariable] = _WriteVariable,
             [EventType.OpenHelp] = _OpenHelp,
+            [EventType.MemoryOptimize] = _MemoryOptimize,
+            [EventType.CheckUpdate] = _CheckUpdate,
+            [EventType.JoinLobby] = _JoinLobby,
         };
 
         /// <summary>
@@ -193,6 +196,32 @@ namespace PCL
         /// </summary>
         private static void _ClearTrash(string _, EventType __) =>
             ModBase.RunInThread(PageToolsTest.RubbishClear);
+
+        /// <summary>
+        /// 内存优化。异步释放启动器与 Minecraft 的闲置工作集。
+        /// </summary>
+        private static void _MemoryOptimize(string _, EventType __) =>
+            ModBase.RunInThread(PageToolsTest.OptimizeMemory);
+
+        /// <summary>
+        /// 检查启动器更新。
+        /// </summary>
+        private static void _CheckUpdate(string _, EventType __) =>
+            UpdateManager.UpdateStart(UpdateEnums.UpdateType.PromptOnly);
+
+        /// <summary>
+        /// 加入联机大厅。
+        /// </summary>
+        private static void _JoinLobby(string arg, EventType __)
+        {
+            if (string.IsNullOrWhiteSpace(arg))
+            {
+                HintService.Hint(Lang.Text("Tools.GameLink.Join.InvalidText"));
+                return;
+            }
+
+            PageToolsGameLink.JoinLobby(arg.Trim());
+        }
 
         /// <summary>
         /// 弹出消息框。参数：Title|Content[|ButtonText]。

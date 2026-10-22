@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using PCL.Core.App;
@@ -256,7 +256,7 @@ public partial class PageSetupUpdate
 
     private void BtnChangelog_Click(object sender, MouseButtonEventArgs e)
     {
-        ModBase.OpenWebsite("https://github.com/PCL-Community/PCL2-CE/releases/v" + ModBase.versionBaseName);
+        ModBase.OpenWebsite("https://github.com/chenfengyimei/PCL3/releases/v" + ModBase.versionBaseName);
     }
 
     public string VersionNameFormat(string str)

@@ -43,22 +43,11 @@ public partial class PageLaunchRight : IRefreshable
         _EnsureHomepageLiveWatcher();
     }
 
-    // 暂时关闭快照版提示
+    // 关闭社区提示（PCL3 不再要求输入名称才能隐藏）
     private void BtnHintClose_Click(object sender, EventArgs e)
     {
-        var input = ModMain.MyMsgBoxInput(Lang.Text("Launch.Right.CommunityHint.InputTitle"));
-        if (string.IsNullOrWhiteSpace(input))
-            return;
-        input = new string(input.Where(char.IsAsciiLetter).ToArray()).ToLower();
-        if (input.Contains("pclcommunity"))
-        {
-            ModAnimation.AniDispose(PanHint, true);
-            States.Hint.CEMessage = false;
-        }
-        else
-        {
-            HintService.Hint(Lang.Text("Launch.Right.CommunityHint.WrongInput"));
-        }
+        ModAnimation.AniDispose(PanHint, true);
+        States.Hint.CEMessage = false;
     }
 
     #region 主页
@@ -128,9 +117,16 @@ public partial class PageLaunchRight : IRefreshable
                     break;
 
                 case 1:
-                    LogWrapper.Info("[Page] 主页预设：回声洞 已被移除");
-                    ModMain.MyMsgBox(Lang.Text("Launch.Homepage.Preset.EchoCave.Removed"));
-                    return;
+                    LogWrapper.Info("[Page] 主页预设：回声洞");
+                    var caveText = PageToolsTest.GetRandomCave(true);
+                    content = $@"
+    <local:MyCard Title=""{{DynamicResource Setup.Ui.Homepage.Preset.EchoCave}}"" Margin=""0,0,0,15"">
+        <TextBlock Margin=""25,38,23,15"" FontSize=""13.5"" IsHitTestVisible=""False"" Text=""{caveText}"" TextWrapping=""Wrap"" Foreground=""{{DynamicResource ColorBrush1}}"" />
+        <local:MyIconButton Height=""22"" Width=""22"" Margin=""9"" VerticalAlignment=""Top"" HorizontalAlignment=""Right""
+            EventType=""刷新主页"" EventData=""/""
+            SvgIcon=""lucide/refresh-cw"" />
+    </local:MyCard>";
+                    break;
 
                 case 2:
                     LogWrapper.Info("[Page] 主页预设：Minecraft 新闻");
@@ -244,6 +240,30 @@ public partial class PageLaunchRight : IRefreshable
                         PanCustom.Children.Add(ModMain.frmHomepageNews);
                     });
                     return;
+
+                case 16:
+                    LogWrapper.Info("[Page] 主页预设：简单主页");
+                    url = "https://pclhomeplazaoss.lingyunawa.top:26994/d/Homepages/MFn233/Custom.xaml";
+                    content = LoadFromNetwork(url);
+                    break;
+
+                case 17:
+                    LogWrapper.Info("[Page] 主页预设：PCL 主页市场");
+                    url = "https://pclhomeplazaoss.lingyunawa.top:26994/d/Homepages/JingHai-Lingyun/Custom.xaml";
+                    content = LoadFromNetwork(url);
+                    break;
+
+                case 18:
+                    LogWrapper.Info("[Page] 主页预设：PCL 新闻速报");
+                    url = "https://pclhomeplazaoss.lingyunawa.top:26994/d/Homepages/Joker2184/UpdateHomepage.xaml";
+                    content = LoadFromNetwork(url);
+                    break;
+
+                case 19:
+                    LogWrapper.Info("[Page] 主页预设：OpenMCIM 仪表盘");
+                    url = "https://files.mcimirror.top/PCL";
+                    content = LoadFromNetwork(url);
+                    break;
             }
         }
 
@@ -326,7 +346,7 @@ public partial class PageLaunchRight : IRefreshable
     {
         try
         {
-            var uri = new Uri($"pack://application:,,,/Plain Craft Launcher 2;component/Resources/hints/{langCode}.txt", UriKind.Absolute);
+            var uri = new Uri($"pack://application:,,,/PCL3;component/Resources/hints/{langCode}.txt", UriKind.Absolute);
             using var stream = Application.GetResourceStream(uri)?.Stream;
             if (stream is null) return null;
             using var reader = new StreamReader(stream);

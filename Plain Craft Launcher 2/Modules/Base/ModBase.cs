@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -72,7 +72,7 @@ public static class ModBase
     /// <summary>
     ///     程序内嵌图片文件夹路径，以“/”结尾。
     /// </summary>
-    public static readonly string pathImage = "pack://application:,,,/Plain Craft Launcher 2;component/Images/";
+    public static readonly string pathImage = "pack://application:,,,/PCL3;component/Images/";
 
     /// <summary>
     ///     当前程序的语言。
@@ -110,10 +110,10 @@ public static class ModBase
     public static string pathAppdata = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "PCL") + @"\";
 
     /// <summary>
-    ///     AppData 中的 PCLCE 配置文件夹路径，以 \ 结尾。
+    ///     AppData 中的 PCL3 配置文件夹路径，以 \ 结尾。
     /// </summary>
     public static string pathAppdataConfig = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                             (versionBranchName == "Debug" ? @"\.pclcedebug\" : @"\.pclce\");
+                                             (versionBranchName == "Debug" ? @"\.pcl3debug\" : @"\.pcl3\");
 
 
     #endregion
@@ -3560,7 +3560,7 @@ public static class ModBase
                                  Lang.Text("Common.Action.OpenFolder"),
                                  Lang.Text("Setup.Feedback.Reminder.NotNeeded")) ==
                              1)) OpenExplorer(exePath + @"PCL\Log\");
-        OpenWebsite("https://github.com/PCL-Community/PCL2-CE/issues/");
+        OpenWebsite("https://github.com/chenfengyimei/PCL3/issues/");
     }
 
     public static bool CanFeedback(bool showHint)

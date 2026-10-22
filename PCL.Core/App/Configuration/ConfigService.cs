@@ -161,7 +161,8 @@ public sealed partial class ConfigService
                 {
                     string[] oldPaths = [
                         Path.Combine(Paths.OldSharedData, "Config.json"),
-                        Path.Combine(Paths.SharedData, "config.json")
+                        Path.Combine(Paths.SharedData, "config.json"),
+                        Path.Combine(Paths.OldSharedData, "config.v1.json")
                     ];
                     _TryMigrate(SharedConfigPath, oldPaths.Select(path =>
                         new ConfigMigration { From = path, To = SharedConfigPath, OnMigration = SharedJsonMigration }));

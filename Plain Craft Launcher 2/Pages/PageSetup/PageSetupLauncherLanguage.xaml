@@ -177,7 +177,7 @@
                             Text="{DynamicResource Setup.Language.Banner.SubmitPullRequest}"
                             SvgIcon="lucide/git-pull-request-arrow"
                             local:CustomEventService.EventType="OpenUrl"
-                            local:CustomEventService.EventData="https://github.com/PCL-Community/PCL-CE/pulls" />
+                            local:CustomEventService.EventData="https://github.com/chenfengyimei/PCL3/pulls" />
                     </StackPanel>
                 </StackPanel>
             </local:MyCard>

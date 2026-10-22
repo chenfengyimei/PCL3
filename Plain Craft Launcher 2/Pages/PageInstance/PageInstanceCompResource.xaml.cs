@@ -2706,9 +2706,9 @@ public partial class PageInstanceCompResource : IRefreshable
 
                     modSearchName = modSearchName.Replace("++", "+").Replace("pti+Fine", "ptiFine");
                     // 显示
-                    if (currentCompType == ModComp.CompType.Schematic || !Lang.IsChineseMainland)
+                    if (currentCompType == ModComp.CompType.Schematic)
                     {
-                        // 投影原理图文件或非中文区域不显示百科搜索选项
+                        // 投影原理图文件不显示百科搜索选项
                         if (modEntry.Url is null)
                             ModMain.MyMsgBox(contentLines.Join("\r\n"), modEntry.Name, Lang.Text("Instance.Resource.Item.Info.Return"));
                         else if (ModMain.MyMsgBox(contentLines.Join("\r\n"), modEntry.Name, Lang.Text("Instance.Resource.Item.Info.OpenWebsite"), Lang.Text("Instance.Resource.Item.Info.Return")) ==

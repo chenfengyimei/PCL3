@@ -1,33 +1,21 @@
-using PCL.Core.App.Region;
-using PCL.Core.App.Localization;
-using PCL.Core.UI;
-
 namespace PCL;
 
+/// <summary>
+///     区域限制策略。PCL3 是完全开放的公开版本，不按国家或地区限制任何功能。
+/// </summary>
 internal static class RestrictedFeaturePolicy
 {
-    internal static RegionAssessment Assess() => RegionPolicy.Evaluate(RegionPolicy.ReadWindowsSignals());
-
-    internal static bool IsRestricted => Assess().IsRestricted;
+    internal static bool IsRestricted => false;
 
     internal static bool Check(string feature, bool showHint = true)
     {
-        var assessment = Assess();
-        if (!assessment.IsRestricted) return true;
-
-        ModBase.Log($"[RegionPolicy] 已阻止功能 {feature}，判定原因：{assessment.Reason}");
-        if (showHint)
-        {
-            HintService.Hint(Lang.Text(assessment.Classification == RegionClassification.Unknown
-                ? "Region.Feature.Unknown"
-                : "Region.Feature.Restricted"), HintType.Error);
-        }
-        return false;
+        _ = feature;
+        _ = showHint;
+        return true;
     }
 
     internal static void ThrowIfRestricted(string feature)
     {
-        if (Check(feature, false)) return;
-        throw new ModBase.CancelledException();
+        _ = feature;
     }
 }

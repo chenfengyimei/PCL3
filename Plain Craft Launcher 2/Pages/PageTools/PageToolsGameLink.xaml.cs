@@ -393,11 +393,21 @@ public partial class PageToolsGameLink
 
                 #region 多服务器轮询获取公告
 
-                while (serverNumber < Secrets.LinkServers.Length)
+                var linkServers = Secrets.LinkServers
+                    .Where(server => !string.IsNullOrWhiteSpace(server))
+                    .Select(server => server.TrimEnd('/'))
+                    .ToArray();
+                if (linkServers.Length == 0)
+                {
+                    LogWrapper.Warn("[Link] 未配置联机服务器地址，跳过公告获取");
+                    return;
+                }
+
+                while (serverNumber < linkServers.Length)
                     try
                     {
                         // 获取缓存版本号
-                        var cacheRes = Requester.Fetch($"{Secrets.LinkServers[serverNumber]}/api/link/v2/cache.ini",
+                        var cacheRes = Requester.Fetch($"{linkServers[serverNumber]}/api/link/v2/cache.ini",
                             new FetchParam
                             {
                                 Method = "GET",
@@ -415,7 +425,7 @@ public partial class PageToolsGameLink
                         {
                             LogWrapper.Info("[Link] Fetching new announcement data");
                             var received = Requester.Fetch(
-                                $"{Secrets.LinkServers[serverNumber]}/api/link/v2/announce.json",
+                                $"{linkServers[serverNumber]}/api/link/v2/announce.json",
                                 new FetchParam
                                 {
                                     Method = "GET",
@@ -883,6 +893,37 @@ public partial class PageToolsGameLink
                 StackPlayerList.Children.Clear();
                 CurrentSubpage = Subpages.PanSelect;
             });
+    }
+
+    /// <summary>
+    ///     通过大厅编号加入联机大厅（供自定义主页事件调用）。
+    /// </summary>
+    public static void JoinLobby(string id)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            HintService.Hint(Lang.Text("Tools.GameLink.Join.InvalidText"));
+            return;
+        }
+
+        if (!ModLink.LobbyPrecheck())
+            return;
+
+        ModBase.RunInNewThread(() =>
+        {
+            try
+            {
+                var ok = LobbyService.JoinLobbyAsync(id.Trim(), LobbyInfoProvider.GetUsername())
+                    .GetAwaiter().GetResult();
+                if (!ok)
+                    HintService.Hint(Lang.Text("Tools.GameLink.Join.InvalidText"), HintType.Error);
+            }
+            catch (Exception ex)
+            {
+                ModBase.Log(ex, "加入大厅失败", ModBase.LogLevel.Hint,
+                    userSummary: Lang.Text("Tools.GameLink.Join.InvalidText"));
+            }
+        }, "Join Lobby");
     }
 
     // 加入大厅

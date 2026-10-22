@@ -39,7 +39,7 @@ public sealed partial class ThemeService
         handler: e =>
         {
             // ignore no change or non-current color theme change
-            if (e.OldValue == e.Value) return;
+            if (Equals(e.OldValue, e.Value)) return;
             if (IsDarkMode) { if (e.Item == Config.Preference.Theme.LightColorConfig) return; }
             else { if (e.Item == Config.Preference.Theme.DarkColorConfig) return; }
             // trigger color refresh
@@ -50,6 +50,30 @@ public sealed partial class ThemeService
                     ApplyColorResources();
                     ColorThemeChanged?.Invoke(CurrentTheme);
                     _AprilFoolLogic();
+                });
+            }
+        }
+    );
+
+    [RegisterConfigEvent]
+    public static ConfigEventRegistry OnCustomThemeArgsConfigChanged => new(
+        scope: [
+            Config.Preference.Theme.WindowHueConfig,
+            Config.Preference.Theme.WindowSatConfig,
+            Config.Preference.Theme.WindowLightConfig,
+            Config.Preference.Theme.WindowDeltaConfig
+        ],
+        trigger: ConfigEvent.Update,
+        handler: e =>
+        {
+            if (Equals(e.OldValue, e.Value)) return;
+            if (CurrentTheme != ColorTheme.Custom) return;
+            if (Lifecycle.CurrentState > LifecycleState.Loading)
+            {
+                Lifecycle.CurrentApplication.Dispatcher.BeginInvoke(() =>
+                {
+                    ApplyColorResources();
+                    ColorThemeChanged?.Invoke(CurrentTheme);
                 });
             }
         }
@@ -101,9 +125,8 @@ public sealed partial class ThemeService
 
     private static void _AprilFoolLogic()
     {
-        // for HMCL theme on April Fools' Day
+        // 愚人节切换窗口标题样式；PCL3 不再限制 HMCL 主题的使用时间
         if (Basics.IsAprilFool) Config.Preference.WindowTitleTypeConfig.TriggerEvent(ConfigEvent.Changed, null);
-        else if (CurrentTheme == ColorTheme.HmclBlue) CurrentTheme = ColorTheme.CatBlue;
     }
 
     /// <summary>
@@ -148,17 +171,22 @@ public sealed partial class ThemeService
     /// <summary>
     /// 获取当前色彩主题对应的各种参数。
     /// </summary>
-    public static (int Hue, double LightAdjust, double ChromaAdjust) GetCurrentThemeArgs()
+    public static (int Hue, double LightAdjust, double ChromaAdjust, int Delta) GetCurrentThemeArgs()
     {
         var theme = CurrentTheme;
         return theme switch
         {
-            ColorTheme.SkyBlue => (235, 0.36, 0.2),
-            ColorTheme.CatBlue => (255, 0, -0.2),
-            ColorTheme.DeathBlue => (268, -0.05, -0.1),
-            ColorTheme.HmclBlue => (275, -0.03, -0.35),
+            ColorTheme.SkyBlue => (235, 0.36, 0.2, 0),
+            ColorTheme.CatBlue => (255, 0, -0.2, 0),
+            ColorTheme.DeathBlue => (268, -0.05, -0.1, 0),
+            ColorTheme.HmclBlue => (275, -0.03, -0.35, 0),
+            ColorTheme.Custom => (
+                ((Config.Preference.Theme.WindowHue % 360) + 360) % 360,
+                (Math.Clamp(Config.Preference.Theme.WindowLight, 0, 100) - 20) / 100d,
+                (Math.Clamp(Config.Preference.Theme.WindowSat, 0, 100) - 80) / 100d,
+                Math.Clamp(Config.Preference.Theme.WindowDelta, 0, 180)),
 #if DEBUG
-            _ => ((int)theme, 0, 0)
+            _ => ((int)theme, 0, 0, 0)
 #else
             _ => throw new IndexOutOfRangeException($"Invalid theme index: {(int)theme}")
 #endif
@@ -199,19 +227,24 @@ public sealed partial class ThemeService
         LabColor.FromLch(tone.LForeground).ToCatColor("Memory", false),
     ];
 
-    private static CatColorResource[] _CalculateColors(ToneProfile tone, (int hue, double lightAdj, double chromaAdj) args) => [
-        LabColor.FromLch(_AdjustLinear(tone.L1, args.lightAdj * 0.1), _AdjustLinear(tone.C1, args.chromaAdj * 0.25), args.hue).ToCatColor("1"),
-        LabColor.FromLch(_AdjustLinear(tone.L2, args.lightAdj), _AdjustLinear(tone.C2, args.chromaAdj), args.hue).ToCatColor("2"),
-        LabColor.FromLch(_AdjustLinear(tone.L3, args.lightAdj), _AdjustLinear(tone.C3, args.chromaAdj), args.hue).ToCatColor("3"),
-        LabColor.FromLch(_AdjustLinear(tone.L4, args.lightAdj), _AdjustLinear(tone.C4, args.chromaAdj), args.hue).ToCatColor("4"),
-        LabColor.FromLch(_AdjustLinear(tone.L5, args.lightAdj), _AdjustLinear(tone.C5, args.chromaAdj), args.hue).ToCatColor("5"),
-        LabColor.FromLch(_AdjustLinear(tone.L6, args.lightAdj), _AdjustLinear(tone.C6, args.chromaAdj), args.hue).ToCatColor("6"),
-        LabColor.FromLch(_AdjustLinear(tone.L7, args.lightAdj), _AdjustLinear(tone.C7, args.chromaAdj), args.hue).ToCatColor("7"),
-        LabColor.FromLch(_AdjustLinear(tone.L8, args.lightAdj), _AdjustLinear(tone.C8, args.chromaAdj), args.hue).ToCatColor("8"),
-        LabColor.FromLch(_AdjustLinear(tone.L8, args.lightAdj), _AdjustLinear(tone.C8, args.chromaAdj), args.hue, tone.ASemiTransparent).ToCatColor("SemiTransparent", false),
-        LabColor.FromLch(_AdjustLinear(tone.L5, args.lightAdj), _AdjustLinear(tone.C5, args.chromaAdj), args.hue).ToCatColor("Bg0"),
-        LabColor.FromLch(_AdjustLinear(tone.L7, args.lightAdj), _AdjustLinear(tone.C7, args.chromaAdj), args.hue, tone.ASemiWhite).ToCatColor("Bg1"),
-    ];
+    private static CatColorResource[] _CalculateColors(ToneProfile tone,
+        (int Hue, double LightAdjust, double ChromaAdjust, int Delta) args)
+    {
+        double Hue(double offset) => args.Hue + args.Delta * offset;
+        return [
+            LabColor.FromLch(_AdjustLinear(tone.L1, args.LightAdjust * 0.1), _AdjustLinear(tone.C1, args.ChromaAdjust * 0.25), Hue(-0.25)).ToCatColor("1"),
+            LabColor.FromLch(_AdjustLinear(tone.L2, args.LightAdjust), _AdjustLinear(tone.C2, args.ChromaAdjust), Hue(-0.15)).ToCatColor("2"),
+            LabColor.FromLch(_AdjustLinear(tone.L3, args.LightAdjust), _AdjustLinear(tone.C3, args.ChromaAdjust), Hue(-0.08)).ToCatColor("3"),
+            LabColor.FromLch(_AdjustLinear(tone.L4, args.LightAdjust), _AdjustLinear(tone.C4, args.ChromaAdjust), Hue(0)).ToCatColor("4"),
+            LabColor.FromLch(_AdjustLinear(tone.L5, args.LightAdjust), _AdjustLinear(tone.C5, args.ChromaAdjust), Hue(0)).ToCatColor("5"),
+            LabColor.FromLch(_AdjustLinear(tone.L6, args.LightAdjust), _AdjustLinear(tone.C6, args.ChromaAdjust), Hue(0.08)).ToCatColor("6"),
+            LabColor.FromLch(_AdjustLinear(tone.L7, args.LightAdjust), _AdjustLinear(tone.C7, args.ChromaAdjust), Hue(0.15)).ToCatColor("7"),
+            LabColor.FromLch(_AdjustLinear(tone.L8, args.LightAdjust), _AdjustLinear(tone.C8, args.ChromaAdjust), Hue(0.25)).ToCatColor("8"),
+            LabColor.FromLch(_AdjustLinear(tone.L8, args.LightAdjust), _AdjustLinear(tone.C8, args.ChromaAdjust), Hue(0.25), tone.ASemiTransparent).ToCatColor("SemiTransparent", false),
+            LabColor.FromLch(_AdjustLinear(tone.L5, args.LightAdjust), _AdjustLinear(tone.C5, args.ChromaAdjust), Hue(0)).ToCatColor("Bg0"),
+            LabColor.FromLch(_AdjustLinear(tone.L7, args.LightAdjust), _AdjustLinear(tone.C7, args.ChromaAdjust), Hue(0.15), tone.ASemiWhite).ToCatColor("Bg1"),
+        ];
+    }
 
     private static CatColorResource[] LightGrayCache { get => field ??= _CalculateGrays(ToneProfiles.Light); set; } = null!;
 

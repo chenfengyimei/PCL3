@@ -25,12 +25,12 @@ namespace PCL
             { "写入变量", "WriteVariable" },
             { "打开帮助", "OpenHelp" },
             { "刷新帮助", "OpenHelp" },
+            { "内存优化", "MemoryOptimize" },
+            { "检查更新", "CheckUpdate" },
+            { "加入房间", "JoinLobby" },
         };
 
-        public static readonly HashSet<string> UnsupportedTypes = new(StringComparer.Ordinal)
-        {
-            "内存优化", "加入房间", "检查更新"
-        };
+        public static readonly HashSet<string> UnsupportedTypes = new(StringComparer.Ordinal);
 
         public static bool TryToEnglish(string chineseName, out string englishName) =>
             ChineseToEnglish.TryGetValue(chineseName, out englishName);

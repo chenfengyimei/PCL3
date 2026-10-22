@@ -1,73 +1,74 @@
-[简体中文](README.md) | **English** | [繁體中文](README-ZH_TW.md)
+**English** | [简体中文](README.md) | [繁體中文](README-ZH_TW.md)
 
 <div align="center">
 
-<img src="Plain Craft Launcher 2/Images/icon.ico" alt="Logo" width="80" height="80">
+<img src="Plain Craft Launcher 2/Images/icon.ico" alt="PCL3 Logo" width="80" height="80">
 
-# PCL Community Edition
+# PCL3
 
-[![Stars](https://img.shields.io/github/stars/PCL-Community/PCL-CE?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZD0iTTggLjI1YS43NS43NSAwIDAgMSAuNjczLjQxOGwxLjg4MiAzLjgxNSA0LjIxLjYxMmEuNzUuNzUgMCAwIDEgLjQxNiAxLjI3OWwtMy4wNDYgMi45Ny43MTkgNC4xOTJhLjc1MS43NTEgMCAwIDEtMS4wODguNzkxTDggMTIuMzQ3bC0zLjc2NiAxLjk4YS43NS43NSAwIDAgMS0xLjA4OC0uNzlsLjcyLTQuMTk0TC44MTggNi4zNzRhLjc1Ljc1IDAgMCAxIC40MTYtMS4yOGw0LjIxLS42MTFMNy4zMjcuNjY4QS43NS43NSAwIDAgMSA4IC4yNVoiIGZpbGw9IiNlYWM1NGYiLz48L3N2Zz4=&logoSize=auto&label=stars&labelColor=444444&color=eac54f)](https://github.com/PCL-Community/PCL-CE/)
-![GitHub Release](https://img.shields.io/github/v/release/PCL-Community/PCL-CE?label=release&logo=github&style=for-the-badge)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/PCL-Community/PCL-CE/build-test.yml?style=for-the-badge)
-
-[![Issues](https://img.shields.io/github/issues/PCL-Community/PCL-CE?style=for-the-badge&label=issues&labelColor=444444&color=1F883D&logo=github)](https://github.com/PCL-Community/PCL-CE/issues)
-[![Pull requests](https://img.shields.io/github/issues-pr/PCL-Community/PCL-CE?style=for-the-badge&label=pull%20requests&labelColor=444444&color=1F883D&logo=github)](https://github.com/PCL-Community/PCL-CE/pulls)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/PCL-Community/PCL-CE/total?style=for-the-badge)
-[![Bilibili](https://img.shields.io/badge/Threads-bilibili-00A4DB?style=for-the-badge&labelColor=444444&logo=bilibili)](https://space.bilibili.com/3546847192811755/dynamic) <br />
-
-<a href="https://trendshift.io/repositories/21800?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-21800" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/21800/daily?language=C%23" alt="PCL-Community%2FPCL-CE | Trendshift" width="250" height="55"/></a>
-<a href="https://trendshift.io/repositories/21800" target="_blank"><img src="https://trendshift.io/api/badge/repositories/21800" alt="PCL-Community%2FPCL-CE | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-
-[download](https://github.com/PCL-Community/PCL-CE/releases/latest) |
-[Upstream repo](https://github.com/Meloong-Git/PCL)
-
-[Submit issues](https://github.com/PCL-Community/PCL-CE/issues/new/choose) |
-[Contribution Guidelines](https://github.com/PCL-Community/PCL-CE/wiki/开发指南)
+An open-source, free, community-driven Minecraft launcher
 
 </div>
 
-PCL CE is a community edition developed as a secondary project based on PCL’s open-source code. It includes features and improvements that have not yet been implemented in the main branch.
+PCL3 is an open-source Minecraft launcher built on top of [PCL Community Edition (PCL CE)](https://github.com/PCL-Community/PCL-CE), which in turn derives from [LTCat](https://github.com/Meloong-Git/PCL)'s Plain Craft Launcher 2. PCL3 ships with its own branding, data directory and update channel, so it can be installed alongside the original PCL and PCL CE without conflicts.
 
-The version numbers of the community edition do not strictly correspond to those of the main branch, so please do not report community edition issues to the official repository.
+**Source code, releases and issue tracker: <https://github.com/chenfengyimei/PCL3>**
 
-Everyone is welcome to try it out!
+PCL3 is a fully open public build: no locked theme palettes, no regional restrictions on downloads, repairs or modpack installation, and no hidden built-in features.
 
-**Developing group:** [599620549](https://qm.qq.com/q/PNQA4Md8wc) | **User group 1:** [1028074835](https://qm.qq.com/q/qrMGJo8BQQ) | **User group 2:** [1070029541](https://qm.qq.com/q/lBywbDMWhG)
+## ✨ Features
 
-## 💻 Supported Platforms
+- Game version management and fully automatic installation (releases, snapshots, legacy versions)
+- Forge, NeoForge, Fabric, Quilt and OptiFine support
+- Search, download and manage mods, modpacks, resource packs, shaders and worlds
+- Microsoft, offline and Authlib-Injector accounts with multi-account switching
+- Java detection/download and memory management
+- Smart crash analysis and log inspection
+- Themes, backgrounds, custom XAML homepages and launch hints
+- Toolbox: junk cleaning, daily luck, custom downloads, skins and avatars, server query, achievement generator and more
+- Multiplayer powered by EasyTier
+- Multiple game folders, version isolation, export and sharing
 
-| Operating System | Support Status | Requirements |
+## 🔔 Startup notice
+
+PCL3 shows a version notice **once on the first launch of each version**. It explains that:
+
+- PCL3 is built on PCL CE and is not affiliated with LTCat or PCL-Community;
+- PCL3's source code is published under the original licenses and contributions are welcome;
+- Branding and data directories are independent, and PCL3 never auto-updates itself into the official PCL CE.
+
+The notice appears only after a version change and never repeats on every launch.
+
+## 💻 Requirements
+
+| OS | Support | Requirements |
 |---|---|---|
-| Windows 10 1809 (17763) or later | ✅ Fully supported | [.NET 10 Desktop Runtime](http://get.dot.net/10) |
-| Windows 8 to Windows 10 1809 (17763) | ⚠️ Expected to run; community support offered at discretion | [.NET 10 Desktop Runtime](http://get.dot.net/10) |
-| Windows 7 or earlier | ❌ Not supported | N/A |
-| macOS / Linux / Other OS | ⚠️ Cross-platform development only (cross-compilation) | [.NET 10 SDK](http://get.dot.net/10) |
+| Windows 10 1809 (17763) or later | ✅ Fully supported | [.NET 10 Desktop Runtime](https://get.dot.net/10) |
+| Windows 8 – Windows 10 1809 | ⚠️ Should work, best-effort support | [.NET 10 Desktop Runtime](https://get.dot.net/10) |
+| Windows 7 or older | ❌ Not supported | / |
+| macOS / Linux | ⚠️ Cross-compilation only | [.NET 10 SDK](https://get.dot.net/10) |
 
-**✅ Fully supported**: We will provide as much support as possible, but you must ensure you are using the latest version of the launcher.
+## 🛠️ Build from source
 
-**⚠️ Expected to run; community support offered at discretion**: PCL CE is expected to run on these platforms, but full functionality is not guaranteed. You may need to upgrade to a fully supported OS version to receive further community technical support.
+```powershell
+dotnet build "Plain Craft Launcher 2.slnx" -c Release
+```
 
-**❌ Not supported**: PCL CE may not be usable on these platforms and might not even launch at all. Please upgrade your OS to use PCL CE.
+The output is `Plain Craft Launcher 2/bin/Release/net10.0-windows/win-x64/PCL3.exe`.
 
-**⚠️ Cross-platform development only (cross-compilation)**: PCL CE’s source code can be built on macOS and Linux, but it cannot run directly. As a developer, you can develop on these platforms and then move the build artifacts to Windows for testing.
+## 🔒 License and open source
 
-**Note**:     
-The community only supports the latest version of the launcher.    
-Depending on the nature of certain issues (e.g., an incomplete system environment), you may still need to upgrade your OS to continue receiving support.    
-PCL CE always recommends using the latest version of your OS for the best experience.    
-You can still try using the latest launcher version on unsupported platforms, but you may encounter many additional problems.
+PCL3 is a derivative work of PCL's open-source code and keeps the upstream licenses:
 
-## 🔒 License
+- `Plain Craft Launcher 2/` uses the [custom license](Plain%20Craft%20Launcher%202/LICENCE)
+- `All other directories` use the [Apache License 2.0](LICENSE)
 
-- `Plain Craft Launcher 2/` uses [Custom License](https://github.com/PCL-Community/PCL-CE/blob/dev/Plain%20Craft%20Launcher%202/LICENCE)
-- `All other directories` use [Apache License 2.0](https://github.com/PCL-Community/PCL-CE/blob/dev/LICENSE)
+The PCL license requires modified editions to publish their source code. PCL3's full source is hosted at <https://github.com/chenfengyimei/PCL3>; the in-app `Settings → About → Source Code` button points to the same repository.
 
-## 🌟 Statistic
-![Alt](https://repobeats.axiom.co/api/embed/3e46296e6e3a134991a783480fd2f62723bb0353.svg "Repobeats analytics image")
+## 🙏 Credits
 
-[![Star History Chart](https://api.star-history.com/svg?repos=PCL-Community/PCL-CE&type=Date)](https://www.star-history.com/#PCL-Community/PCL-CE&Date)
+Thanks to LTCat for creating PCL / PCL2, to PCL-Community for maintaining PCL CE, and to everyone who contributes launchers, mirrors and community content.
 
-**Views** (Total / Today): [![Hits](https://hits.zkitefly.eu.org/?tag=https://github.com/PCL-Community/PCL-CE)](https://hits.zkitefly.eu.org/?tag=https://github.com/PCL-Community/PCL-CE&web=true)
-## ❤️ Contributors
-
-[![](https://contrib.rocks/image?repo=PCL-Community/PCL-CE)](https://github.com/PCL-Community/PCL-CE/graphs/contributors)
+- Upstream PCL: <https://github.com/Meloong-Git/PCL>
+- Upstream PCL CE: <https://github.com/PCL-Community/PCL-CE>
+- Please report PCL3 issues at <https://github.com/chenfengyimei/PCL3/issues>, not to the original PCL or PCL CE repositories.

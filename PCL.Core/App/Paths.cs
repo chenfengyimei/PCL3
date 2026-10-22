@@ -64,11 +64,13 @@ public static class Paths
     static Paths()
     {
 #if DEBUG
-        const string name = "PCLCE_Debug";
-        const string oldName = ".PCLCEDebug";
+        const string name = "PCL3_Debug";
+        const string oldName = "PCLCY_Debug";
 #else
-        const string name = "PCLCE";
-        const string oldName = ".PCLCE";
+        // PCL3：数据目录独立于 PCL CE（PCLCE），单实例锁/配置/缓存互不干扰
+        const string name = "PCL3";
+        // 上一代修改版（PCLCY）的配置目录，启动时自动迁移
+        const string oldName = "PCLCY";
 #endif
         // fill paths
         _data = Path.Combine(DefaultDirectory, "PCL");

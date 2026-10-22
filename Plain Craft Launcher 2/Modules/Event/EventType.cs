@@ -22,6 +22,9 @@ namespace PCL
         WriteSetting,
         ModifyVariable,
         WriteVariable,
-        OpenHelp
+        OpenHelp,
+        MemoryOptimize,
+        CheckUpdate,
+        JoinLobby
     }
 }

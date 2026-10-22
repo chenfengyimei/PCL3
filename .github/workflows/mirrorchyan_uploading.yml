@@ -1,3 +1,5 @@
+# PCL3: 发布前请将 mirrorchyan_rid / owner / repo 替换为 PCL3 自有渠道，
+# 避免把构建产物上传到 PCL CE 的发布渠道。
 name: Mirror Chyan (Upload)
 
 permissions:
@@ -29,12 +31,12 @@ jobs:
       - uses: MirrorChyan/uploading-action@ea9a0f6f516fafb6b0a3046a1fe4b0dccb29eca8 # v1
         with:
           filetype: latest-release
-          filename: "PCL2_CE_${{ inputs.channel == 'stable' && 'Release' || 'Beta' }}_${{ inputs.arch == 'x64' && 'x64' || 'ARM64' }}.exe"
+          filename: "PCL3_${{ inputs.channel == 'stable' && 'Release' || 'Beta' }}_${{ inputs.arch == 'x64' && 'x64' || 'ARM64' }}.exe"
           mirrorchyan_rid: PCL2-CE
 
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          owner: PCL-Community
-          repo: PCL2-CE
+          owner: chenfengyimei
+          repo: PCL3
           upload_token: ${{ secrets.MirrorChyanUploadToken }}
           os: win
           arch: ${{ inputs.arch }}

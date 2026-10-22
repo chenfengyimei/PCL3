@@ -1,6 +1,6 @@
 # 如何为项目做贡献
 
-Wiki 页面:
+Wiki 页面（沿用上游 PCL CE 的开发文档）:
 [开发指南](https://github.com/PCL-Community/PCL2-CE/wiki/开发指南)
 [技术规范](https://github.com/PCL-Community/PCL2-CE/wiki/技术规范)
 
@@ -10,7 +10,7 @@ Wiki 页面:
 
 ## 开始之前
 
-查看 [Issues](https://github.com/PCL-Community/PCL2-CE/issues) 寻找可以参与的任务，或创建新 Issue 讨论您的想法。
+查看 [Issues](https://github.com/chenfengyimei/PCL3/issues) 寻找可以参与的任务，或创建新 Issue 讨论您的想法。
 
 ## 贡献流程
 
@@ -54,7 +54,7 @@ Wiki 页面:
    ```
 
 6. 创建 Pull Request
-   - 指向上游仓库的 `dev` 分支
+   - 指向 PCL3 仓库的 `dev` 分支
    - 详细填写 PR 信息
    - 关联 Issue（如有）
 

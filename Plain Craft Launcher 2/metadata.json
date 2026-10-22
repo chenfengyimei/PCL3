@@ -1,10 +1,10 @@
 {
-  "name": "Plain Craft Launcher Community Edition",
+  "name": "PCL3",
   "version": {
-    "base": "2.15.1",
+    "base": "3.0.0",
     "upstream": "2.12.1",
     "suffix": "",
-    "code": 524
+    "code": 600
   },
   "licenses": [
     {

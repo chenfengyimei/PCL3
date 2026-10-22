@@ -12,9 +12,23 @@ namespace PCL;
 
 public partial class PageSetupUI
 {
-    public string[] ThemeColors => Basics.IsAprilFool 
-        ? [Lang.Text("Setup.Ui.Theme.Color.SkyBlue"), Lang.Text("Setup.Ui.Theme.Color.CatBlue"), Lang.Text("Setup.Ui.Theme.Color.CrashBlue"), Lang.Text("Setup.Ui.Theme.Color.Hmcl")]
-        : [Lang.Text("Setup.Ui.Theme.Color.SkyBlue"), Lang.Text("Setup.Ui.Theme.Color.CatBlue"), Lang.Text("Setup.Ui.Theme.Color.CrashBlue")];
+    public string[] ThemeColors =>
+    [
+        Lang.Text("Setup.Ui.Theme.Color.SkyBlue"),
+        Lang.Text("Setup.Ui.Theme.Color.CatBlue"),
+        Lang.Text("Setup.Ui.Theme.Color.CrashBlue"),
+        Lang.Text("Setup.Ui.Theme.Color.Hmcl"),
+        Lang.Text("Setup.Ui.Theme.Color.Custom")
+    ];
+
+    public ColorTheme[] ThemeColorValues =>
+    [
+        ColorTheme.SkyBlue,
+        ColorTheme.CatBlue,
+        ColorTheme.DeathBlue,
+        ColorTheme.HmclBlue,
+        ColorTheme.Custom
+    ];
     
     public new bool isLoaded;
 
@@ -40,8 +54,6 @@ public partial class PageSetupUI
         isLoaded = true;
 
         SliderLoad();
-
-        PanLauncherHide.Visibility = Visibility.Visible;
     }
 
     public void Reload()
@@ -52,8 +64,13 @@ public partial class PageSetupUI
             SliderLauncherOpacity.Value = Config.Preference.Theme.WindowOpacity;
             CheckLauncherLogo.Checked = Config.Preference.ShowStartupLogo;
             ComboDarkMode.SelectedIndex = (int)Config.Preference.Theme.ColorMode;
-            ComboDarkColor.SelectedIndex = (int)Config.Preference.Theme.DarkColor;
-            ComboLightColor.SelectedIndex = (int)Config.Preference.Theme.LightColor;
+            ComboDarkColor.SelectedIndex = Array.IndexOf(ThemeColorValues, Config.Preference.Theme.DarkColor);
+            ComboLightColor.SelectedIndex = Array.IndexOf(ThemeColorValues, Config.Preference.Theme.LightColor);
+            SliderCustomHue.Value = Config.Preference.Theme.WindowHue;
+            SliderCustomSaturation.Value = Config.Preference.Theme.WindowSat;
+            SliderCustomLightness.Value = Config.Preference.Theme.WindowLight;
+            SliderCustomDelta.Value = Config.Preference.Theme.WindowDelta;
+            UpdateCustomThemePanel();
             CheckShowLaunchingHint.Checked = Config.Preference.ShowLaunchingHint;
 
             // 字体设置
@@ -663,14 +680,28 @@ public partial class PageSetupUI
     private void ThemeColor_Change(object senderRaw, SelectionChangedEventArgs e)
     {
         var sender = (MyComboBox)senderRaw;
-        SetByTag(sender.Tag?.ToString(), sender.SelectedIndex);
+        var index = sender.SelectedIndex;
+        if (index < 0 || index >= ThemeColorValues.Length) return;
+        var theme = ThemeColorValues[index];
+        switch (sender.Tag?.ToString())
+        {
+            case "UiLightColor":
+                Config.Preference.Theme.LightColor = theme;
+                break;
+            case "UiDarkColor":
+                Config.Preference.Theme.DarkColor = theme;
+                break;
+        }
+        UpdateCustomThemePanel();
         ThemeManager.ThemeRefresh();
     }
 
-    // 赞助
-    private void BtnLauncherDonate_Click(object sender, MouseButtonEventArgs e)
+    private void UpdateCustomThemePanel()
     {
-        ModBase.OpenWebsite("https://afdian.com/a/LTCat");
+        if (PanCustomTheme is null) return;
+        var isCustom = Config.Preference.Theme.LightColor == ColorTheme.Custom ||
+                       Config.Preference.Theme.DarkColor == ColorTheme.Custom;
+        PanCustomTheme.Visibility = isCustom ? Visibility.Visible : Visibility.Collapsed;
     }
 
     // 滑动条

@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -299,19 +300,136 @@ public partial class PageToolsTest
         }, "Rubbish Clear");
     }
 
-    public static string GetRandomCave()
+    /// <summary>
+    ///     随机获取一条“回声洞”内容。优先读取 PCL\caves.txt，否则使用内置内容。
+    /// </summary>
+    /// <param name="escape">是否转义为可直接嵌入 XAML 的文本</param>
+    public static string GetRandomCave(bool escape = false)
     {
-        return Lang.Text("Tools.Test.CeNotice");
+        var lines = _LoadCaveLines();
+        var cave = lines.Length > 0 ? lines[Random.Shared.Next(lines.Length)] : PageLaunchRight.GetRandomHint();
+        return escape ? _EscapeXaml(cave) : cave;
+    }
+
+    [DllImport("psapi.dll", SetLastError = true)]
+    private static extern bool EmptyWorkingSet(IntPtr hProcess);
+
+    /// <summary>
+    ///     释放启动器与正在运行的 Minecraft 的闲置工作集。
+    /// </summary>
+    public static void OptimizeMemory()
+    {
+        try
+        {
+            var processes = new List<Process> { Process.GetCurrentProcess() };
+            if (ModLaunch.mcLaunchProcess is { HasExited: false } game && game.Id != Environment.ProcessId)
+                processes.Add(game);
+
+            long GetWorkingSet()
+            {
+                long total = 0;
+                foreach (var process in processes)
+                {
+                    try
+                    {
+                        process.Refresh();
+                        total += process.WorkingSet64;
+                    }
+                    catch
+                    {
+                        // 进程可能已退出，忽略
+                    }
+                }
+
+                return total;
+            }
+
+            var before = GetWorkingSet();
+            foreach (var process in processes)
+            {
+                try
+                {
+                    EmptyWorkingSet(process.Handle);
+                }
+                catch
+                {
+                    // 权限不足或进程已退出，忽略
+                }
+            }
+
+            var freedMb = Math.Max(0, before - GetWorkingSet()) / 1024d / 1024d;
+            HintService.Hint(Lang.Text("Tools.Test.Memory.Success", Lang.Number(freedMb, "N0")), HintType.Success);
+        }
+        catch (Exception ex)
+        {
+            ModBase.Log(ex, "内存优化失败", ModBase.LogLevel.Hint,
+                userSummary: Lang.Text("Tools.Test.Error.OperationFailed"));
+        }
+    }
+
+    private void BtnMemoryOptimize_Click(object sender, MouseButtonEventArgs e)
+    {
+        ModBase.RunInNewThread(OptimizeMemory, "Memory Optimize");
     }
 
     public static string GetRandomHint()
     {
-        return Lang.Text("Tools.Test.CeNotice");
+        return PageLaunchRight.GetRandomHint();
     }
 
     public static string GetRandomPresetHint()
     {
-        return Lang.Text("Tools.Test.CeNotice");
+        return GetRandomCave(true);
+    }
+
+    private static string[] _LoadCaveLines()
+    {
+        var externalPath = Path.Combine(ModBase.exePath, "PCL", "caves.txt");
+        if (File.Exists(externalPath))
+        {
+            try
+            {
+                var externalLines = File.ReadAllLines(externalPath)
+                    .Where(l => !string.IsNullOrWhiteSpace(l))
+                    .Select(l => l.Trim())
+                    .ToArray();
+                if (externalLines.Length > 0) return externalLines;
+            }
+            catch (Exception ex)
+            {
+                ModBase.Log(ex, "读取回声洞外部内容失败");
+            }
+        }
+
+        var langCode = LocalizationService.CurrentLanguage.Code;
+        return _LoadEmbeddedCaveLines(langCode)
+               ?? _LoadEmbeddedCaveLines(LocalizationService.DefaultLanguageCode)
+               ?? [];
+    }
+
+    private static string[]? _LoadEmbeddedCaveLines(string langCode)
+    {
+        try
+        {
+            var uri = new Uri($"pack://application:,,,/PCL3;component/Resources/caves/{langCode}.txt", UriKind.Absolute);
+            using var stream = Application.GetResourceStream(uri)?.Stream;
+            if (stream is null) return null;
+            using var reader = new StreamReader(stream);
+            return reader.ReadToEnd()
+                .Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries)
+                .Where(l => !string.IsNullOrWhiteSpace(l))
+                .Select(l => l.Trim())
+                .ToArray();
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static string _EscapeXaml(string text)
+    {
+        return text.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;");
     }
 
     private void TextDownloadUrl_TextChanged(object sender, TextChangedEventArgs e)
