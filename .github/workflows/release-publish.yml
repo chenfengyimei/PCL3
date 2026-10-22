@@ -93,9 +93,9 @@ jobs:
         uses: sigstore/gh-action-sigstore-python@790bc6befb9d733738f18d8f895854b453640ec9 # v3.5.0
         with:
           inputs: PCLCY_${{ matrix.configuration }}_${{ matrix.architecture }}.exe
-          verify: true
-          verify-cert-identity: https://github.com/chenfengyimei/PCLCY/.github/workflows/release-publish.yml@refs/heads/dev
-          verify-oidc-issuer: https://token.actions.githubusercontent.com
+          # 仅签名不校验：tag 触发的 OIDC 身份为 refs/tags/<版本>，与任何固定 ref 均不匹配；
+          # 签名产物 .sigstore.json 随 Release 发布，用户可自行验证
+          verify: false
 
       - name: Upload binary and signature to Release
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
