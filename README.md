@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="Plain Craft Launcher 2/Images/icon.ico" alt="PCL CY Edition Logo" width="80" height="80">
+<img src="PCLCY/Images/icon.ico" alt="PCL CY Edition Logo" width="80" height="80">
 
 # PCL CY Edition
 
@@ -51,16 +51,16 @@ PCL CY Edition 会在**每个版本首次启动**时展示一次版本说明，�
 ## 🛠️ 从源码构建
 
 ```powershell
-dotnet build "Plain Craft Launcher 2.slnx" -c Release
+dotnet build "PCLCY.slnx" -c Release
 ```
 
-构建产物为 `Plain Craft Launcher 2/bin/Release/net10.0-windows/win-x64/PCLCY.exe`（单文件、自包含依赖需按需添加发布参数）。
+构建产物为 `PCLCY/bin/Release/net10.0-windows/win-x64/PCLCY.exe`（单文件、自包含依赖需按需添加发布参数）。
 
 ## 🔒 许可证与开源
 
 PCL CY Edition 是基于 PCL 开源代码的衍生作品，继续遵循上游许可证：
 
-- `Plain Craft Launcher 2/` 使用 [自定义许可证](Plain%20Craft%20Launcher%202/LICENCE)
+- `PCLCY/` 使用 [自定义许可证](PCLCY/LICENCE)
 - `其余所有目录` 使用 [Apache License 2.0](LICENSE)
 
 根据 PCL 许可证要求，修改版需要公开其源代码。PCL CY Edition 的完整源码托管于 <https://github.com/chenfengyimei/PCL3>，启动器内 `设置 → 关于 → 源代码` 指向同一仓库。

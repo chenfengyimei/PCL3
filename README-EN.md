@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="Plain Craft Launcher 2/Images/icon.ico" alt="PCL CY Edition Logo" width="80" height="80">
+<img src="PCLCY/Images/icon.ico" alt="PCL CY Edition Logo" width="80" height="80">
 
 # PCL CY Edition
 
@@ -51,16 +51,16 @@ The notice appears only after a version change and never repeats on every launch
 ## 🛠️ Build from source
 
 ```powershell
-dotnet build "Plain Craft Launcher 2.slnx" -c Release
+dotnet build "PCLCY.slnx" -c Release
 ```
 
-The output is `Plain Craft Launcher 2/bin/Release/net10.0-windows/win-x64/PCLCY.exe`.
+The output is `PCLCY/bin/Release/net10.0-windows/win-x64/PCLCY.exe`.
 
 ## 🔒 License and open source
 
 PCL CY Edition is a derivative work of PCL's open-source code and keeps the upstream licenses:
 
-- `Plain Craft Launcher 2/` uses the [custom license](Plain%20Craft%20Launcher%202/LICENCE)
+- `PCLCY/` uses the [custom license](PCLCY/LICENCE)
 - `All other directories` use the [Apache License 2.0](LICENSE)
 
 The PCL license requires modified editions to publish their source code. PCL CY Edition's full source is hosted at <https://github.com/chenfengyimei/PCL3>; the in-app `Settings → About → Source Code` button points to the same repository.
