@@ -39,7 +39,7 @@ public partial class FormMain
     {
         ModBase.RunInNewThread(() =>
         {
-            var changelogFile = $"{ModBase.pathTemp}CEUpdateLog.md";
+            var changelogFile = $"{ModBase.pathTemp}UpdateLog.md";
             string changelog;
             if (File.Exists(changelogFile))
                 changelog = ModBase.ReadFile(changelogFile);

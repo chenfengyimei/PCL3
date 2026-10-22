@@ -14,11 +14,12 @@ public static class UpdateManager
 
     public static UpdatesWrapperModel remoteServer = new(new List<IUpdateSource>
     {
-        // PCL CY Edition：已移除 PCL CE 官方更新渠道，防止用户被自动更新回官方版本。
-        // 接入自有更新源时，参考下列写法替换 UpdatesNoopModel（必须免费提供）：
-        //   new UpdatesMinioModel("https://<你的服务器>/<路径>/", "自定义源"),
+        // PCL CY Edition 自有更新源：GitHub Releases（打 tag 发布 Release 即向用户推送更新）。
+        // 大陆直连 api.github.com 可能不稳，若更新检查失败可稍后重试或配置代理；
+        // 需要更稳的国内线路时，可在此追加 MirrorChyan（需先替换其渠道 ID）或自建 Minio 源：
         //   new UpdatesMirrorChyanModel(),
-        new UpdatesNoopModel()
+        //   new UpdatesMinioModel("https://<你的服务器>/<路径>/", "自定义源"),
+        new UpdatesGitHubModel()
     });
 
     public static bool IsCurrentVersionBeta
@@ -80,7 +81,7 @@ public static class UpdateManager
                     SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64
                 );
 
-                ModBase.WriteFile($"{ModBase.pathTemp}CEUpdateLog.md", version.Changelog);
+                ModBase.WriteFile($"{ModBase.pathTemp}UpdateLog.md", version.Changelog);
                 ModBase.Log($"[Update] 远程最新版本: {version.VersionName}, 当前版本: {ModBase.versionBaseName}");
                 if (!(SemVer.Parse(version.VersionName) > SemVer.Parse(ModBase.versionBaseName)))
                     return;
