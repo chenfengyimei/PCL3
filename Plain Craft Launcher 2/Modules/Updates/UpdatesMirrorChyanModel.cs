@@ -13,7 +13,7 @@ public class UpdatesMirrorChyanModel : IUpdateSource // Mirror 酱的更新格�
     private const string mirrorChyanBaseUrl =
         "https://mirrorchyan.com/api/resources/{cid}/latest?cdk={cdk}&os=win&arch={arch}&channel={channel}";
 
-    // PCL3: 接入 MirrorChyan 时请替换为 PCL3 自有的渠道 ID，当前值仅用于兼容上游格式
+    // PCL CY Edition: 接入 MirrorChyan 时请替换为 PCL CY Edition 自有的渠道 ID，当前值仅用于兼容上游格式
     private const string myCid = "PCL2-CE";
     public string SourceName { get; set; } = "MirrorChyan";
 

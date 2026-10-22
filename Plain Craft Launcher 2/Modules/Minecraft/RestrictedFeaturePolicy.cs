@@ -1,7 +1,7 @@
 namespace PCL;
 
 /// <summary>
-///     区域限制策略。PCL3 是完全开放的公开版本，不按国家或地区限制任何功能。
+///     区域限制策略。PCL CY Edition 是完全开放的公开版本，不按国家或地区限制任何功能。
 /// </summary>
 internal static class RestrictedFeaturePolicy
 {

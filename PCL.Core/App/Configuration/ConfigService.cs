@@ -159,10 +159,11 @@ public sealed partial class ConfigService
                 // try migrate
                 if (!File.Exists(SharedConfigPath))
                 {
+                    // PCL CY Edition 与上一代共用数据目录：仅迁移同目录下的历史文件名，
+                    // config.v1.json 即当前配置文件本身，不参与迁移
                     string[] oldPaths = [
                         Path.Combine(Paths.OldSharedData, "Config.json"),
-                        Path.Combine(Paths.SharedData, "config.json"),
-                        Path.Combine(Paths.OldSharedData, "config.v1.json")
+                        Path.Combine(Paths.SharedData, "config.json")
                     ];
                     _TryMigrate(SharedConfigPath, oldPaths.Select(path =>
                         new ConfigMigration { From = path, To = SharedConfigPath, OnMigration = SharedJsonMigration }));

@@ -3,7 +3,7 @@ using PCL.Core.Utils;
 namespace PCL;
 
 /// <summary>
-///     占位更新源：PCL3 尚未接入自有更新服务器时使用。
+///     占位更新源：PCL CY Edition 尚未接入自有更新服务器时使用。
 ///     始终报告“已是最新版本”，公告与下载均为空，确保用户不会被更新回 PCL CE 官方版本。
 ///     接入自有更新源后，请在 UpdateManager.remoteServer 中替换本类（参考其中的注释）。
 /// </summary>

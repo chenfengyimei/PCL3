@@ -43,7 +43,7 @@ public partial class PageLaunchRight : IRefreshable
         _EnsureHomepageLiveWatcher();
     }
 
-    // 关闭社区提示（PCL3 不再要求输入名称才能隐藏）
+    // 关闭社区提示（PCL CY Edition 不再要求输入名称才能隐藏）
     private void BtnHintClose_Click(object sender, EventArgs e)
     {
         ModAnimation.AniDispose(PanHint, true);
@@ -346,7 +346,7 @@ public partial class PageLaunchRight : IRefreshable
     {
         try
         {
-            var uri = new Uri($"pack://application:,,,/PCL3;component/Resources/hints/{langCode}.txt", UriKind.Absolute);
+            var uri = new Uri($"pack://application:,,,/PCLCY;component/Resources/hints/{langCode}.txt", UriKind.Absolute);
             using var stream = Application.GetResourceStream(uri)?.Stream;
             if (stream is null) return null;
             using var reader = new StreamReader(stream);

@@ -14,7 +14,7 @@ public static class UpdateManager
 
     public static UpdatesWrapperModel remoteServer = new(new List<IUpdateSource>
     {
-        // PCL3：已移除 PCL CE 官方更新渠道，防止用户被自动更新回官方版本。
+        // PCL CY Edition：已移除 PCL CE 官方更新渠道，防止用户被自动更新回官方版本。
         // 接入自有更新源时，参考下列写法替换 UpdatesNoopModel（必须免费提供）：
         //   new UpdatesMinioModel("https://<你的服务器>/<路径>/", "自定义源"),
         //   new UpdatesMirrorChyanModel(),
@@ -70,7 +70,7 @@ public static class UpdateManager
 
     public static void UpdateStart(UpdateEnums.UpdateType type, string receivedKey = null, bool forceValidated = false)
     {
-        var dlTargetPath = ModBase.exePath + @"PCL\PCL3.exe";
+        var dlTargetPath = ModBase.exePath + @"PCL\PCLCY.exe";
         ModBase.RunInNewThread(() =>
         {
             try
@@ -165,7 +165,7 @@ public static class UpdateManager
     {
         try
         {
-            var fileName = ModBase.exePath + @"PCL\PCL3.exe";
+            var fileName = ModBase.exePath + @"PCL\PCLCY.exe";
             if (!File.Exists(fileName))
             {
                 ModBase.Log("[System] 更新失败：未找到更新文件");
@@ -204,7 +204,7 @@ public static class UpdateManager
     internal static void DownloadLatestPCL(ModLoader.LoaderBase loaderToSyncProgress = null)
     {
         // 注意：如果要自行实现这个功能，请换用另一个文件路径，以免与官方版本冲突
-        var latestPCLPath = Path.Combine(ModBase.pathTemp, "PCL3-Latest.exe");
+        var latestPCLPath = Path.Combine(ModBase.pathTemp, "PCLCY-Latest.exe");
         var target = remoteServer.GetLatestVersion(UpdateChannel.stable,
             SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64);
         if (target is null)

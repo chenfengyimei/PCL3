@@ -4,7 +4,7 @@ namespace PCL.Core.Utils.OS;
 
 public static class AumidHelper
 {
-    public const string Aumid = "PCL3.Launcher";
+    public const string Aumid = "PCLCY.Launcher";
     
     public static bool HasAumid()
     {
@@ -16,7 +16,7 @@ public static class AumidHelper
     {
         // .NET 8 在正常情况下不可能返回 null，如果炸了不应该包住而是让他炸下去
         using var key = Registry.CurrentUser.CreateSubKey(string.Concat(@"Software\Classes\AppUserModelId\", Aumid));
-        key.SetValue("DisplayName", "PCL3");
+        key.SetValue("DisplayName", "PCL CY Edition");
         key.SetValue("IconUri", IconHelper.GetIconPath());
         key.SetValue("IconBackgroundColor", "FFDDDD");
     }

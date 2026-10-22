@@ -37,7 +37,7 @@ public static class Lang
     public static CultureInfo Culture { get; private set; } = CultureInfo.CurrentCulture;
 
     /// <summary>
-    ///     当前功能是否不受限制。PCL3 是完全开放的公开版本，不再按区域或语言限制功能。
+    ///     当前功能是否不受限制。PCL CY Edition 是完全开放的公开版本，不再按区域或语言限制功能。
     /// </summary>
     public static bool IsFeaturesUnrestricted => true;
     

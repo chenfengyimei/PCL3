@@ -2,19 +2,19 @@
 
 <div align="center">
 
-<img src="Plain Craft Launcher 2/Images/icon.ico" alt="PCL3 Logo" width="80" height="80">
+<img src="Plain Craft Launcher 2/Images/icon.ico" alt="PCL CY Edition Logo" width="80" height="80">
 
-# PCL3
+# PCL CY Edition
 
 开源、免费、社区驱动的 Minecraft 启动器
 
 </div>
 
-PCL3 是基于 [PCL 社区版（PCL CE）](https://github.com/PCL-Community/PCL-CE) 二次开发的开源 Minecraft 启动器，而 PCL CE 又源自[龙腾猫跃](https://github.com/Meloong-Git/PCL)的 Plain Craft Launcher 2。PCL3 拥有独立的品牌、数据目录与更新线路，可与原版 PCL、PCL CE 同时安装、互不干扰。
+PCL CY Edition 是基于 [PCL 社区版（PCL CE）](https://github.com/PCL-Community/PCL-CE) 二次开发的开源 Minecraft 启动器，而 PCL CE 又源自[龙腾猫跃](https://github.com/Meloong-Git/PCL)的 Plain Craft Launcher 2。PCL CY Edition 拥有独立的品牌、数据目录与更新线路，可与原版 PCL、PCL CE 同时安装、互不干扰。
 
 **源码、Releases 与问题反馈：<https://github.com/chenfengyimei/PCL3>**
 
-PCL3 是完全开放的公开版本：不限制主题色系，不按国家或地区锁定下载、补全或整合包安装，也不隐藏任何内置功能。
+PCL CY Edition 是完全开放的公开版本：不限制主题色系，不按国家或地区锁定下载、补全或整合包安装，也不隐藏任何内置功能。
 
 ## ✨ 功能
 
@@ -31,10 +31,10 @@ PCL3 是完全开放的公开版本：不限制主题色系，不按国家或地
 
 ## 🔔 启动说明
 
-PCL3 会在**每个版本首次启动**时展示一次版本说明，内容包括：
+PCL CY Edition 会在**每个版本首次启动**时展示一次版本说明，内容包括：
 
 - 本启动器基于 PCL CE 二次开发，与龙腾猫跃、PCL-Community 无从属关系；
-- PCL3 的源代码按原许可证公开，欢迎查阅与贡献；
+- PCL CY Edition 的源代码按原许可证公开，欢迎查阅与贡献；
 - 品牌与数据目录独立，不会自动更新为 PCL CE 官方版本。
 
 该说明只会在版本变化后的第一次启动出现，之后不会反复打扰。
@@ -54,16 +54,16 @@ PCL3 会在**每个版本首次启动**时展示一次版本说明，内容包�
 dotnet build "Plain Craft Launcher 2.slnx" -c Release
 ```
 
-构建产物为 `Plain Craft Launcher 2/bin/Release/net10.0-windows/win-x64/PCL3.exe`（单文件、自包含依赖需按需添加发布参数）。
+构建产物为 `Plain Craft Launcher 2/bin/Release/net10.0-windows/win-x64/PCLCY.exe`（单文件、自包含依赖需按需添加发布参数）。
 
 ## 🔒 许可证与开源
 
-PCL3 是基于 PCL 开源代码的衍生作品，继续遵循上游许可证：
+PCL CY Edition 是基于 PCL 开源代码的衍生作品，继续遵循上游许可证：
 
 - `Plain Craft Launcher 2/` 使用 [自定义许可证](Plain%20Craft%20Launcher%202/LICENCE)
 - `其余所有目录` 使用 [Apache License 2.0](LICENSE)
 
-根据 PCL 许可证要求，修改版需要公开其源代码。PCL3 的完整源码托管于 <https://github.com/chenfengyimei/PCL3>，启动器内 `设置 → 关于 → 源代码` 指向同一仓库。
+根据 PCL 许可证要求，修改版需要公开其源代码。PCL CY Edition 的完整源码托管于 <https://github.com/chenfengyimei/PCL3>，启动器内 `设置 → 关于 → 源代码` 指向同一仓库。
 
 ## 🙏 致谢
 
@@ -71,4 +71,4 @@ PCL3 是基于 PCL 开源代码的衍生作品，继续遵循上游许可证：
 
 - 上游 PCL：<https://github.com/Meloong-Git/PCL>
 - 上游 PCL CE：<https://github.com/PCL-Community/PCL-CE>
-- 问题反馈：<https://github.com/chenfengyimei/PCL3/issues>，请不要向原版或 PCL CE 仓库反馈 PCL3 的问题。
+- 问题反馈：<https://github.com/chenfengyimei/PCL3/issues>，请不要向原版或 PCL CE 仓库反馈 PCL CY Edition 的问题。

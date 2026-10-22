@@ -272,7 +272,7 @@ public partial class PageSetupLauncherMisc
             }
         }
         
-        // 由于 PCL3 配置文件夹正在使用，使用延迟调用 CMD 的方法删除
+        // 由于 PCL CY Edition 配置文件夹正在使用，使用延迟调用 CMD 的方法删除
         List<string> foldersToDelete =
         [
             Paths.Data,

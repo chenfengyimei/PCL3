@@ -188,7 +188,7 @@ public static class Basics
         return resourceInfo?.Stream;
     }
 
-    private const string AssemblyImagePath = "pack://application:,,,/PCL3;component/Images/";
+    private const string AssemblyImagePath = "pack://application:,,,/PCLCY;component/Images/";
     public static string GetAppImagePath(string imageName) => AssemblyImagePath + imageName;
 
     #endregion

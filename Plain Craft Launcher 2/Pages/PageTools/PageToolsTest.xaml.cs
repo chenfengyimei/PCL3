@@ -411,7 +411,7 @@ public partial class PageToolsTest
     {
         try
         {
-            var uri = new Uri($"pack://application:,,,/PCL3;component/Resources/caves/{langCode}.txt", UriKind.Absolute);
+            var uri = new Uri($"pack://application:,,,/PCLCY;component/Resources/caves/{langCode}.txt", UriKind.Absolute);
             using var stream = Application.GetResourceStream(uri)?.Stream;
             if (stream is null) return null;
             using var reader = new StreamReader(stream);

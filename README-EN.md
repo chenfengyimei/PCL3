@@ -2,19 +2,19 @@
 
 <div align="center">
 
-<img src="Plain Craft Launcher 2/Images/icon.ico" alt="PCL3 Logo" width="80" height="80">
+<img src="Plain Craft Launcher 2/Images/icon.ico" alt="PCL CY Edition Logo" width="80" height="80">
 
-# PCL3
+# PCL CY Edition
 
 An open-source, free, community-driven Minecraft launcher
 
 </div>
 
-PCL3 is an open-source Minecraft launcher built on top of [PCL Community Edition (PCL CE)](https://github.com/PCL-Community/PCL-CE), which in turn derives from [LTCat](https://github.com/Meloong-Git/PCL)'s Plain Craft Launcher 2. PCL3 ships with its own branding, data directory and update channel, so it can be installed alongside the original PCL and PCL CE without conflicts.
+PCL CY Edition is an open-source Minecraft launcher built on top of [PCL Community Edition (PCL CE)](https://github.com/PCL-Community/PCL-CE), which in turn derives from [LTCat](https://github.com/Meloong-Git/PCL)'s Plain Craft Launcher 2. PCL CY Edition ships with its own branding, data directory and update channel, so it can be installed alongside the original PCL and PCL CE without conflicts.
 
 **Source code, releases and issue tracker: <https://github.com/chenfengyimei/PCL3>**
 
-PCL3 is a fully open public build: no locked theme palettes, no regional restrictions on downloads, repairs or modpack installation, and no hidden built-in features.
+PCL CY Edition is a fully open public build: no locked theme palettes, no regional restrictions on downloads, repairs or modpack installation, and no hidden built-in features.
 
 ## ✨ Features
 
@@ -31,11 +31,11 @@ PCL3 is a fully open public build: no locked theme palettes, no regional restric
 
 ## 🔔 Startup notice
 
-PCL3 shows a version notice **once on the first launch of each version**. It explains that:
+PCL CY Edition shows a version notice **once on the first launch of each version**. It explains that:
 
-- PCL3 is built on PCL CE and is not affiliated with LTCat or PCL-Community;
-- PCL3's source code is published under the original licenses and contributions are welcome;
-- Branding and data directories are independent, and PCL3 never auto-updates itself into the official PCL CE.
+- PCL CY Edition is built on PCL CE and is not affiliated with LTCat or PCL-Community;
+- PCL CY Edition's source code is published under the original licenses and contributions are welcome;
+- Branding and data directories are independent, and PCL CY Edition never auto-updates itself into the official PCL CE.
 
 The notice appears only after a version change and never repeats on every launch.
 
@@ -54,16 +54,16 @@ The notice appears only after a version change and never repeats on every launch
 dotnet build "Plain Craft Launcher 2.slnx" -c Release
 ```
 
-The output is `Plain Craft Launcher 2/bin/Release/net10.0-windows/win-x64/PCL3.exe`.
+The output is `Plain Craft Launcher 2/bin/Release/net10.0-windows/win-x64/PCLCY.exe`.
 
 ## 🔒 License and open source
 
-PCL3 is a derivative work of PCL's open-source code and keeps the upstream licenses:
+PCL CY Edition is a derivative work of PCL's open-source code and keeps the upstream licenses:
 
 - `Plain Craft Launcher 2/` uses the [custom license](Plain%20Craft%20Launcher%202/LICENCE)
 - `All other directories` use the [Apache License 2.0](LICENSE)
 
-The PCL license requires modified editions to publish their source code. PCL3's full source is hosted at <https://github.com/chenfengyimei/PCL3>; the in-app `Settings → About → Source Code` button points to the same repository.
+The PCL license requires modified editions to publish their source code. PCL CY Edition's full source is hosted at <https://github.com/chenfengyimei/PCL3>; the in-app `Settings → About → Source Code` button points to the same repository.
 
 ## 🙏 Credits
 
@@ -71,4 +71,4 @@ Thanks to LTCat for creating PCL / PCL2, to PCL-Community for maintaining PCL CE
 
 - Upstream PCL: <https://github.com/Meloong-Git/PCL>
 - Upstream PCL CE: <https://github.com/PCL-Community/PCL-CE>
-- Please report PCL3 issues at <https://github.com/chenfengyimei/PCL3/issues>, not to the original PCL or PCL CE repositories.
+- Please report PCL CY Edition issues at <https://github.com/chenfengyimei/PCL3/issues>, not to the original PCL or PCL CE repositories.

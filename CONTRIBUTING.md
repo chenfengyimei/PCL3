@@ -54,7 +54,7 @@ Wiki 页面（沿用上游 PCL CE 的开发文档）:
    ```
 
 6. 创建 Pull Request
-   - 指向 PCL3 仓库的 `dev` 分支
+   - 指向 PCL CY Edition 仓库的 `dev` 分支
    - 详细填写 PR 信息
    - 关联 Issue（如有）
 

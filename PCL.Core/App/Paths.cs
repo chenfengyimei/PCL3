@@ -64,14 +64,14 @@ public static class Paths
     static Paths()
     {
 #if DEBUG
-        const string name = "PCL3_Debug";
-        const string oldName = "PCLCY_Debug";
+        const string name = "PCLCY_Debug";
 #else
-        // PCL3：数据目录独立于 PCL CE（PCLCE），单实例锁/配置/缓存互不干扰
-        const string name = "PCL3";
-        // 上一代修改版（PCLCY）的配置目录，启动时自动迁移
-        const string oldName = "PCLCY";
+        // PCL CY Edition：与上一代 PCL CY 修改版同目录延续（%AppData%\PCLCY），
+        // 与 PCL CE（PCLCE）的单实例锁/配置/缓存互不干扰
+        const string name = "PCLCY";
 #endif
+        // 本产品线与上一代共用数据目录，OldSharedData 即当前目录（保留接口兼容，不做跨目录迁移）
+        const string oldName = name;
         // fill paths
         _data = Path.Combine(DefaultDirectory, "PCL");
         _sharedData = GetSpecialPath(Special.ApplicationData, name);

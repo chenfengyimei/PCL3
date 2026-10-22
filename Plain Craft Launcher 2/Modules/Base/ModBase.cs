@@ -72,7 +72,7 @@ public static class ModBase
     /// <summary>
     ///     程序内嵌图片文件夹路径，以“/”结尾。
     /// </summary>
-    public static readonly string pathImage = "pack://application:,,,/PCL3;component/Images/";
+    public static readonly string pathImage = "pack://application:,,,/PCLCY;component/Images/";
 
     /// <summary>
     ///     当前程序的语言。
@@ -110,7 +110,7 @@ public static class ModBase
     public static string pathAppdata = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "PCL") + @"\";
 
     /// <summary>
-    ///     AppData 中的 PCL3 配置文件夹路径，以 \ 结尾。
+    ///     AppData 中的 PCL CY Edition 配置文件夹路径，以 \ 结尾。
     /// </summary>
     public static string pathAppdataConfig = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                                              (versionBranchName == "Debug" ? @"\.pcl3debug\" : @"\.pcl3\");
@@ -3560,7 +3560,7 @@ public static class ModBase
                                  Lang.Text("Common.Action.OpenFolder"),
                                  Lang.Text("Setup.Feedback.Reminder.NotNeeded")) ==
                              1)) OpenExplorer(exePath + @"PCL\Log\");
-        OpenWebsite("https://github.com/chenfengyimei/PCL3/issues/");
+        OpenWebsite("https://github.com/chenfengyimei/PCL CY Edition/issues/");
     }
 
     public static bool CanFeedback(bool showHint)

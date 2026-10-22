@@ -125,7 +125,7 @@ public sealed partial class ThemeService
 
     private static void _AprilFoolLogic()
     {
-        // 愚人节切换窗口标题样式；PCL3 不再限制 HMCL 主题的使用时间
+        // 愚人节切换窗口标题样式；PCL CY Edition 不再限制 HMCL 主题的使用时间
         if (Basics.IsAprilFool) Config.Preference.WindowTitleTypeConfig.TriggerEvent(ConfigEvent.Changed, null);
     }
 

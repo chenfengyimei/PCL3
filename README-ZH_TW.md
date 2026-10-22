@@ -2,19 +2,19 @@
 
 <div align="center">
 
-<img src="Plain Craft Launcher 2/Images/icon.ico" alt="PCL3 Logo" width="80" height="80">
+<img src="Plain Craft Launcher 2/Images/icon.ico" alt="PCL CY Edition Logo" width="80" height="80">
 
-# PCL3
+# PCL CY Edition
 
 開源、免費、社群驅動的 Minecraft 啟動器
 
 </div>
 
-PCL3 是基於 [PCL 社群版（PCL CE）](https://github.com/PCL-Community/PCL-CE) 二次開發的開源 Minecraft 啟動器，而 PCL CE 又源自[龍騰貓躍](https://github.com/Meloong-Git/PCL)的 Plain Craft Launcher 2。PCL3 擁有獨立的品牌、資料目錄與更新線路，可與原版 PCL、PCL CE 同時安裝、互不干擾。
+PCL CY Edition 是基於 [PCL 社群版（PCL CE）](https://github.com/PCL-Community/PCL-CE) 二次開發的開源 Minecraft 啟動器，而 PCL CE 又源自[龍騰貓躍](https://github.com/Meloong-Git/PCL)的 Plain Craft Launcher 2。PCL CY Edition 擁有獨立的品牌、資料目錄與更新線路，可與原版 PCL、PCL CE 同時安裝、互不干擾。
 
 **原始碼、Releases 與問題回饋：<https://github.com/chenfengyimei/PCL3>**
 
-PCL3 是完全開放的公開版本：不限制主題色系，不按國家或地區鎖定下載、補全或整合包安裝，也不隱藏任何內建功能。
+PCL CY Edition 是完全開放的公開版本：不限制主題色系，不按國家或地區鎖定下載、補全或整合包安裝，也不隱藏任何內建功能。
 
 ## ✨ 功能
 
@@ -31,10 +31,10 @@ PCL3 是完全開放的公開版本：不限制主題色系，不按國家或地
 
 ## 🔔 啟動說明
 
-PCL3 會在**每個版本首次啟動**時展示一次版本說明，內容包括：
+PCL CY Edition 會在**每個版本首次啟動**時展示一次版本說明，內容包括：
 
 - 本啟動器基於 PCL CE 二次開發，與龍騰貓躍、PCL-Community 無從屬關係；
-- PCL3 的原始碼依原授權條款公開，歡迎查閱與貢獻；
+- PCL CY Edition 的原始碼依原授權條款公開，歡迎查閱與貢獻；
 - 品牌與資料目錄獨立，不會自動更新為 PCL CE 官方版本。
 
 該說明只會在版本變更後的第一次啟動出現，之後不會反覆打擾。
@@ -54,16 +54,16 @@ PCL3 會在**每個版本首次啟動**時展示一次版本說明，內容包�
 dotnet build "Plain Craft Launcher 2.slnx" -c Release
 ```
 
-建置產物為 `Plain Craft Launcher 2/bin/Release/net10.0-windows/win-x64/PCL3.exe`。
+建置產物為 `Plain Craft Launcher 2/bin/Release/net10.0-windows/win-x64/PCLCY.exe`。
 
 ## 🔒 授權與開源
 
-PCL3 是基於 PCL 開源程式碼的衍生作品，繼續遵循上游授權條款：
+PCL CY Edition 是基於 PCL 開源程式碼的衍生作品，繼續遵循上游授權條款：
 
 - `Plain Craft Launcher 2/` 使用 [自訂授權條款](Plain%20Craft%20Launcher%202/LICENCE)
 - `其餘所有目錄` 使用 [Apache License 2.0](LICENSE)
 
-依 PCL 授權條款要求，修改版需要公開其原始碼。PCL3 的完整原始碼託管於 <https://github.com/chenfengyimei/PCL3>，啟動器內 `設定 → 關於 → 原始碼` 指向同一儲存庫。
+依 PCL 授權條款要求，修改版需要公開其原始碼。PCL CY Edition 的完整原始碼託管於 <https://github.com/chenfengyimei/PCL3>，啟動器內 `設定 → 關於 → 原始碼` 指向同一儲存庫。
 
 ## 🙏 致謝
 
@@ -71,4 +71,4 @@ PCL3 是基於 PCL 開源程式碼的衍生作品，繼續遵循上游授權條�
 
 - 上游 PCL：<https://github.com/Meloong-Git/PCL>
 - 上游 PCL CE：<https://github.com/PCL-Community/PCL-CE>
-- 問題回饋：<https://github.com/chenfengyimei/PCL3/issues>，請不要向原版或 PCL CE 儲存庫回饋 PCL3 的問題。
+- 問題回饋：<https://github.com/chenfengyimei/PCL3/issues>，請不要向原版或 PCL CE 儲存庫回饋 PCL CY Edition 的問題。
