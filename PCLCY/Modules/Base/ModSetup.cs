@@ -433,7 +433,7 @@ public class ModSetup
                     Lang.Text("Setup.Ui.Homepage.NetUpdate.Hint");
                 CustomEventService.SetEventType(ModMain.frmSetupUI.HintCustom, EventType.OpenUrl);
                 CustomEventService.SetEventData(ModMain.frmSetupUI.HintCustom,
-                    "https://github.com/chenfengyimei/PCL3/discussions");
+                    "https://github.com/chenfengyimei/PCLCY/discussions");
                 break;
             }
             case 3: // 预设

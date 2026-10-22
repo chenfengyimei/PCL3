@@ -12,7 +12,7 @@
 
 PCL CY Edition 是基于 [PCL 社区版（PCL CE）](https://github.com/PCL-Community/PCL-CE) 二次开发的开源 Minecraft 启动器，而 PCL CE 又源自[龙腾猫跃](https://github.com/Meloong-Git/PCL)的 Plain Craft Launcher 2。PCL CY Edition 拥有独立的品牌、数据目录与更新线路，可与原版 PCL、PCL CE 同时安装、互不干扰。
 
-**源码、Releases 与问题反馈：<https://github.com/chenfengyimei/PCL3>**
+**源码、Releases 与问题反馈：<https://github.com/chenfengyimei/PCLCY>**
 
 PCL CY Edition 是完全开放的公开版本：不限制主题色系，不按国家或地区锁定下载、补全或整合包安装，也不隐藏任何内置功能。
 
@@ -63,7 +63,7 @@ PCL CY Edition 是基于 PCL 开源代码的衍生作品，继续遵循上游许
 - `PCLCY/` 使用 [自定义许可证](PCLCY/LICENCE)
 - `其余所有目录` 使用 [Apache License 2.0](LICENSE)
 
-根据 PCL 许可证要求，修改版需要公开其源代码。PCL CY Edition 的完整源码托管于 <https://github.com/chenfengyimei/PCL3>，启动器内 `设置 → 关于 → 源代码` 指向同一仓库。
+根据 PCL 许可证要求，修改版需要公开其源代码。PCL CY Edition 的完整源码托管于 <https://github.com/chenfengyimei/PCLCY>，启动器内 `设置 → 关于 → 源代码` 指向同一仓库。
 
 ## 🙏 致谢
 
@@ -71,4 +71,4 @@ PCL CY Edition 是基于 PCL 开源代码的衍生作品，继续遵循上游许
 
 - 上游 PCL：<https://github.com/Meloong-Git/PCL>
 - 上游 PCL CE：<https://github.com/PCL-Community/PCL-CE>
-- 问题反馈：<https://github.com/chenfengyimei/PCL3/issues>，请不要向原版或 PCL CE 仓库反馈 PCL CY Edition 的问题。
+- 问题反馈：<https://github.com/chenfengyimei/PCLCY/issues>，请不要向原版或 PCL CE 仓库反馈 PCL CY Edition 的问题。

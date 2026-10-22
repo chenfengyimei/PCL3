@@ -12,7 +12,7 @@ An open-source, free, community-driven Minecraft launcher
 
 PCL CY Edition is an open-source Minecraft launcher built on top of [PCL Community Edition (PCL CE)](https://github.com/PCL-Community/PCL-CE), which in turn derives from [LTCat](https://github.com/Meloong-Git/PCL)'s Plain Craft Launcher 2. PCL CY Edition ships with its own branding, data directory and update channel, so it can be installed alongside the original PCL and PCL CE without conflicts.
 
-**Source code, releases and issue tracker: <https://github.com/chenfengyimei/PCL3>**
+**Source code, releases and issue tracker: <https://github.com/chenfengyimei/PCLCY>**
 
 PCL CY Edition is a fully open public build: no locked theme palettes, no regional restrictions on downloads, repairs or modpack installation, and no hidden built-in features.
 
@@ -63,7 +63,7 @@ PCL CY Edition is a derivative work of PCL's open-source code and keeps the upst
 - `PCLCY/` uses the [custom license](PCLCY/LICENCE)
 - `All other directories` use the [Apache License 2.0](LICENSE)
 
-The PCL license requires modified editions to publish their source code. PCL CY Edition's full source is hosted at <https://github.com/chenfengyimei/PCL3>; the in-app `Settings → About → Source Code` button points to the same repository.
+The PCL license requires modified editions to publish their source code. PCL CY Edition's full source is hosted at <https://github.com/chenfengyimei/PCLCY>; the in-app `Settings → About → Source Code` button points to the same repository.
 
 ## 🙏 Credits
 
@@ -71,4 +71,4 @@ Thanks to LTCat for creating PCL / PCL2, to PCL-Community for maintaining PCL CE
 
 - Upstream PCL: <https://github.com/Meloong-Git/PCL>
 - Upstream PCL CE: <https://github.com/PCL-Community/PCL-CE>
-- Please report PCL CY Edition issues at <https://github.com/chenfengyimei/PCL3/issues>, not to the original PCL or PCL CE repositories.
+- Please report PCL CY Edition issues at <https://github.com/chenfengyimei/PCLCY/issues>, not to the original PCL or PCL CE repositories.

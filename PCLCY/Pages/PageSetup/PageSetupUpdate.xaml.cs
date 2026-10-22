@@ -256,7 +256,7 @@ public partial class PageSetupUpdate
 
     private void BtnChangelog_Click(object sender, MouseButtonEventArgs e)
     {
-        ModBase.OpenWebsite("https://github.com/chenfengyimei/PCL3/releases/v" + ModBase.versionBaseName);
+        ModBase.OpenWebsite("https://github.com/chenfengyimei/PCLCY/releases/v" + ModBase.versionBaseName);
     }
 
     public string VersionNameFormat(string str)

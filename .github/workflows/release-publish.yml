@@ -99,7 +99,7 @@ jobs:
         with:
           inputs: PCLCY_${{ matrix.configuration }}_${{ matrix.architecture }}.exe
           verify: true
-          verify-cert-identity: https://github.com/chenfengyimei/PCL3/.github/workflows/release-publish.yml@refs/heads/dev
+          verify-cert-identity: https://github.com/chenfengyimei/PCLCY/.github/workflows/release-publish.yml@refs/heads/dev
           verify-oidc-issuer: https://token.actions.githubusercontent.com
 
       - name: Upload binary and signature to Release

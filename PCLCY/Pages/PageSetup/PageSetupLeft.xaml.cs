@@ -166,7 +166,7 @@ public partial class PageSetupLeft
                 }
                 case 2:
                 {
-                    ModBase.OpenWebsite("https://github.com/chenfengyimei/PCL3/issues/");
+                    ModBase.OpenWebsite("https://github.com/chenfengyimei/PCLCY/issues/");
                     break;
                 }
             }

@@ -36,7 +36,7 @@ jobs:
 
           github_token: ${{ secrets.GITHUB_TOKEN }}
           owner: chenfengyimei
-          repo: PCL3
+          repo: PCLCY
           upload_token: ${{ secrets.MirrorChyanUploadToken }}
           os: win
           arch: ${{ inputs.arch }}

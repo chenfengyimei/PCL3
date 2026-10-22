@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: "功能请求 / Feature Requests"
-    url: "https://github.com/chenfengyimei/PCL3/issues/new/choose"
+    url: "https://github.com/chenfengyimei/PCLCY/issues/new/choose"
     about: "PCL CY Edition 目前优先处理 Bug 与兼容性问题，大型功能请求可能不会被受理。/ PCL CY Edition currently prioritizes bug and compatibility fixes; large feature requests may not be accepted."
   - name: "主页预设反馈 / Homepage Preset Feedback"
     url: https://github.com/Meloong-Git/PCL/discussions/categories/自定义主页
@@ -10,5 +10,5 @@ contact_links:
     url: https://github.com/PCL-Community/docs.pclc.cc/issues
     about: "提交与 PCL CE 帮助文档（独立文档站）中的具体内容相关的反馈 / Submit feedback about specific content in the PCL CE help documentation on the standalone documentation site."
   - name: "提问 / 讨论 / Questions / Discussions"
-    url: https://github.com/chenfengyimei/PCL3/discussions/new
+    url: https://github.com/chenfengyimei/PCLCY/discussions/new
     about: "想问问或谈谈关于 PCL CY Edition 的事情 / Ask questions or discuss topics about PCL CY Edition."

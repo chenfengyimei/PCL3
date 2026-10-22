@@ -17,7 +17,7 @@ public class UpdatesGitHubModel : IUpdateSource
     /// <summary>
     ///     公开仓库 slug。若 GitHub 仓库更名，仅需调整此常量。
     /// </summary>
-    private const string RepoSlug = "chenfengyimei/PCL3";
+    private const string RepoSlug = "chenfengyimei/PCLCY";
 
     private const string LatestUrl = $"https://api.github.com/repos/{RepoSlug}/releases/latest";
     private const string ListUrl = $"https://api.github.com/repos/{RepoSlug}/releases?per_page=20";
