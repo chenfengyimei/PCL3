@@ -1866,6 +1866,7 @@
     <sys:String x:Key="Main.SpecialVersion.IUnderstand">我清楚我在做什麼</sys:String>
     <sys:String x:Key="Main.SpecialVersion.OpenDownloadPageAndExit">開啟最新版下載頁並退出</sys:String>
     <sys:String x:Key="Main.SpecialVersion.Title">特殊版本提示</sys:String>
+    <sys:String x:Key="Main.Tab.About">關於</sys:String>
     <sys:String x:Key="Main.Tab.Download">下載</sys:String>
     <sys:String x:Key="Main.Tab.Launch">啟動</sys:String>
     <sys:String x:Key="Main.Tab.Settings">設定</sys:String>

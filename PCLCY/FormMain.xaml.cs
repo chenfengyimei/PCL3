@@ -1380,6 +1380,11 @@ public partial class FormMain
         Setup = 2,
 
         /// <summary>
+        ///     关于。PCL CY Edition 将关于页独立为主导航入口。
+        /// </summary>
+        About = 4,
+
+        /// <summary>
         ///     实例选择。这是一个副页面。
         /// </summary>
         InstanceSelect = 5,
@@ -1672,8 +1677,10 @@ public partial class FormMain
             // 切换到主页面
             PageChangeExit();
             isChangingPage = true; // 防止下面的勾选直接触发了 PageChangeActual
-            ((MyRadioButton)PanTitleSelect.Children[(int)stack.page]).SetChecked(true, true,
-                string.IsNullOrEmpty(PageNameGet(pageCurrent)));
+            // PCL CY Edition：按 Tag 匹配导航按钮（页面枚举值与按钮排列顺序解耦，支持非连续 Tag）
+            var navButton = PanTitleSelect.Children.OfType<MyRadioButton>()
+                .FirstOrDefault(btn => ModBase.Val(btn.Tag) == (double)(int)stack.page);
+            navButton?.SetChecked(true, true, string.IsNullOrEmpty(PageNameGet(pageCurrent)));
             isChangingPage = false;
             switch (stack.page)
             {
@@ -1870,6 +1877,12 @@ public partial class FormMain
                         ModMain.frmSetupLeft ??= new PageSetupLeft();
                         subType = ModMain.frmSetupLeft.pageID;
                         PageChangeAnim(ModMain.frmSetupLeft, (FrameworkElement)ModMain.frmSetupLeft.PageGet(subType));
+                        break;
+                    }
+                case PageType.About: // 关于（PCL CY Edition 独立入口）
+                    {
+                        ModMain.frmSetupAbout ??= new PageSetupAbout();
+                        PageChangeAnim(new MyPageLeft(), ModMain.frmSetupAbout);
                         break;
                     }
                 case PageType.GameLog: // 实时日志

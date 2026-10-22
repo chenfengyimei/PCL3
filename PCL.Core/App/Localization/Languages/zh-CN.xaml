@@ -1913,6 +1913,7 @@
     <sys:String x:Key="Main.SpecialVersion.IUnderstand">我清楚我在做什么</sys:String>
     <sys:String x:Key="Main.SpecialVersion.OpenDownloadPageAndExit">打开最新版下载页并退出</sys:String>
     <sys:String x:Key="Main.SpecialVersion.Title">特殊版本提示</sys:String>
+    <sys:String x:Key="Main.Tab.About">关于</sys:String>
     <sys:String x:Key="Main.Tab.Download">下载</sys:String>
     <sys:String x:Key="Main.Tab.Launch">启动</sys:String>
     <sys:String x:Key="Main.Tab.Settings">设置</sys:String>

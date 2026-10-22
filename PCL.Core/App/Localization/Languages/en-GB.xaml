@@ -1866,6 +1866,7 @@
     <sys:String x:Key="Main.SpecialVersion.IUnderstand">I know what I am doing</sys:String>
     <sys:String x:Key="Main.SpecialVersion.OpenDownloadPageAndExit">Open latest download page and exit</sys:String>
     <sys:String x:Key="Main.SpecialVersion.Title">Special build notice</sys:String>
+    <sys:String x:Key="Main.Tab.About">About</sys:String>
     <sys:String x:Key="Main.Tab.Download">Download</sys:String>
     <sys:String x:Key="Main.Tab.Launch">Launch</sys:String>
     <sys:String x:Key="Main.Tab.Settings">Settings</sys:String>

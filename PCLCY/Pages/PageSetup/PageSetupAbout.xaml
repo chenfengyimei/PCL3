@@ -84,9 +84,9 @@
                         Grid.Row="0"
                         Grid.Column="2"
                         Height="35"
-                        local:CustomEventService.EventData="https://ifdian.net/a/LTCat"
+                        local:CustomEventService.EventData="https://github.com/Meloong-Git/PCL"
                         local:CustomEventService.EventType="OpenUrl"
-                        Text="{DynamicResource Setup.About.SponsorOriginalAuthor}" />
+                        Text="{DynamicResource Setup.About.GitHubHome}" />
                     <local:MyButton
                         Grid.Row="1"
                         Grid.Column="2"
@@ -122,17 +122,11 @@
                     <local:MyListItem
                         Grid.Row="0"
                         Grid.Column="1"
-                        Margin="-5,0,15,0"
+                        Grid.ColumnSpan="2"
+                        Margin="-5,0,0,0"
                         Info="{DynamicResource Setup.About.SpecialThanks.Info.Bmclapi}"
                         IsHitTestVisible="False"
                         Title="{DynamicResource Setup.About.SpecialThanks.Name.Bangbang93}" />
-                    <local:MyButton
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Height="35"
-                        local:CustomEventService.EventData="https://afdian.com/a/bangbang93"
-                        local:CustomEventService.EventType="OpenUrl"
-                        Text="{DynamicResource Setup.About.SpecialThanks.SponsorMirror}" />
                     <local:MyListItem
                         x:Name="ItemMcmod"
                         Grid.Row="1"

@@ -88,51 +88,8 @@ public static class ModLaunch
         if (!string.IsNullOrEmpty(checkResult))
             throw new ArgumentException(checkResult);
 
-#if BETA
-        if (currentLaunchOptions?.SaveBatch is null) // 保存脚本时不提示
-        {
-            ModBase.RunInNewThread(() =>
-            {
-                switch (States.System.LaunchCount)
-                {
-                    case 10:
-                    case 20:
-                    case 40:
-                    case 60:
-                    case 80:
-                    case 100:
-                    case 120:
-                    case 150:
-                    case 200:
-                    case 250:
-                    case 300:
-                    case 350:
-                    case 400:
-                    case 500:
-                    case 600:
-                    case 700:
-                    case 800:
-                    case 900:
-                    case 1000:
-                    case 1200:
-                    case 1400:
-                    case 1600:
-                    case 1800:
-                    case 2000:
-                        if (ModMain.MyMsgBox(
-                                Lang.Text("Minecraft.Launch.Donate.Message", States.System.LaunchCount),
-                                Lang.Text("Minecraft.Launch.Donate.Title", States.System.LaunchCount),
-                                Lang.Text("Minecraft.Launch.Donate.Support"),
-                                Lang.Text("Minecraft.Launch.Donate.Decline")) == 1)
-                        {
-                            ModBase.OpenWebsite("https://afdian.com/a/LTCat");
-                        }
-                        break;
-                }
-            }, "Donate");
-        }
-#endif
-        
+        // PCL CY Edition：按项目定位关闭对原作者的赞助弹窗（原 #if BETA 的 Donate 提示块已移除）
+
         #if DEBUG || DEBUGCI
         return;
         #endif
