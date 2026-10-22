@@ -1,5 +1,41 @@
 # 如何为项目做贡献
 
+## 本地构建与打包
+
+```powershell
+# 编译整个解决方案
+dotnet build "PCLCY.slnx" -c Release
+
+# 发布单文件 exe（x64）
+dotnet publish "PCLCY/PCLCY.csproj" -p:Configuration=Release -p:Platform=x64 -o ./artifact --no-self-contained
+```
+
+### 密钥注入（可选）
+
+CurseForge 下载、微软正版登录等功能依赖构建时注入的 API 密钥。CI 通过 Secrets 注入；本地构建通过环境变量：
+
+```powershell
+$env:PCL_WRITE_SECRET = '1'
+$env:PCL_CURSEFORGE_API_KEY = '<你的 Key>'
+dotnet publish ...
+```
+
+**注意（常见坑）**：密钥由 `PCL.Core.SourceGenerators` 的源生成器读取**编译服务进程的环境变量**并写入程序集。共享编译进程（VBCSCompiler）会保留其启动时的环境快照，因此连续构建时修改密钥环境变量可能不生效。可靠流程：
+
+```powershell
+dotnet build-server shutdown          # 关闭共享编译服务
+Remove-Item PCL.Core\obj -Recurse     # 清理生成器缓存
+# 然后在同一进程中设置环境变量并构建
+```
+
+### 文件编码约定
+
+- 文本文件统一 UTF-8；`.ps1` 脚本带 BOM，其余源文件不带
+- 行尾统一 CRLF（`.gitattributes` 已配置）
+- 编辑时注意不要引入重复 BOM 字节
+
+## 开发文档
+
 Wiki 页面（沿用上游 PCL CE 的开发文档）:
 [开发指南](https://github.com/PCL-Community/PCL2-CE/wiki/开发指南)
 [技术规范](https://github.com/PCL-Community/PCL2-CE/wiki/技术规范)
