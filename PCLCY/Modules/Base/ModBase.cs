@@ -3572,7 +3572,7 @@ public static class ModBase
                     ? Lang.Text("Setup.Feedback.Unavailable.NotLatest.Action")
                     : Lang.Text("Setup.Feedback.Unavailable.CheckFailed.Action"),
                 Lang.Text("Common.Action.Cancel")) == 1)
-            ModMain.frmMain.PageChange(FormMain.PageType.Setup, FormMain.PageSubType.SetupUpdate);
+            ModMain.frmMain.PageChange(FormMain.PageType.About, FormMain.PageSubType.SetupUpdate);
 
         return false;
     }

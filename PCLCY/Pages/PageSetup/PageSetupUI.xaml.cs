@@ -803,27 +803,16 @@ public partial class PageSetupUI
                     : Visibility.Visible;
                 ModMain.frmSetupLeft.ItemJava.Visibility =
                     !HiddenForceShow && conf.SetupJava ? Visibility.Collapsed : Visibility.Visible;
-                ModMain.frmSetupLeft.ItemUpdate.Visibility =
-                    !HiddenForceShow && conf.SetupUpdate ? Visibility.Collapsed : Visibility.Visible;
                 ModMain.frmSetupLeft.ItemGameLink.Visibility = !HiddenForceShow && conf.SetupGameLink
                     ? Visibility.Collapsed
                     : Visibility.Visible;
-                ModMain.frmSetupLeft.ItemAbout.Visibility =
-                    !HiddenForceShow && conf.SetupAbout ? Visibility.Collapsed : Visibility.Visible;
-                ModMain.frmSetupLeft.ItemFeedback.Visibility = !HiddenForceShow && conf.SetupFeedback
-                    ? Visibility.Collapsed
-                    : Visibility.Visible;
-                ModMain.frmSetupLeft.ItemLog.Visibility =
-                    !HiddenForceShow && conf.SetupLog ? Visibility.Collapsed : Visibility.Visible;
 
                 var categories = new[]
                 {
                     (ModMain.frmSetupLeft.TextGameCategory,
                         !(conf.SetupLaunch && conf.SetupJava && conf.SetupGameManage)),
                     (ModMain.frmSetupLeft.TextToolsCategory, !conf.SetupGameLink),
-                    (ModMain.frmSetupLeft.TextLauncherCategory, !(conf.SetupUi && conf.SetupLauncherLanguage && conf.SetupLauncherMisc)),
-                    (ModMain.frmSetupLeft.TextAboutCategory,
-                        !(conf.SetupAbout && conf.SetupUpdate && conf.SetupFeedback && conf.SetupLog))
+                    (ModMain.frmSetupLeft.TextLauncherCategory, !(conf.SetupUi && conf.SetupLauncherLanguage && conf.SetupLauncherMisc))
                 };
 
                 foreach (var category in categories)
@@ -848,18 +837,41 @@ public partial class PageSetupUI
                     setupCount += 1;
                 if (!conf.SetupJava)
                     setupCount += 1;
-                if (!conf.SetupUpdate)
-                    setupCount += 1;
                 if (!conf.SetupGameLink)
-                    setupCount += 1;
-                if (!conf.SetupAbout)
-                    setupCount += 1;
-                if (!conf.SetupFeedback)
-                    setupCount += 1;
-                if (!conf.SetupLog)
                     setupCount += 1;
                 ModMain.frmSetupLeft.PanItem.Visibility =
                     setupCount < 2 && !HiddenForceShow ? Visibility.Collapsed : Visibility.Visible;
+            }
+
+            // 关于子页面 (FrmAboutLeft)：PCL CY Edition 将关于分类独立为主导航页
+            if (ModMain.frmAboutLeft is not null)
+            {
+                ModMain.frmAboutLeft.ItemAbout.Visibility =
+                    !HiddenForceShow && conf.SetupAbout ? Visibility.Collapsed : Visibility.Visible;
+                ModMain.frmAboutLeft.ItemUpdate.Visibility =
+                    !HiddenForceShow && conf.SetupUpdate ? Visibility.Collapsed : Visibility.Visible;
+                ModMain.frmAboutLeft.ItemFeedback.Visibility = !HiddenForceShow && conf.SetupFeedback
+                    ? Visibility.Collapsed
+                    : Visibility.Visible;
+                ModMain.frmAboutLeft.ItemLog.Visibility =
+                    !HiddenForceShow && conf.SetupLog ? Visibility.Collapsed : Visibility.Visible;
+
+                var aboutVisible = !(conf.SetupAbout && conf.SetupUpdate && conf.SetupFeedback && conf.SetupLog) || HiddenForceShow;
+                ModMain.frmAboutLeft.TextAboutCategory.Visibility = aboutVisible ? Visibility.Visible : Visibility.Collapsed;
+                if (aboutVisible)
+                    ModMain.frmAboutLeft.TextAboutCategory.Opacity = 0.6d;
+
+                var aboutCount = 0;
+                if (!conf.SetupAbout)
+                    aboutCount += 1;
+                if (!conf.SetupUpdate)
+                    aboutCount += 1;
+                if (!conf.SetupFeedback)
+                    aboutCount += 1;
+                if (!conf.SetupLog)
+                    aboutCount += 1;
+                ModMain.frmAboutLeft.PanItem.Visibility =
+                    aboutCount < 2 && !HiddenForceShow ? Visibility.Collapsed : Visibility.Visible;
             }
 
             // 工具子页面 (FrmToolsLeft)

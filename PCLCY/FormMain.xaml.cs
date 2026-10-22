@@ -1712,6 +1712,19 @@ public partial class FormMain
 
                     break;
                 }
+                case PageType.About:
+                {
+                    ModMain.frmAboutLeft ??= new PageAboutLeft();
+                    foreach (var item in ModMain.frmAboutLeft.PanItem.Children)
+                        if (item is MyListItem listItem &&
+                            ModBase.Val(listItem.Tag) == (double)subType)
+                        {
+                            listItem.SetChecked(true, true, stack == pageCurrent);
+                            break;
+                        }
+
+                    break;
+                }
             }
 
             PageChangeActual(stack, subType);
@@ -1879,10 +1892,11 @@ public partial class FormMain
                         PageChangeAnim(ModMain.frmSetupLeft, (FrameworkElement)ModMain.frmSetupLeft.PageGet(subType));
                         break;
                     }
-                case PageType.About: // 关于（PCL CY Edition 独立入口）
+                case PageType.About: // 关于（PCL CY Edition 独立入口：软件信息/日志/反馈/更新）
                     {
-                        ModMain.frmSetupAbout ??= new PageSetupAbout();
-                        PageChangeAnim(new MyPageLeft(), ModMain.frmSetupAbout);
+                        ModMain.frmAboutLeft ??= new PageAboutLeft();
+                        subType = ModMain.frmAboutLeft.pageID;
+                        PageChangeAnim(ModMain.frmAboutLeft, (FrameworkElement)ModMain.frmAboutLeft.PageGet(subType));
                         break;
                     }
                 case PageType.GameLog: // 实时日志

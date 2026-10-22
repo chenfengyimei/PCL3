@@ -23,10 +23,8 @@ public partial class PageSetupLeft
         if (ItemUI.Checked && hide.SetupUi) isHiddenPage = true;
         if (ItemLauncherLanguage.Checked && hide.SetupLauncherLanguage) isHiddenPage = true;
         if (ItemLauncherMisc.Checked && hide.SetupLauncherMisc) isHiddenPage = true;
-        if (ItemAbout.Checked && hide.SetupAbout) isHiddenPage = true;
-        if (ItemUpdate.Checked && hide.SetupUpdate) isHiddenPage = true;
-        if (ItemFeedback.Checked && hide.SetupFeedback) isHiddenPage = true;
-        if (ItemLog.Checked && hide.SetupLog) isHiddenPage = true;
+        // PCL CY Edition：关于分类（软件信息/日志/反馈/更新）已独立为主导航"关于"页，
+        // 其隐藏配置不再影响设置页的子页面选择
         if (PageSetupUI.HiddenForceShow)
             isHiddenPage = false;
         // 若页面错误，或尚未加载，则继续
@@ -39,29 +37,21 @@ public partial class PageSetupLeft
         if (isPageSwitched)
             return;
         var hideCfg = Config.Preference.Hide;
-        if (!hideCfg.SetupLaunch) 
+        if (!hideCfg.SetupLaunch)
             ItemLaunch.SetChecked(true, false, false);
-        else if (!hideCfg.SetupJava) 
-            ItemJava.SetChecked(true, false, false);    
-        else if (!hideCfg.SetupGameManage) 
+        else if (!hideCfg.SetupJava)
+            ItemJava.SetChecked(true, false, false);
+        else if (!hideCfg.SetupGameManage)
             ItemGameManage.SetChecked(true, false, false);
-        else if (!hideCfg.SetupGameLink) 
-            ItemGameLink.SetChecked(true, false, false);    
-        else if (!hideCfg.SetupUi) 
+        else if (!hideCfg.SetupGameLink)
+            ItemGameLink.SetChecked(true, false, false);
+        else if (!hideCfg.SetupUi)
             ItemUI.SetChecked(true, false, false);
         else if (!hideCfg.SetupLauncherLanguage)
             ItemLauncherLanguage.SetChecked(true, false, false);
-        else if (!hideCfg.SetupLauncherMisc) 
+        else if (!hideCfg.SetupLauncherMisc)
             ItemLauncherMisc.SetChecked(true, false, false);
-        else if (!hideCfg.SetupAbout) 
-            ItemAbout.SetChecked(true, false, false);   
-        else if (!hideCfg.SetupUpdate) 
-            ItemUpdate.SetChecked(true, false, false);
-        else if (!hideCfg.SetupFeedback) 
-            ItemFeedback.SetChecked(true, false, false);
-        else if (!hideCfg.SetupLog) 
-            ItemLog.SetChecked(true, false, false);
-        else 
+        else
             ItemLaunch.SetChecked(true, false, false);
     }
 
@@ -177,12 +167,6 @@ public partial class PageSetupLeft
     {
         switch (ModBase.Val(((MyIconButton)sender).Tag))
         {
-            case (double)FormMain.PageSubType.SetupFeedback:
-            {
-                if (ModMain.frmSetupFeedback is not null) ModMain.frmSetupFeedback.Loader.Start(isForceRestart: true);
-                ItemFeedback.Checked = true;
-                break;
-            }
             case (double)FormMain.PageSubType.SetupJava:
             {
                 if (ModMain.frmSetupJava is not null) ModMain.frmSetupJava.loader.Start(isForceRestart: true);
@@ -220,14 +204,6 @@ public partial class PageSetupLeft
             pageID = FormMain.PageSubType.SetupLauncherLanguage;
         else if (!hideCfg.SetupLauncherMisc)
             pageID = FormMain.PageSubType.SetupLauncherMisc;
-        else if (!hideCfg.SetupAbout)
-            pageID = FormMain.PageSubType.SetupAbout;        
-        else if (!hideCfg.SetupUpdate)
-            pageID = FormMain.PageSubType.SetupUpdate;
-        else if (!hideCfg.SetupFeedback)
-            pageID = FormMain.PageSubType.SetupFeedback;
-        else if (!hideCfg.SetupLog)
-            pageID = FormMain.PageSubType.SetupLog;
         else
             pageID = FormMain.PageSubType.SetupLaunch;
         AnimatedControl = PanItem;

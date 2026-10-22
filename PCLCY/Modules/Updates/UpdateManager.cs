@@ -95,7 +95,7 @@ public static class UpdateManager
                                 Lang.Text("Update.Action"),
                                 Lang.Text("Common.Action.Cancel")
                             ) == 1)
-                            ModMain.frmMain.PageChange(FormMain.PageType.Setup, FormMain.PageSubType.SetupUpdate);
+                            ModMain.frmMain.PageChange(FormMain.PageType.About, FormMain.PageSubType.SetupUpdate);
                     });
                     return;
                     // 构造步骤加载器

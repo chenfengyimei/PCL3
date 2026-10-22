@@ -67,6 +67,7 @@ public static class ModMain
     public static PageSetupGameLink? frmSetupGameLink;
     public static PageSetupLauncherLanguage? frmSetupLauncherLanguage;
     public static PageSetupLauncherMisc? frmSetupLauncherMisc;
+    public static PageAboutLeft? frmAboutLeft;
     public static PageLoginAuth? frmLoginAuth;
     public static PageLoginMs? frmLoginMs;
     public static PageLoginProfile? frmLoginProfile;
