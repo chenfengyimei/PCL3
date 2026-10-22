@@ -37,7 +37,12 @@ public class UpdatesGitHubModel : IUpdateSource
 
     public VersionDataModel GetLatestVersion(UpdateChannel channel, UpdateArch arch)
     {
-        var release = _GetRelease(channel);
+        var release = _GetReleaseOrNull(channel) ?? throw new Exception("GitHub Releases 暂无任何版本");
+        return _BuildVersionData(release, arch, channel, SourceName);
+    }
+
+    private static VersionDataModel _BuildVersionData(JsonObject release, UpdateArch arch, UpdateChannel channel, string sourceName)
+    {
         var tagName = (string?)release["tag_name"];
         if (string.IsNullOrWhiteSpace(tagName) || !tagName.StartsWithF("v"))
             throw new Exception("GitHub Release 的 tag 不符合 vX.Y.Z 约定");
@@ -45,7 +50,7 @@ public class UpdatesGitHubModel : IUpdateSource
         var semVer = SemVer.Parse(versionName);
         return new VersionDataModel
         {
-            Source = SourceName,
+            Source = sourceName,
             VersionName = versionName,
             VersionCode = semVer.Major * 1000 + semVer.Minor * 10 + semVer.Patch,
             Changelog = (string?)release["body"] ?? "",
@@ -53,10 +58,19 @@ public class UpdatesGitHubModel : IUpdateSource
         };
     }
 
+    private static string _GetVersionName(JsonObject release)
+    {
+        var tagName = (string?)release["tag_name"] ?? "";
+        return tagName.StartsWithF("v") ? tagName[1..] : tagName;
+    }
+
     public bool IsLatest(UpdateChannel channel, UpdateArch arch, SemVer currentVersion, int currentVersionCode)
     {
-        var latest = GetLatestVersion(channel, arch);
-        return currentVersion >= SemVer.Parse(latest.VersionName);
+        // 仓库尚无任何 Release（404）属正常状态：视为已是最新，而不是网络错误
+        var release = _GetReleaseOrNull(channel);
+        if (release is null)
+            return true;
+        return currentVersion >= SemVer.Parse(_GetVersionName(release));
     }
 
     public VersionAnnouncementDataModel GetAnnouncementList()
@@ -83,21 +97,41 @@ public class UpdatesGitHubModel : IUpdateSource
 
     private static JsonObject _GetRelease(UpdateChannel channel)
     {
+        return _GetReleaseOrNull(channel) ?? throw new Exception("GitHub Releases 暂无任何版本");
+    }
+
+    /// <summary>
+    ///     获取 Release；仓库尚无任何 Release（API 返回 404）时返回 null，视为"已是最新"而非错误。
+    /// </summary>
+    private static JsonObject? _GetReleaseOrNull(UpdateChannel channel)
+    {
         if (channel == UpdateChannel.stable)
-        {
-            var latest = Requester.FetchJson(LatestUrl, RequestParam.WithRetry) as JsonObject;
-            if (latest is null || latest["tag_name"] is null)
-                throw new Exception("GitHub Releases 暂无正式版");
-            return latest;
-        }
+            return _FetchJsonOrNull(LatestUrl) as JsonObject;
 
         // beta 通道：取最新的 prerelease；仓库尚无 prerelease 时回退到正式版
-        var list = Requester.FetchJson(ListUrl, RequestParam.WithRetry) as JsonArray;
-        if (list is not null)
+        if (_FetchJsonOrNull(ListUrl) is JsonArray list)
             foreach (var node in list.OfType<JsonObject>())
                 if (node["prerelease"]?.GetValue<bool>() == true)
                     return node;
-        return _GetRelease(UpdateChannel.stable);
+        return _GetReleaseOrNull(UpdateChannel.stable);
+    }
+
+    private static JsonNode? _FetchJsonOrNull(string url)
+    {
+        try
+        {
+            var node = Requester.FetchJson(url, RequestParam.WithRetry);
+            if (node is JsonObject { } obj && obj["tag_name"] is null && obj.ContainsKey("message"))
+                return null; // API 的 404 JSON 响应（message: "Not Found"）
+            return node;
+        }
+        catch (Exception ex)
+        {
+            // HttpRequest 的非 2xx 状态会以 HttpResponseException 形式抛出；404 = 仓库尚无 Release
+            if (ex.Message.ContainsF("404") || ex.Message.ContainsF("Not Found"))
+                return null;
+            throw;
+        }
     }
 
     private static string _AssetSuffix(UpdateChannel channel, UpdateArch arch)

@@ -2479,7 +2479,7 @@
     <sys:String x:Key="Setup.About.UpstreamLegal.PrivacyText">本軟體的 User Agent 中包含啟動器的版本號，以統計各版本的使用者數量。&#xD;除此之外，本軟體不會向開發者上傳任何其他資訊。</sys:String>
     <sys:String x:Key="Setup.About.UpstreamLegal.TermsAndDisclaimer">使用者協議與免責宣告</sys:String>
     <sys:String x:Key="Setup.About.UpstreamLegal.Title">上游版權與法律資訊</sys:String>
-    <sys:String x:Key="Setup.About.Version.Info">目前版本: %VERSION% (%BRANCH%, %VERSIONCODE%, %COMMIT_HASH%)</sys:String>
+    <sys:String x:Key="Setup.About.Version.Info">基於 PCL Community Edition 與龍騰貓躍的 PCL2 開源專案二次開發（上游基線 2.12.1）&#xA;目前版本: %VERSION% (%BRANCH%, %VERSIONCODE%, %COMMIT_HASH%)</sys:String>
 
     <!-- Setup.About.EasterEgg -->
 

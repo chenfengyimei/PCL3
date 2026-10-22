@@ -2479,7 +2479,7 @@
     <sys:String x:Key="Setup.About.UpstreamLegal.PrivacyText">The User Agent of this software includes the launcher version number to count the number of users on each version.&#xD;Other than this, this software will not upload any other information to the developers.</sys:String>
     <sys:String x:Key="Setup.About.UpstreamLegal.TermsAndDisclaimer">ToS &amp; Disclaimer</sys:String>
     <sys:String x:Key="Setup.About.UpstreamLegal.Title">Upstream legal information</sys:String>
-    <sys:String x:Key="Setup.About.Version.Info">Current version: %VERSION% (%BRANCH%, %VERSIONCODE%, %COMMIT_HASH%)</sys:String>
+    <sys:String x:Key="Setup.About.Version.Info">Derived from the open-source PCL Community Edition and LTCat's PCL2 (upstream baseline 2.12.1)&#xA;Current version: %VERSION% (%BRANCH%, %VERSIONCODE%, %COMMIT_HASH%)</sys:String>
 
     <!-- Setup.About.EasterEgg -->
 
