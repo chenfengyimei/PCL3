@@ -19,15 +19,24 @@ on:
         description: 'Version to release (e.g., 2.14.2)'
         required: true
         type: string
+  push:
+    tags:
+      - 'v*'
+
+env:
+  # 兼容两种触发方式：推送 v* tag 时从 tag 名取版本（固定 Release 配置），
+  # 手动 dispatch 时使用输入值
+  RELEASE_VERSION: ${{ github.event_name == 'push' && replace(github.ref_name, 'v', '') || inputs.version }}
+  RELEASE_CONFIGURATION: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
 
 jobs:
   build:
     strategy:
       matrix:
         include:
-          - configuration: ${{ inputs.configuration }}
+          - configuration: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
             architecture: x64
-          - configuration: ${{ inputs.configuration }}
+          - configuration: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
             architecture: ARM64
       fail-fast: false
 
@@ -51,7 +60,7 @@ jobs:
           tool: git-cliff
 
       - name: Create local release tag
-        run: git tag -f "v${{ inputs.version }}"
+        run: git tag -f "v${{ env.RELEASE_VERSION }}"
 
       - name: Generate changelog
         run: git-cliff --latest -o CHANGELOG.md
@@ -62,10 +71,10 @@ jobs:
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           draft: true
-          tag_name: v${{ inputs.version }}
-          name: Release ${{ inputs.version }}
+          tag_name: v${{ env.RELEASE_VERSION }}
+          name: Release ${{ env.RELEASE_VERSION }}
           body_path: CHANGELOG.md
-          prerelease: ${{ inputs.configuration == 'Beta' }}
+          prerelease: ${{ env.RELEASE_CONFIGURATION == 'Beta' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -79,9 +88,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - configuration: ${{ inputs.configuration }}
+          - configuration: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
             architecture: x64
-          - configuration: ${{ inputs.configuration }}
+          - configuration: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
             architecture: ARM64
     steps:
       - name: Download Build Artifact
@@ -106,7 +115,7 @@ jobs:
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           draft: true
-          tag_name: v${{ inputs.version }}
+          tag_name: v${{ env.RELEASE_VERSION }}
           files: |
             PCLCY_${{ matrix.configuration }}_${{ matrix.architecture }}.exe
             PCLCY_${{ matrix.configuration }}_${{ matrix.architecture }}.exe.sigstore.json
@@ -120,12 +129,12 @@ jobs:
       - name: Publish Draft
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
-          tag_name: v${{ inputs.version }}
+          tag_name: v${{ env.RELEASE_VERSION }}
 
       - name: Trigger MirrorChyanUploading
         run: |
           MRC_CHANNEL="stable"
-          if [ "${{ inputs.configuration }}" = "Beta" ]; then
+          if [ "${{ env.RELEASE_CONFIGURATION }}" = "Beta" ]; then
             MRC_CHANNEL="beta"
           fi
 
