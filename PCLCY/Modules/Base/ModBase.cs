@@ -109,13 +109,6 @@ public static class ModBase
     /// </summary>
     public static string pathAppdata = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "PCL") + @"\";
 
-    /// <summary>
-    ///     AppData 中的 PCL CY Edition 配置文件夹路径，以 \ 结尾。
-    /// </summary>
-    public static string pathAppdataConfig = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                             (versionBranchName == "Debug" ? @"\.pcl3debug\" : @"\.pcl3\");
-
-
     #endregion
 
     #region 自定义类
