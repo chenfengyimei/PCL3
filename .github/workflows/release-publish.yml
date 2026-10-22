@@ -4,39 +4,25 @@ permissions:
   contents: write
   actions: write
 
+# 推送 v* tag 触发完整发布流程（构建 x64/ARM64 -> git-cliff 变更日志
+# -> sigstore 签名 -> 草稿 Release -> 发布），版本号取自 tag 名（如 v3.0.0）
 on:
-  workflow_dispatch:
-    inputs:
-      configuration:
-        description: 'Build configuration (Beta is published as prerelease)'
-        required: true
-        default: Beta
-        type: choice
-        options:
-          - Release
-          - Beta
-      version:
-        description: 'Version to release (e.g., 2.14.2)'
-        required: true
-        type: string
   push:
     tags:
       - 'v*'
 
 env:
-  # 兼容两种触发方式：推送 v* tag 时从 tag 名取版本（固定 Release 配置），
-  # 手动 dispatch 时使用输入值
-  RELEASE_VERSION: ${{ github.event_name == 'push' && replace(github.ref_name, 'v', '') || inputs.version }}
-  RELEASE_CONFIGURATION: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
+  # tag 名（含 v 前缀），用于 Release tag_name 与本地 changelog tag
+  RELEASE_TAG: ${{ github.ref_name }}
 
 jobs:
   build:
     strategy:
       matrix:
         include:
-          - configuration: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
+          - configuration: Release
             architecture: x64
-          - configuration: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
+          - configuration: Release
             architecture: ARM64
       fail-fast: false
 
@@ -60,7 +46,7 @@ jobs:
           tool: git-cliff
 
       - name: Create local release tag
-        run: git tag -f "v${{ env.RELEASE_VERSION }}"
+        run: git tag -f "$RELEASE_TAG"
 
       - name: Generate changelog
         run: git-cliff --latest -o CHANGELOG.md
@@ -71,10 +57,10 @@ jobs:
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           draft: true
-          tag_name: v${{ env.RELEASE_VERSION }}
-          name: Release ${{ env.RELEASE_VERSION }}
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: Release ${{ env.RELEASE_TAG }}
           body_path: CHANGELOG.md
-          prerelease: ${{ env.RELEASE_CONFIGURATION == 'Beta' }}
+          prerelease: ${{ contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -88,9 +74,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - configuration: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
+          - configuration: Release
             architecture: x64
-          - configuration: ${{ github.event_name == 'push' && 'Release' || inputs.configuration }}
+          - configuration: Release
             architecture: ARM64
     steps:
       - name: Download Build Artifact
@@ -115,7 +101,7 @@ jobs:
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           draft: true
-          tag_name: v${{ env.RELEASE_VERSION }}
+          tag_name: ${{ env.RELEASE_TAG }}
           files: |
             PCLCY_${{ matrix.configuration }}_${{ matrix.architecture }}.exe
             PCLCY_${{ matrix.configuration }}_${{ matrix.architecture }}.exe.sigstore.json
@@ -129,12 +115,12 @@ jobs:
       - name: Publish Draft
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
-          tag_name: v${{ env.RELEASE_VERSION }}
+          tag_name: ${{ env.RELEASE_TAG }}
 
       - name: Trigger MirrorChyanUploading
         run: |
           MRC_CHANNEL="stable"
-          if [ "${{ env.RELEASE_CONFIGURATION }}" = "Beta" ]; then
+          if echo "$RELEASE_TAG" | grep -qiE 'beta|rc'; then
             MRC_CHANNEL="beta"
           fi
 
