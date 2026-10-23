@@ -1,10 +1,13 @@
 ﻿using System.IO;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using PCL.Core.App;
 using PCL.Core.App.Configuration;
 using PCL.Core.UI;
+using PCL.Core.UI.Theme;
 using PCL.Core.Utils;
 using PCL.Core.App.Localization;
 
@@ -64,12 +67,13 @@ public partial class PageSetupUI
             SliderLauncherOpacity.Value = Config.Preference.Theme.WindowOpacity;
             CheckLauncherLogo.Checked = Config.Preference.ShowStartupLogo;
             ComboDarkMode.SelectedIndex = (int)Config.Preference.Theme.ColorMode;
-            ComboDarkColor.SelectedIndex = Array.IndexOf(ThemeColorValues, Config.Preference.Theme.DarkColor);
-            ComboLightColor.SelectedIndex = Array.IndexOf(ThemeColorValues, Config.Preference.Theme.LightColor);
-            SliderCustomHue.Value = Config.Preference.Theme.WindowHue;
-            SliderCustomSaturation.Value = Config.Preference.Theme.WindowSat;
-            SliderCustomLightness.Value = Config.Preference.Theme.WindowLight;
-            SliderCustomDelta.Value = Config.Preference.Theme.WindowDelta;
+            // 主题预览卡（首次构建 + 选中态/自定义色带刷新）
+            EnsureThemeCards();
+            RefreshThemeCards();
+            // 自定义参数：默认编辑当前配色模式（浅/深各自独立一套四参）
+            _customEditingDark = ThemeManager.IsDarkMode;
+            ComboCustomTarget.SelectedIndex = _customEditingDark ? 1 : 0;
+            LoadCustomSliders();
             UpdateCustomThemePanel();
             CheckShowLaunchingHint.Checked = Config.Preference.ShowLaunchingHint;
 
@@ -216,7 +220,14 @@ public partial class PageSetupUI
     {
         var sender = (MySlider)senderRaw;
         if (ModAnimation.AniControlEnabled == 0)
-            SetByTag(sender.Tag?.ToString(), sender.Value);
+        {
+            var tag = sender.Tag?.ToString();
+            SetByTag(tag, sender.Value);
+            // 自定义主题参数：预览卡色带随滑条实时刷新
+            if (tag is "UiLauncherHue" or "UiLauncherSat" or "UiLauncherLight" or "UiLauncherDelta" or
+                "UiDarkHue" or "UiDarkSat" or "UiDarkLight" or "UiDarkDelta")
+                RefreshCustomThemeCards();
+        }
     }
 
     private void ComboChange(object senderRaw, SelectionChangedEventArgs e)
@@ -676,24 +687,174 @@ public partial class PageSetupUI
         ModBase.OpenWebsite("https://docs.pclc.cc/ce/customization/xaml-format");
     }
 
-    // 主题
-    private void ThemeColor_Change(object senderRaw, SelectionChangedEventArgs e)
+    // 主题预览卡
+    private bool _themeCardsBuilt;
+    private bool _customEditingDark;
+    private readonly Dictionary<(ColorTheme Theme, bool IsDark), Border> _themeCards = [];
+
+    /// <summary>构建浅色/深色两排主题预览卡（每排 5 张，色阶渐变 + 名称）。</summary>
+    private void EnsureThemeCards()
     {
-        var sender = (MyComboBox)senderRaw;
-        var index = sender.SelectedIndex;
-        if (index < 0 || index >= ThemeColorValues.Length) return;
-        var theme = ThemeColorValues[index];
-        switch (sender.Tag?.ToString())
+        if (_themeCardsBuilt) return;
+        _themeCardsBuilt = true;
+        BuildThemeCards(PanLightThemeCards, isDark: false);
+        BuildThemeCards(PanDarkThemeCards, isDark: true);
+    }
+
+    private void BuildThemeCards(Panel host, bool isDark)
+    {
+        host.Children.Clear();
+        for (var i = 0; i < ThemeColorValues.Length; i++)
+            host.Children.Add(CreateThemeCard(ThemeColorValues[i], ThemeColors[i], isDark));
+    }
+
+    private Border CreateThemeCard(ColorTheme theme, string name, bool isDark)
+    {
+        var strip = new Border
         {
-            case "UiLightColor":
-                Config.Preference.Theme.LightColor = theme;
-                break;
-            case "UiDarkColor":
-                Config.Preference.Theme.DarkColor = theme;
-                break;
+            Height = 24,
+            CornerRadius = new CornerRadius(4, 4, 0, 0),
+            Margin = new Thickness(6, 6, 6, 0),
+            Background = BuildThemeStripBrush(theme, isDark),
+        };
+        var label = new TextBlock
+        {
+            Text = name,
+            FontSize = 11,
+            Foreground = (Brush)FindResource("ColorBrushGray5"),
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Margin = new Thickness(2, 4, 2, 5),
+            TextTrimming = TextTrimming.CharacterEllipsis,
+        };
+        var grid = new Grid();
+        grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+        grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+        Grid.SetRow(strip, 0);
+        Grid.SetRow(label, 1);
+        grid.Children.Add(strip);
+        grid.Children.Add(label);
+        var card = new Border
+        {
+            CornerRadius = new CornerRadius(6),
+            BorderThickness = new Thickness(2),
+            BorderBrush = Brushes.Transparent,
+            Background = (Brush)FindResource("ColorBrushGray4"),
+            Margin = new Thickness(3, 0, 3, 0),
+            Cursor = Cursors.Hand,
+            Child = grid,
+        };
+        _themeCards[(theme, isDark)] = card;
+        card.MouseLeftButtonUp += (_, _) => ThemeCard_Click(theme, isDark);
+        card.MouseEnter += (_, _) => ApplyThemeCardVisual(card, theme, isDark, true);
+        card.MouseLeave += (_, _) => ApplyThemeCardVisual(card, theme, isDark, false);
+        return card;
+    }
+
+    /// <summary>按主题与配色模式生成 8 档色阶渐变条（与 ThemeService 实际渲染同源）。</summary>
+    private static Brush BuildThemeStripBrush(ColorTheme theme, bool isDark)
+    {
+        var colors = ThemeService.GetThemePreviewColors(theme, isDark);
+        var brush = new LinearGradientBrush
+        {
+            StartPoint = new Point(0, 0.5),
+            EndPoint = new Point(1, 0.5),
+        };
+        for (var i = 0; i < colors.Length; i++)
+            brush.GradientStops.Add(new GradientStop(colors[i], i / (double)(colors.Length - 1)));
+        brush.Freeze();
+        return brush;
+    }
+
+    private static bool IsThemeSelected(ColorTheme theme, bool isDark)
+        => isDark
+            ? Config.Preference.Theme.DarkColor == theme
+            : Config.Preference.Theme.LightColor == theme;
+
+    /// <summary>刷新全部预览卡的选中态与自定义卡色带（自定义参数随滑条实时变化）。</summary>
+    private void RefreshThemeCards()
+    {
+        if (!_themeCardsBuilt) return;
+        foreach (var ((theme, isDark), card) in _themeCards)
+        {
+            ApplyThemeCardVisual(card, theme, isDark, false);
+            if (theme == ColorTheme.Custom)
+            {
+                var strip = FindThemeStrip(card);
+                if (strip != null)
+                    strip.Background = BuildThemeStripBrush(theme, isDark);
+            }
         }
-        UpdateCustomThemePanel();
+    }
+
+    private void RefreshCustomThemeCards()
+    {
+        if (!_themeCardsBuilt) return;
+        foreach (var isDark in new[] { false, true })
+        {
+            if (_themeCards.TryGetValue((ColorTheme.Custom, isDark), out var card))
+            {
+                var strip = FindThemeStrip(card);
+                if (strip != null)
+                    strip.Background = BuildThemeStripBrush(ColorTheme.Custom, isDark);
+            }
+        }
+    }
+
+    private static Border? FindThemeStrip(Border card)
+        => (card.Child as Grid)?.Children.OfType<Border>().FirstOrDefault();
+
+    private void ApplyThemeCardVisual(Border card, ColorTheme theme, bool isDark, bool hovered)
+    {
+        var selected = IsThemeSelected(theme, isDark);
+        if (selected)
+        {
+            card.BorderBrush = new SolidColorBrush(ThemeService.GetThemePreviewColors(theme, isDark)[4]);
+            card.Opacity = 1;
+        }
+        else
+        {
+            card.BorderBrush = hovered
+                ? (Brush)FindResource("ColorBrushGray5")
+                : Brushes.Transparent;
+            card.Opacity = hovered ? 1 : 0.85;
+        }
+    }
+
+    private void ThemeCard_Click(ColorTheme theme, bool isDark)
+    {
+        if (ModAnimation.AniControlEnabled != 0) return;
+        if (isDark)
+            Config.Preference.Theme.DarkColor = theme;
+        else
+            Config.Preference.Theme.LightColor = theme;
+        // 配置事件负责当前模式的配色资源；ThemeRefresh 兜底灰阶缓存与彩色背景渐变
         ThemeManager.ThemeRefresh();
+        RefreshThemeCards();
+        UpdateCustomThemePanel();
+    }
+
+    /// <summary>自定义参数编辑目标（浅色/深色）切换：滑条 Tag 与显示值随目标重载。</summary>
+    private void CustomTarget_Change(object senderRaw, SelectionChangedEventArgs e)
+    {
+        if (ModAnimation.AniControlEnabled != 0) return;
+        if (ComboCustomTarget.SelectedIndex < 0) return;
+        _customEditingDark = ComboCustomTarget.SelectedIndex == 1;
+        LoadCustomSliders();
+    }
+
+    private void LoadCustomSliders()
+    {
+        ModAnimation.AniControlEnabled += 1;
+        var t = Config.Preference.Theme;
+        SliderCustomHue.Tag = _customEditingDark ? "UiDarkHue" : "UiLauncherHue";
+        SliderCustomSaturation.Tag = _customEditingDark ? "UiDarkSat" : "UiLauncherSat";
+        SliderCustomLightness.Tag = _customEditingDark ? "UiDarkLight" : "UiLauncherLight";
+        SliderCustomDelta.Tag = _customEditingDark ? "UiDarkDelta" : "UiLauncherDelta";
+        SliderCustomHue.Value = _customEditingDark ? t.WindowDarkHue : t.WindowHue;
+        SliderCustomSaturation.Value = _customEditingDark ? t.WindowDarkSat : t.WindowSat;
+        SliderCustomLightness.Value = _customEditingDark ? t.WindowDarkLight : t.WindowLight;
+        SliderCustomDelta.Value = _customEditingDark ? t.WindowDarkDelta : t.WindowDelta;
+        ModAnimation.AniControlEnabled -= 1;
     }
 
     private void UpdateCustomThemePanel()
@@ -702,6 +863,104 @@ public partial class PageSetupUI
         var isCustom = Config.Preference.Theme.LightColor == ColorTheme.Custom ||
                        Config.Preference.Theme.DarkColor == ColorTheme.Custom;
         PanCustomTheme.Visibility = isCustom ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    // 主题预设：导入 / 导出
+    private sealed class ThemePresetParams
+    {
+        public int Hue { get; set; }
+        public int Saturation { get; set; }
+        public int Lightness { get; set; }
+        public int Delta { get; set; }
+    }
+
+    private sealed class ThemePreset
+    {
+        public string Format { get; set; } = "";
+        public int Version { get; set; }
+        public string LightColor { get; set; } = "";
+        public string DarkColor { get; set; } = "";
+        public ThemePresetParams? Light { get; set; }
+        public ThemePresetParams? Dark { get; set; }
+    }
+
+    private void BtnThemeExport_Click(object sender, MouseButtonEventArgs e)
+    {
+        var t = Config.Preference.Theme;
+        var preset = new ThemePreset
+        {
+            Format = "pclcy-theme",
+            Version = 1,
+            LightColor = t.LightColor.ToString(),
+            DarkColor = t.DarkColor.ToString(),
+            Light = new ThemePresetParams
+            {
+                Hue = t.WindowHue, Saturation = t.WindowSat,
+                Lightness = t.WindowLight, Delta = t.WindowDelta,
+            },
+            Dark = new ThemePresetParams
+            {
+                Hue = t.WindowDarkHue, Saturation = t.WindowDarkSat,
+                Lightness = t.WindowDarkLight, Delta = t.WindowDarkDelta,
+            },
+        };
+        var fileName = $"PCLCY-Theme-{preset.LightColor}-{preset.DarkColor}.pcltheme.json";
+        var path = SystemDialogs.SelectSaveFile(
+            Lang.Text("Setup.Ui.Theme.Preset.Export.Title"),
+            fileName,
+            Lang.Text("Setup.Ui.Theme.Preset.FileFilter"));
+        if (string.IsNullOrEmpty(path)) return;
+        try
+        {
+            File.WriteAllText(path, JsonSerializer.Serialize(preset, new JsonSerializerOptions { WriteIndented = true }));
+            HintService.Hint(Lang.Text("Setup.Ui.Theme.Preset.Export.Success"), HintType.Success);
+        }
+        catch (Exception ex)
+        {
+            ModBase.Log(ex, "导出主题预设失败", ModBase.LogLevel.Msgbox,
+                userSummary: Lang.Text("Setup.Ui.Theme.Preset.Export.Failed"));
+        }
+    }
+
+    private void BtnThemeImport_Click(object sender, MouseButtonEventArgs e)
+    {
+        var path = SystemDialogs.SelectFile(
+            Lang.Text("Setup.Ui.Theme.Preset.FileFilter"),
+            Lang.Text("Setup.Ui.Theme.Preset.Import.Title"));
+        if (string.IsNullOrEmpty(path)) return;
+        try
+        {
+            var preset = JsonSerializer.Deserialize<ThemePreset>(File.ReadAllText(path));
+            if (preset is null || preset.Format != "pclcy-theme")
+                throw new JsonException("不是有效的 PCL CY Edition 主题预设文件");
+            if (!Enum.TryParse(preset.LightColor, ignoreCase: true, out ColorTheme light) ||
+                !Enum.TryParse(preset.DarkColor, ignoreCase: true, out ColorTheme dark))
+                throw new JsonException("预设中的主题名称无法识别");
+            var t = Config.Preference.Theme;
+            t.LightColor = light;
+            t.DarkColor = dark;
+            if (preset.Light != null)
+            {
+                t.WindowHue = Math.Clamp(preset.Light.Hue, 0, 360);
+                t.WindowSat = Math.Clamp(preset.Light.Saturation, 0, 100);
+                t.WindowLight = Math.Clamp(preset.Light.Lightness, 0, 100);
+                t.WindowDelta = Math.Clamp(preset.Light.Delta, 0, 180);
+            }
+            if (preset.Dark != null)
+            {
+                t.WindowDarkHue = Math.Clamp(preset.Dark.Hue, 0, 360);
+                t.WindowDarkSat = Math.Clamp(preset.Dark.Saturation, 0, 100);
+                t.WindowDarkLight = Math.Clamp(preset.Dark.Lightness, 0, 100);
+                t.WindowDarkDelta = Math.Clamp(preset.Dark.Delta, 0, 180);
+            }
+            Reload();
+            HintService.Hint(Lang.Text("Setup.Ui.Theme.Preset.Import.Success"), HintType.Success);
+        }
+        catch (Exception ex)
+        {
+            ModBase.Log(ex, "导入主题预设失败", ModBase.LogLevel.Msgbox,
+                userSummary: Lang.Text("Setup.Ui.Theme.Preset.Import.Failed"));
+        }
     }
 
     // 滑动条

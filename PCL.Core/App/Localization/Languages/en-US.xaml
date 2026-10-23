@@ -3221,6 +3221,7 @@
     <sys:String x:Key="Setup.Ui.Theme.Color.Hmcl">HMCL</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.Color.SkyBlue">Sky Blue</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.Color.Custom">Custom</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.CustomTarget">Custom parameters</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.CustomHue">Hue</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.CustomSaturation">Saturation</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.CustomLightness">Lightness</sys:String>
@@ -3232,6 +3233,16 @@
     <sys:String x:Key="Setup.Ui.Theme.Light">Light</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.LightColor">Light theme color</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.Title">Theme</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Title">Theme preset</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Export">Export current theme</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Import">Import theme preset</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Export.Title">Export theme preset</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Import.Title">Import theme preset</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.FileFilter">Theme preset files|*.pcltheme.json;*.json</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Export.Success">Theme preset exported!</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Import.Success">Theme preset imported!</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Export.Failed">Failed to export theme preset</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Import.Failed">Failed to import theme preset: invalid file format</sys:String>
 
     <!-- Setup.Update -->
 

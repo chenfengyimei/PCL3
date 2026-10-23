@@ -3221,6 +3221,7 @@
     <sys:String x:Key="Setup.Ui.Theme.Color.Hmcl">HMCL</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.Color.SkyBlue">天空蓝</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.Color.Custom">自定义</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.CustomTarget">自定义参数</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.CustomHue">色相</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.CustomSaturation">饱和度</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.CustomLightness">明度</sys:String>
@@ -3232,6 +3233,16 @@
     <sys:String x:Key="Setup.Ui.Theme.Light">浅色</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.LightColor">浅色配色</sys:String>
     <sys:String x:Key="Setup.Ui.Theme.Title">主题</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Title">主题预设</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Export">导出当前主题</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Import">导入主题预设</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Export.Title">导出主题预设</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Import.Title">导入主题预设</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.FileFilter">主题预设文件|*.pcltheme.json;*.json</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Export.Success">主题预设已导出！</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Import.Success">主题预设已导入！</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Export.Failed">主题预设导出失败</sys:String>
+    <sys:String x:Key="Setup.Ui.Theme.Preset.Import.Failed">主题预设导入失败，文件格式不正确</sys:String>
 
     <!-- Setup.Update -->
 

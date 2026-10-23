@@ -36,10 +36,6 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="Name1" />
                                 <ColumnDefinition />
-                                <ColumnDefinition Width="92" SharedSizeGroup="SubName" />
-                                <ColumnDefinition />
-                                <ColumnDefinition SharedSizeGroup="SubName" />
-                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{DynamicResource Setup.Ui.Theme.Title}" />
                             <local:MyComboBox Grid.Column="1" x:Name="ComboDarkMode" Tag="UiDarkMode"
@@ -48,13 +44,30 @@
                                 <local:MyComboBoxItem Content="{DynamicResource Setup.Ui.Theme.Dark}" />
                                 <local:MyComboBoxItem Content="{DynamicResource Setup.Ui.Theme.FollowSystem}" /> <!-- default -->
                             </local:MyComboBox>
-                            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{DynamicResource Setup.Ui.Theme.LightColor}"/>
-                            <local:MyComboBox Grid.Column="3" x:Name="ComboLightColor" Tag="UiLightColor" ItemsSource="{Binding ThemeColors}" SelectionChanged="ThemeColor_Change"/>
-                            <TextBlock Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{DynamicResource Setup.Ui.Theme.DarkColor}"/>
-                            <local:MyComboBox Grid.Column="5" x:Name="ComboDarkColor" Tag="UiDarkColor" ItemsSource="{Binding ThemeColors}" SelectionChanged="ThemeColor_Change"/>
-
                         </Grid>
+                        <!-- 浅色主题预览卡（代码构建，替代下拉框） -->
+                        <StackPanel Margin="0,0,0,7">
+                            <TextBlock Text="{DynamicResource Setup.Ui.Theme.LightColor}" Opacity="0.6" Margin="1,0,0,4" />
+                            <UniformGrid x:Name="PanLightThemeCards" Rows="1" />
+                        </StackPanel>
+                        <!-- 深色主题预览卡 -->
+                        <StackPanel Margin="0,0,0,7">
+                            <TextBlock Text="{DynamicResource Setup.Ui.Theme.DarkColor}" Opacity="0.6" Margin="1,0,0,4" />
+                            <UniformGrid x:Name="PanDarkThemeCards" Rows="1" />
+                        </StackPanel>
                         <StackPanel x:Name="PanCustomTheme" Margin="0,2,0,7" Visibility="Collapsed">
+                            <Grid Height="28" Margin="0,0,0,6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="Name1" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"
+                                           Text="{DynamicResource Setup.Ui.Theme.CustomTarget}" />
+                                <local:MyComboBox Grid.Column="1" x:Name="ComboCustomTarget" SelectionChanged="CustomTarget_Change">
+                                    <local:MyComboBoxItem Content="{DynamicResource Setup.Ui.Theme.Light}" />
+                                    <local:MyComboBoxItem Content="{DynamicResource Setup.Ui.Theme.Dark}" />
+                                </local:MyComboBox>
+                            </Grid>
                             <Grid Height="28" Margin="0,0,0,6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="Name1" />
@@ -96,6 +109,21 @@
                                                 MaxValue="180" ValueByKey="1" Change="SliderChange" />
                             </Grid>
                         </StackPanel>
+                        <!-- 主题预设：导入 / 导出（JSON 分享） -->
+                        <Grid Height="28" Margin="0,0,0,7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="Name1" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                       Text="{DynamicResource Setup.Ui.Theme.Preset.Title}" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <local:MyButton x:Name="BtnThemeExport" Text="{DynamicResource Setup.Ui.Theme.Preset.Export}"
+                                                Padding="13,0" Margin="0,0,12,0" Click="BtnThemeExport_Click" />
+                                <local:MyButton x:Name="BtnThemeImport" Text="{DynamicResource Setup.Ui.Theme.Preset.Import}"
+                                                Padding="13,0" Click="BtnThemeImport_Click" />
+                            </StackPanel>
+                        </Grid>
                         <local:MyCheckBox Text="{DynamicResource Setup.Ui.Basic.ShowLogo}" Margin="-1,0,0,7" Height="22"
                                           x:Name="CheckLauncherLogo" Tag="UiLauncherLogo" Change="CheckBoxChange" />
                         <local:MyCheckBox Text="{DynamicResource Setup.Ui.Basic.LockWindow}" Margin="-1,0,0,7" Height="22" x:Name="CheckLockWindowSize"

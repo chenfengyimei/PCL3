@@ -61,7 +61,11 @@ public sealed partial class ThemeService
             Config.Preference.Theme.WindowHueConfig,
             Config.Preference.Theme.WindowSatConfig,
             Config.Preference.Theme.WindowLightConfig,
-            Config.Preference.Theme.WindowDeltaConfig
+            Config.Preference.Theme.WindowDeltaConfig,
+            Config.Preference.Theme.WindowDarkHueConfig,
+            Config.Preference.Theme.WindowDarkSatConfig,
+            Config.Preference.Theme.WindowDarkLightConfig,
+            Config.Preference.Theme.WindowDarkDeltaConfig
         ],
         trigger: ConfigEvent.Update,
         handler: e =>
@@ -172,14 +176,24 @@ public sealed partial class ThemeService
     /// 获取当前色彩主题对应的各种参数。
     /// </summary>
     public static (int Hue, double LightAdjust, double ChromaAdjust, int Delta) GetCurrentThemeArgs()
+        => GetThemeArgs(CurrentTheme, IsDarkMode);
+
+    /// <summary>
+    /// 获取指定主题在指定配色模式下的各种参数。
+    /// </summary>
+    public static (int Hue, double LightAdjust, double ChromaAdjust, int Delta) GetThemeArgs(ColorTheme theme, bool isDark)
     {
-        var theme = CurrentTheme;
         return theme switch
         {
             ColorTheme.SkyBlue => (235, 0.36, 0.2, 0),
             ColorTheme.CatBlue => (255, 0, -0.2, 0),
             ColorTheme.DeathBlue => (268, -0.05, -0.1, 0),
             ColorTheme.HmclBlue => (275, -0.03, -0.35, 0),
+            ColorTheme.Custom when isDark => (
+                ((Config.Preference.Theme.WindowDarkHue % 360) + 360) % 360,
+                (Math.Clamp(Config.Preference.Theme.WindowDarkLight, 0, 100) - 20) / 100d,
+                (Math.Clamp(Config.Preference.Theme.WindowDarkSat, 0, 100) - 80) / 100d,
+                Math.Clamp(Config.Preference.Theme.WindowDarkDelta, 0, 180)),
             ColorTheme.Custom => (
                 ((Config.Preference.Theme.WindowHue % 360) + 360) % 360,
                 (Math.Clamp(Config.Preference.Theme.WindowLight, 0, 100) - 20) / 100d,
@@ -191,6 +205,23 @@ public sealed partial class ThemeService
             _ => throw new IndexOutOfRangeException($"Invalid theme index: {(int)theme}")
 #endif
         };
+    }
+
+    /// <summary>
+    /// 获取指定主题在指定配色模式下的 8 档预览色阶（Color1 → Color8，与实际渲染同源）。
+    /// 供设置页主题预览卡使用。
+    /// </summary>
+    public static System.Windows.Media.Color[] GetThemePreviewColors(ColorTheme theme, bool isDark)
+    {
+        var tone = isDark ? ToneProfiles.Dark : ToneProfiles.Light;
+        var colors = _CalculateColors(tone, GetThemeArgs(theme, isDark));
+        var result = new System.Windows.Media.Color[8];
+        for (var i = 0; i < 8; i++)
+        {
+            var c = colors[i];
+            result[i] = System.Windows.Media.Color.FromScRgb(c.Alpha, c.Red, c.Green, c.Blue);
+        }
+        return result;
     }
 
     private static double _AdjustLinear(double value, double adjustment)

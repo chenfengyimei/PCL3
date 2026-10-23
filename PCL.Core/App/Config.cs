@@ -301,6 +301,26 @@ public static partial class Config
             [ConfigItem<int>("UiLauncherDelta", 90, ConfigSource.Local)] public partial int WindowDelta { get; set; }
 
             /// <summary>
+            /// 自定义主题（深色模式）：色相 (H)。
+            /// </summary>
+            [ConfigItem<int>("UiDarkHue", 180, ConfigSource.Local)] public partial int WindowDarkHue { get; set; }
+
+            /// <summary>
+            /// 自定义主题（深色模式）：饱和度 (S)。
+            /// </summary>
+            [ConfigItem<int>("UiDarkSat", 80, ConfigSource.Local)] public partial int WindowDarkSat { get; set; }
+
+            /// <summary>
+            /// 自定义主题（深色模式）：明度 (L)。
+            /// </summary>
+            [ConfigItem<int>("UiDarkLight", 20, ConfigSource.Local)] public partial int WindowDarkLight { get; set; }
+
+            /// <summary>
+            /// 自定义主题（深色模式）：色相渐变。
+            /// </summary>
+            [ConfigItem<int>("UiDarkDelta", 90, ConfigSource.Local)] public partial int WindowDarkDelta { get; set; }
+
+            /// <summary>
             /// 传说中的主题选择，但是没卵用。
             /// </summary>
             [ConfigItem<int>("UiLauncherTheme", 0, ConfigSource.Local)] public partial int ThemeSelected { get; set; }
