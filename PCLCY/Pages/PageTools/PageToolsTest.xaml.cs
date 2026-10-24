@@ -173,8 +173,9 @@ public partial class PageToolsTest
 
     public static void Jrrp()
     {
-        var random = new Random(GenerateDailySeed());
-        var luckValue = random.Next(0, 101);
+        // 无限制中心：可指定下一次人品值（一次性，抽完即失效）
+        var luckValue = PageUnlimited._nextLuckValue ?? new Random(GenerateDailySeed()).Next(0, 101);
+        PageUnlimited._nextLuckValue = null;
         var rating = GetRating(luckValue);
         var title = Lang.Text("Tools.Test.Luck.MsgboxTitle", Lang.Date(DateTime.Now, "d"));
 

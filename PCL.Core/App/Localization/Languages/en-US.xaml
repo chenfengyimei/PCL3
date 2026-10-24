@@ -7,6 +7,7 @@
 
     <!-- Meta -->
 
+    <sys:String x:Key="Main.Tab.Unlimited">Unlimited</sys:String>
     <sys:String x:Key="Meta.Code">en-US</sys:String>
     <sys:String x:Key="Meta.Name">English (US)</sys:String>
 
@@ -3608,6 +3609,46 @@
 
     <!-- Update -->
 
+    <sys:String x:Key="Unlimited.Files.CavesHint">Place caves.txt in this folder to customize echo cave content</sys:String>
+    <sys:String x:Key="Unlimited.Files.Desc">Echo cave and trivia hints support external customization: place caves.txt / hints.txt (one entry per line, UTF-8) in the PCL folder next to the exe to fully replace the built-in content.</sys:String>
+    <sys:String x:Key="Unlimited.Files.HintsHint">Place hints.txt in this folder to customize trivia hints</sys:String>
+    <sys:String x:Key="Unlimited.Files.OpenCaves">Open PCL folder (caves.txt)</sys:String>
+    <sys:String x:Key="Unlimited.Files.OpenHints">Open PCL folder (hints.txt)</sys:String>
+    <sys:String x:Key="Unlimited.Files.Title">External content files</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Applied">April Fools mode toggled</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Desc">April Fools mode turns on automatically only on April 1 each year (the HMCL theme is available all year regardless).</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Force">Force April Fools mode</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Force.ToolTip">Enable April Fools title styles and easter-egg behaviour regardless of date; uncheck to restore automatic (April 1 only).</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Title">April Fools &amp;amp; easter eggs</sys:String>
+    <sys:String x:Key="Unlimited.Hints.Desc">All "don't show again" flags and their current state. Toggle them individually or reset all (the corresponding hints will reappear).</sys:String>
+    <sys:String x:Key="Unlimited.Hints.EulaReset">EULA confirmation reset; it will show again on next launch</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ReplayEula">Replay EULA</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ReplayNotice">Replay version notice</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ReplayUpdateLog">Replay changelog</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ResetAll">Reset all</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ResetDone">All hint flags reset</sys:String>
+    <sys:String x:Key="Unlimited.Hints.Title">Hints &amp; confirmations</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Force.Invalid">Enter an integer between 0 and 100</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Force.Success">Next luck value forced to {0}</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Force.ToolTip">Enter 0-100. The next roll shows this value exactly, then natural randomness resumes.</sys:String>
+    <sys:String x:Key="Unlimited.Luck.ForceApply">Apply</sys:String>
+    <sys:String x:Key="Unlimited.Luck.ForceNext">Force next:</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Hint">Daily luck is hashed from the date plus the launcher ID, and stays fixed for the day. You can view it here, or force the next roll (one-shot).</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Roll">Roll</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Title">Daily luck</sys:String>
+    <sys:String x:Key="Unlimited.Luck.TodayValue">Today's value: </sys:String>
+    <sys:String x:Key="Unlimited.Presets.Copy">Copy</sys:String>
+    <sys:String x:Key="Unlimited.Presets.Desc">Names and source URLs of all 20 built-in homepage presets; copy any of them for your custom homepage.</sys:String>
+    <sys:String x:Key="Unlimited.Presets.Local">(generated locally, no URL)</sys:String>
+    <sys:String x:Key="Unlimited.Presets.Title">Homepage preset sources</sys:String>
+    <sys:String x:Key="Unlimited.Stats.Edit">Edit</sys:String>
+    <sys:String x:Key="Unlimited.Stats.Hint">These counters drive milestone behaviour (e.g. update notice pacing) and can be edited freely.</sys:String>
+    <sys:String x:Key="Unlimited.Stats.InputHint">Enter a new value (non-negative integer)</sys:String>
+    <sys:String x:Key="Unlimited.Stats.Invalid">Enter a non-negative integer</sys:String>
+    <sys:String x:Key="Unlimited.Stats.LaunchCount">Game launches: </sys:String>
+    <sys:String x:Key="Unlimited.Stats.Saved">Saved</sys:String>
+    <sys:String x:Key="Unlimited.Stats.StartupCount">Launcher opens: </sys:String>
+    <sys:String x:Key="Unlimited.Stats.Title">Runtime stats</sys:String>
     <sys:String x:Key="Update.Action">Update</sys:String>
     <sys:String x:Key="Update.Available">A new launcher version is available ({0} -&gt; {1})&#xA;Update now?</sys:String>
     <sys:String x:Key="Update.Check.Failed">Unable to get latest version information. Please check your network connection.</sys:String>

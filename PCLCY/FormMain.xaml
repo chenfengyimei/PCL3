@@ -182,6 +182,10 @@
                                                  Check="BtnTitleSelect_Click"
                                                  LogoScale="1"
                                                  SvgIcon="lucide/wrench" />
+                            <local:MyRadioButton x:Name="BtnTitleSelect11" Text="{DynamicResource Main.Tab.Unlimited}" Tag="11" Margin="5,0" Padding="2,0"
+                                                 Check="BtnTitleSelect_Click"
+                                                 LogoScale="1"
+                                                 SvgIcon="lucide/infinity" />
                         </StackPanel>
                     </Grid>
                     <Grid x:Name="PanTitleInner" Visibility="Collapsed" Margin="-16,0,0,0" Opacity="0"

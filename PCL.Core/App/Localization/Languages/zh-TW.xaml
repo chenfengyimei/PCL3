@@ -54,6 +54,7 @@
     <sys:String x:Key="Launch.Skin.Cape.Name.Aurora">極光披風</sys:String>
     <sys:String x:Key="Launch.Skin.Cape.Name.Hero">英雄披風</sys:String>
     <sys:String x:Key="Launch.Skin.Cape.Name.Twisted">扭曲披風</sys:String>
+    <sys:String x:Key="Main.Tab.Unlimited">無限制</sys:String>
     <sys:String x:Key="Meta.Code">zh-TW</sys:String>
     <sys:String x:Key="Meta.Name">繁體中文（台灣）</sys:String>
 
@@ -3610,6 +3611,46 @@
 
     <!-- Update -->
 
+    <sys:String x:Key="Unlimited.Files.CavesHint">將 caves.txt 放入該資料夾即可自訂回聲洞內容</sys:String>
+    <sys:String x:Key="Unlimited.Files.Desc">回聲洞與「你知道嗎」支援外部自訂：在啟動器旁的 PCL 資料夾放置 caves.txt / hints.txt（每行一條，UTF-8），將完全替換內建內容。</sys:String>
+    <sys:String x:Key="Unlimited.Files.HintsHint">將 hints.txt 放入該資料夾即可自訂「你知道嗎」內容</sys:String>
+    <sys:String x:Key="Unlimited.Files.OpenCaves">開啟 PCL 資料夾（caves.txt）</sys:String>
+    <sys:String x:Key="Unlimited.Files.OpenHints">開啟 PCL 資料夾（hints.txt）</sys:String>
+    <sys:String x:Key="Unlimited.Files.Title">外部內容檔案</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Applied">愚人節模式已切換</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Desc">愚人節模式預設僅在每年 4 月 1 日自動開啟（HMCL 主題全年可用，不受此影響）。</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Force">強制愚人節模式</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Force.ToolTip">不受日期限制，隨時啟用愚人節的標題欄樣式等彩蛋表現；取消勾選恢復自動（4 月 1 日）。</sys:String>
+    <sys:String x:Key="Unlimited.Fool.Title">愚人節與彩蛋</sys:String>
+    <sys:String x:Key="Unlimited.Hints.Desc">以下是所有「不再提示」類標記的目前狀態，可單獨切換或全部重置（重置後對應提示會再次出現）。</sys:String>
+    <sys:String x:Key="Unlimited.Hints.EulaReset">已重置協議確認，下次啟動將再次彈出</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ReplayEula">重看使用者協議</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ReplayNotice">重看版本說明</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ReplayUpdateLog">重看更新日誌</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ResetAll">全部重置</sys:String>
+    <sys:String x:Key="Unlimited.Hints.ResetDone">已重置全部提示標記</sys:String>
+    <sys:String x:Key="Unlimited.Hints.Title">提示與確認狀態</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Force.Invalid">請輸入 0-100 之間的整數</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Force.Success">已指定下一次人品值：{0}</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Force.ToolTip">輸入 0-100，下一次「今日人品」將直接顯示該值，之後恢復自然隨機。</sys:String>
+    <sys:String x:Key="Unlimited.Luck.ForceApply">套用</sys:String>
+    <sys:String x:Key="Unlimited.Luck.ForceNext">指定下一次：</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Hint">今日人品由「日期 + 啟動器識別碼」雜湊決定，當天內固定。可以在這裡查看，也可以指定下一次抽出的人品值（一次性生效）。</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Roll">抽一次</sys:String>
+    <sys:String x:Key="Unlimited.Luck.Title">今日人品</sys:String>
+    <sys:String x:Key="Unlimited.Luck.TodayValue">今日人品：</sys:String>
+    <sys:String x:Key="Unlimited.Presets.Copy">複製</sys:String>
+    <sys:String x:Key="Unlimited.Presets.Desc">全部 20 個內建主頁預設的名稱與來源位址，可一鍵複製用於自訂主頁。</sys:String>
+    <sys:String x:Key="Unlimited.Presets.Local">（本地生成，無網路位址）</sys:String>
+    <sys:String x:Key="Unlimited.Presets.Title">主頁預設源</sys:String>
+    <sys:String x:Key="Unlimited.Stats.Edit">修改</sys:String>
+    <sys:String x:Key="Unlimited.Stats.Hint">這些計數會影響里程碑行為（如更新提示節奏），可自由修改。</sys:String>
+    <sys:String x:Key="Unlimited.Stats.InputHint">輸入新的數值（非負整數）</sys:String>
+    <sys:String x:Key="Unlimited.Stats.Invalid">請輸入非負整數</sys:String>
+    <sys:String x:Key="Unlimited.Stats.LaunchCount">遊戲啟動次數：</sys:String>
+    <sys:String x:Key="Unlimited.Stats.Saved">已儲存</sys:String>
+    <sys:String x:Key="Unlimited.Stats.StartupCount">啟動器開啟次數：</sys:String>
+    <sys:String x:Key="Unlimited.Stats.Title">執行資料</sys:String>
     <sys:String x:Key="Update.Action">更新</sys:String>
     <sys:String x:Key="Update.Available">啟動器有新版本可用（{0} -&gt; {1}）&#xA;是否立即更新？</sys:String>
     <sys:String x:Key="Update.Check.Failed">無法取得最新版本資訊，請檢查網路連線</sys:String>

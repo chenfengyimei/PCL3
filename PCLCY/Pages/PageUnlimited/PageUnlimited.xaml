@@ -1,0 +1,131 @@
+<local:MyPageRight
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PCL"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" x:Class="PCL.PageUnlimited"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    PanScroll="{Binding ElementName=PanBack}">
+    <local:MyScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" x:Name="PanBack">
+        <StackPanel Margin="10,12,10,12">
+            <!-- 今日人品 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Luck.Title}">
+                <StackPanel Margin="25,42,25,20">
+                    <TextBlock Text="{DynamicResource Unlimited.Luck.Hint}" Opacity="0.5" Margin="1,0,0,10"
+                               TextWrapping="Wrap" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                                   Text="{DynamicResource Unlimited.Luck.TodayValue}" Margin="0,0,12,0" />
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" x:Name="LabLuckToday"
+                                   FontWeight="Bold" />
+                        <local:MyButton Grid.Column="2" x:Name="BtnLuckRoll" Padding="13,0"
+                                        Text="{DynamicResource Unlimited.Luck.Roll}" Click="BtnLuckRoll_Click" />
+                    </Grid>
+                    <Grid Margin="0,14,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                                   Text="{DynamicResource Unlimited.Luck.ForceNext}" Margin="0,0,12,0" />
+                        <local:MyTextBox Grid.Column="1" x:Name="TextLuckForce" MaxLength="3" />
+                        <local:MyButton Grid.Column="2" x:Name="BtnLuckForce" Padding="13,0" Margin="12,0,0,0"
+                                        Text="{DynamicResource Unlimited.Luck.ForceApply}" Click="BtnLuckForce_Click"
+                                        ToolTip="{DynamicResource Unlimited.Luck.Force.ToolTip}" />
+                    </Grid>
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 运行数据 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Stats.Title}">
+                <StackPanel Margin="25,42,25,20">
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                                   Text="{DynamicResource Unlimited.Stats.StartupCount}" Margin="0,0,12,0" />
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" x:Name="LabStartupCount" />
+                        <local:MyButton Grid.Column="2" x:Name="BtnStartupEdit" Padding="13,0"
+                                        Text="{DynamicResource Unlimited.Stats.Edit}" Click="BtnStartupEdit_Click" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                                   Text="{DynamicResource Unlimited.Stats.LaunchCount}" Margin="0,0,12,0" />
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" x:Name="LabLaunchCount" />
+                        <local:MyButton Grid.Column="2" x:Name="BtnLaunchEdit" Padding="13,0"
+                                        Text="{DynamicResource Unlimited.Stats.Edit}" Click="BtnLaunchEdit_Click" />
+                    </Grid>
+                    <TextBlock Text="{DynamicResource Unlimited.Stats.Hint}" Opacity="0.5" Margin="1,10,0,0"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 提示与确认状态 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Hints.Title}">
+                <StackPanel Margin="25,42,25,20">
+                    <TextBlock Text="{DynamicResource Unlimited.Hints.Desc}" Opacity="0.5" Margin="1,0,0,10"
+                               TextWrapping="Wrap" />
+                    <StackPanel x:Name="PanHintFlags" />
+                    <local:MyButton x:Name="BtnHintsResetAll" Padding="13,0" Margin="0,10,0,0" HorizontalAlignment="Left"
+                                    Text="{DynamicResource Unlimited.Hints.ResetAll}" Click="BtnHintsResetAll_Click" />
+                    <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                        <local:MyButton x:Name="BtnReplayNotice" Padding="13,0" Margin="0,0,12,0"
+                                        Text="{DynamicResource Unlimited.Hints.ReplayNotice}" Click="BtnReplayNotice_Click" />
+                        <local:MyButton x:Name="BtnReplayEula" Padding="13,0" Margin="0,0,12,0"
+                                        Text="{DynamicResource Unlimited.Hints.ReplayEula}" Click="BtnReplayEula_Click" />
+                        <local:MyButton x:Name="BtnReplayUpdateLog" Padding="13,0"
+                                        Text="{DynamicResource Unlimited.Hints.ReplayUpdateLog}" Click="BtnReplayUpdateLog_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 愚人节与彩蛋 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Fool.Title}">
+                <StackPanel Margin="25,42,25,20">
+                    <local:MyCheckBox x:Name="CheckFoolForce" Height="22" Change="CheckFoolForce_Change"
+                                      Text="{DynamicResource Unlimited.Fool.Force}"
+                                      ToolTip="{DynamicResource Unlimited.Fool.Force.ToolTip}" />
+                    <TextBlock Text="{DynamicResource Unlimited.Fool.Desc}" Opacity="0.5" Margin="1,10,0,0"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 主页预设源 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Presets.Title}" CanSwap="True" IsSwapped="True">
+                <StackPanel Margin="25,42,25,20">
+                    <TextBlock Text="{DynamicResource Unlimited.Presets.Desc}" Opacity="0.5" Margin="1,0,0,10"
+                               TextWrapping="Wrap" />
+                    <StackPanel x:Name="PanPresetUrls" />
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 外部内容文件 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Files.Title}">
+                <StackPanel Margin="25,42,25,20">
+                    <TextBlock Text="{DynamicResource Unlimited.Files.Desc}" Opacity="0.5" Margin="1,0,0,10"
+                               TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal">
+                        <local:MyButton x:Name="BtnOpenCaves" Padding="13,0" Margin="0,0,12,0"
+                                        Text="{DynamicResource Unlimited.Files.OpenCaves}" Click="BtnOpenCaves_Click" />
+                        <local:MyButton x:Name="BtnOpenHints" Padding="13,0"
+                                        Text="{DynamicResource Unlimited.Files.OpenHints}" Click="BtnOpenHints_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </local:MyCard>
+        </StackPanel>
+    </local:MyScrollViewer>
+</local:MyPageRight>

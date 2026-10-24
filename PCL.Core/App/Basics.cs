@@ -40,9 +40,18 @@ public static class Basics
     public static string VersionBranch => Metadata.Version.BranchName;
 
     /// <summary>
-    /// 当前日期是否为愚人节。
+    /// 当前日期是否为愚人节。无限制中心可运行时强制（Unlimited.ForceAprilFool）。
     /// </summary>
-    public static bool IsAprilFool => DateTime.Now is { Month: 4, Day: 1 };
+    public static bool IsAprilFool => UnlimitedForce.ForceAprilFool ?? DateTime.Now is { Month: 4, Day: 1 };
+
+    /// <summary>
+    ///     无限制中心的运行时强制开关（PCL CY Edition）。放在 PCL.Core 侧避免反向依赖主工程。
+    /// </summary>
+    public static class UnlimitedForce
+    {
+        /// <summary>强制愚人节模式；null = 自动按日期。</summary>
+        public static bool? ForceAprilFool;
+    }
 
     #endregion
 

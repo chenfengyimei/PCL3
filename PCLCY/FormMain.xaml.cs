@@ -35,7 +35,7 @@ public partial class FormMain
     #region 基础
 
     // 更新日志
-    private void ShowUpdateLog()
+    internal void ShowUpdateLog()
     {
         ModBase.RunInNewThread(() =>
         {
@@ -1385,6 +1385,11 @@ public partial class FormMain
         About = 4,
 
         /// <summary>
+        ///     无限制中心。PCL CY Edition 将所有隐藏参数、彩蛋与状态开关集中暴露，给用户最大的开放性。
+        /// </summary>
+        Unlimited = 11,
+
+        /// <summary>
         ///     实例选择。这是一个副页面。
         /// </summary>
         InstanceSelect = 5,
@@ -1897,6 +1902,12 @@ public partial class FormMain
                         ModMain.frmAboutLeft ??= new PageAboutLeft();
                         subType = ModMain.frmAboutLeft.pageID;
                         PageChangeAnim(ModMain.frmAboutLeft, (FrameworkElement)ModMain.frmAboutLeft.PageGet(subType));
+                        break;
+                    }
+                case PageType.Unlimited: // 无限制中心：所有隐藏参数、彩蛋与状态开关集中暴露
+                    {
+                        ModMain.frmUnlimited ??= new PageUnlimited();
+                        PageChangeAnim(new MyPageLeft(), ModMain.frmUnlimited);
                         break;
                     }
                 case PageType.GameLog: // 实时日志
