@@ -1016,24 +1016,16 @@ public partial class PageSetupUI
             // 获取配置组引用以缩短代码
             var conf = Config.Preference.Hide;
 
-            // 顶部栏：下载、设置、工具
-            var isAllTitleHidden = !HiddenForceShow && conf.PageDownload && conf.PageSetup && conf.PageTools;
-
-            if (isAllTitleHidden)
-            {
-                ModMain.frmMain.PanTitleSelect.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                ModMain.frmMain.PanTitleSelect.Visibility = Visibility.Visible;
-                ModMain.frmMain.BtnTitleSelect1.Visibility = !HiddenForceShow && conf.PageDownload
-                    ? Visibility.Collapsed
-                    : Visibility.Visible;
-                ModMain.frmMain.BtnTitleSelect2.Visibility =
-                    !HiddenForceShow && conf.PageSetup ? Visibility.Collapsed : Visibility.Visible;
-                ModMain.frmMain.BtnTitleSelect3.Visibility =
-                    !HiddenForceShow && conf.PageTools ? Visibility.Collapsed : Visibility.Visible;
-            }
+            // 顶部栏：下载、设置、工具可按配置隐藏；启动与关于常驻
+            // （关于页承载上游署名与许可信息，保持可达；启动是主页面入口，隐藏会导致无法导航）
+            ModMain.frmMain.PanTitleSelect.Visibility = Visibility.Visible;
+            ModMain.frmMain.BtnTitleSelect1.Visibility = !HiddenForceShow && conf.PageDownload
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+            ModMain.frmMain.BtnTitleSelect2.Visibility =
+                !HiddenForceShow && conf.PageSetup ? Visibility.Collapsed : Visibility.Visible;
+            ModMain.frmMain.BtnTitleSelect3.Visibility =
+                !HiddenForceShow && conf.PageTools ? Visibility.Collapsed : Visibility.Visible;
 
             // 功能隐藏设置卡片
             if (ModMain.frmSetupUI is not null)
