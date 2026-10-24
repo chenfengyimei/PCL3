@@ -108,6 +108,14 @@ public sealed partial class TelemetryService
     // 设备环境上报
     private static void _ReportDeviceEnvironment(TelemetryDeviceEnvironment content)
     {
+        // Sentry SDK 未初始化（未配置 DSN）时 CaptureMessage 是空操作，
+        // 如实记录"跳过"而不是误导性的"已发送"
+        if (!SentrySdk.IsEnabled)
+        {
+            Context.Info("遥测未启用（未配置 Sentry DSN），跳过设备环境调查上报");
+            return;
+        }
+
         Context.Info("正在上报设备环境调查数据");
         
         SentrySdk.ConfigureScope(scope =>
