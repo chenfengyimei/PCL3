@@ -108,8 +108,11 @@ public static class UpdateManager
                     SystemInfo.IsArm64System ? UpdateArch.arm64 : UpdateArch.x64, dlTargetPath));
                 loaders.Add(new ModLoader.LoaderTask<int, int>(Lang.Text("Update.Task.Check"), _ =>
                 {
+                    // 更新源未提供哈希时跳过校验（如 GitHub Release 资产缺少 digest 字段），
+                    // 避免空哈希与实际文件哈希恒不相等导致更新流程必然失败
+                    if (string.IsNullOrWhiteSpace(version.Sha256)) return;
                     var curHash = ModBase.GetFileSHA256(dlTargetPath);
-                    if ((curHash ?? "") != (version.Sha256 ?? ""))
+                    if ((curHash ?? "") != version.Sha256)
                         throw new Exception(Lang.Text("Update.Error.Sha256Mismatch", version.Sha256, curHash));
                 }));
                 if (type == UpdateEnums.UpdateType.UpdateNow)
