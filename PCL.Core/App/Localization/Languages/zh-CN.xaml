@@ -2666,6 +2666,22 @@
 
     <sys:String x:Key="Setup.GameManage.Error.InitFailed">初始化其他页设置失败</sys:String>
     <sys:String x:Key="Setup.GameManage.Initialized">已初始化其他页设置！</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckDone">下载源检测完成</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Checking">正在检测各下载源连通性……</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckNow">立即检测</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckNow.ToolTip">对各下载源发起一次轻量连通性探测并更新健康状态，不会修改任何设置。</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Cooldown">冷却中 · {0} 秒</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.FailCount">近期失败 {0} 次</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Hint">下载源的连通状态会在此展示。使用中自动记录：连续失败的源会在重试排序中暂缓，冷却结束后自动恢复；也可以立即手动检测。</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset">重置健康状态</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset.Success">已重置下载源健康状态</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset.ToolTip">清空所有下载源的健康记录；被暂时降权的源重置后立即恢复默认排序。</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Bmclapi">BMCLAPI（国内镜像）</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.CurseForge">CurseForge（官方）</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Mcim">MCIM 镜像</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Modrinth">Modrinth（官方）</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Mojang">Mojang 官方源</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Title">网络诊断</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.File">文件下载源</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.PreferOfficialThenMirror">优先使用官方源，在加载缓慢时换用镜像源</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.Title">游戏资源获取行为</sys:String>

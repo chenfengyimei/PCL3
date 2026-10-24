@@ -7,6 +7,53 @@
 
     <!-- Meta -->
 
+    <sys:String x:Key="Crash.Report.JarInJarMod.ConflictDiscouraged">Discouraged</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.ConflictIncompatible">Incompatible</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.ConflictNone">No conflicts found.</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.ConflictSection">=== Conflicts (incompatible / discouraged) ===</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningDisabled">disabled prerequisite(s) [{0}]</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningMismatch">version-incompatible prerequisite(s) [{0}]</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningMissing">missing prerequisite(s) [{0}]</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningNone">No dependency issues found.</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningSection">=== Dependency warnings (missing / version mismatch) ===</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Bundled.Current">✓ used by this instance</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Bundled.From">[bundled · from {0}]</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Bundled.Incompatible">⚠ incompatible with this version</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Bundled.Versions">{0} versions</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.DeleteTitle">Deleting this mod affects {0} mod(s) that depend on it. Choose how to proceed:</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.DisableTitle">Disabling this mod affects {0} mod(s) that depend on it. Choose how to proceed:</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.OnlySelf">Only this mod</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.WithDelete">Also delete mods that depend on it</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.WithDisable">Also disable mods that depend on it</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Conflict.Discouraged">Discouraged</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Conflict.Incompatible">Incompatible</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Conflict.Pair">{0} and {1}</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Conflict.Tooltip">Incompatible: cannot load together; installing both will crash the game or prevent startup — remove one.&#10;Discouraged: can load together, but the author flagged compatibility issues that may cause bugs or broken features.</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Bundled">Bundled</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Disabled">Disabled</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Installed">Installed</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Missing">Missing</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Optional">[optional]</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.VersionMismatch">Version mismatch</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Empty.Message">None of this instance's mods declare dependencies or bundle other mods, or the mod list has not finished loading.</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Empty.Title">No mod relations to analyze</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Entry">Mod Relations</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Entry.ToolTip">View mod dependencies, missing prerequisites and bundled (Jar-in-Jar) structure</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Message">An overview of dependencies and bundled structure between mods. Disabling or deleting a mod will warn about affected dependencies.</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.ParsePending.Message">Embedded mod relationships are still being analyzed in the background. Dependency cascade detection may be incomplete right now and could miss mods that should be handled together. Continue anyway?</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.ParsePending.Title">Mods still loading</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Search.Hint">Search mods: name / ModId / dependency</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Section.Bundled">Bundled mods</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Section.Conflicts">Conflicts</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Section.Relations">Mod relations</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Section.Warnings">Warnings</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Warning.Disabled">{0} has disabled prerequisite(s): {1}</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Warning.Missing">{0} is missing prerequisite(s): {1}</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Warning.VersionMismatch">{0} has version-incompatible prerequisite(s): {1}</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Warning.VersionMismatch.Detail">{0} {1} (detected: {2})</sys:String>
+    <sys:String x:Key="Launch.Skin.Cape.Name.Aurora">Aurora</sys:String>
+    <sys:String x:Key="Launch.Skin.Cape.Name.Hero">Hero</sys:String>
+    <sys:String x:Key="Launch.Skin.Cape.Name.Twisted">Twisted</sys:String>
     <sys:String x:Key="Meta.Code">en-GB</sys:String>
     <sys:String x:Key="Meta.Name">English (United Kingdom)</sys:String>
 
@@ -2320,6 +2367,8 @@
 
     <!-- Select -->
 
+    <sys:String x:Key="Region.Feature.Restricted">Minecraft downloads, repairs, and modpack installation are unavailable in your country or region.</sys:String>
+    <sys:String x:Key="Region.Feature.Unknown">Could not determine region info. Minecraft downloads, repairs, and modpack installation are temporarily unavailable.</sys:String>
     <sys:String x:Key="Select.Error.OperationFailed">An instance selection operation failed. See the details below.</sys:String>
 
     <!-- Select.Folder -->
@@ -2617,8 +2666,33 @@
 
     <!-- Setup.GameManage -->
 
+    <sys:String x:Key="Setup.GameManage.Download.FileConnections">Max connections per file</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.FileConnections.ToolTip">The most connections a large file may use at once. A higher value can help sources that cap each connection, but may also trigger source throttling.</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol">File download protocol</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Auto">Automatic (recommended)</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Auto.ToolTip">Prefer HTTP/2 for small files and batch downloads, and use HTTP/1.1 for large segmented downloads to balance concurrency and compatibility.</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Http11">HTTP/1.1</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Http11.ToolTip">Force HTTP/1.1 for all file downloads. This can help environments where independent connections improve large-file throughput.</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Http2">Prefer HTTP/2</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Http2.ToolTip">Prefer HTTP/2 for all file downloads, falling back to HTTP/1.1 when the source or proxy does not support it.</sys:String>
     <sys:String x:Key="Setup.GameManage.Error.InitFailed">Failed to initialise game management settings</sys:String>
     <sys:String x:Key="Setup.GameManage.Initialized">Game management settings have been initialised!</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckDone">Download source check finished</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Checking">Checking download source connectivity...</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckNow">Check now</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckNow.ToolTip">Run a lightweight connectivity probe against each download source and refresh health status. No settings are changed.</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Cooldown">Cooling down · {0}s</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.FailCount">{0} recent failure(s)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Hint">Connectivity of download sources is shown here. Failures are tracked automatically: sources failing repeatedly are deprioritized in retry order and recover automatically after cooldown; you can also run a manual check.</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset">Reset health</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset.Success">Download source health has been reset</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset.ToolTip">Clear health records of all download sources; deprioritized sources immediately return to default order.</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Bmclapi">BMCLAPI (China mirror)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.CurseForge">CurseForge (official)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Mcim">MCIM mirror</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Modrinth">Modrinth (official)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Mojang">Mojang official</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Title">Network diagnostics</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.File">File download source</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.PreferOfficialThenMirror">Prefer official sources, fallback to mirrors when slow</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.Title">Game resources</sys:String>

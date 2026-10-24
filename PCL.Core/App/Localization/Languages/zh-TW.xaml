@@ -7,6 +7,53 @@
 
     <!-- Meta -->
 
+    <sys:String x:Key="Crash.Report.JarInJarMod.ConflictDiscouraged">不建議共存</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.ConflictIncompatible">不兼容</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.ConflictNone">未發現沖突。</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.ConflictSection">=== 沖突關系（不兼容 / 不建議共存）===</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningDisabled">前置被禁用 [{0}]</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningMismatch">前置版本不符 [{0}]</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningMissing">缺少前置 [{0}]</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningNone">未發現依賴問題。</sys:String>
+    <sys:String x:Key="Crash.Report.JarInJarMod.WarningSection">=== 依賴警告（缺失前置 / 版本不符）===</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Bundled.Current">? 當前實例使用</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Bundled.From">[內置 · 來自 {0}]</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Bundled.Incompatible">? 不適配當前版本</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Bundled.Versions">{0} 個版本</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.DeleteTitle">刪除此模組會影響 {0} 個依賴它的模組，請選擇處理方式</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.DisableTitle">禁用此模組會影響 {0} 個依賴它的模組，請選擇處理方式</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.OnlySelf">僅操作此模組</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.WithDelete">連帶刪除依賴它的模組</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Cascade.WithDisable">連帶禁用依賴它的模組</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Conflict.Discouraged">不建議共存</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Conflict.Incompatible">不兼容</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Conflict.Pair">{0} 與 {1}</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Conflict.Tooltip">「不兼容」：兩者無法同時加載，一起安裝會導致游戲崩潰或無法啟動，需卸載其一。&#10;「不建議共存」：可以一起加載，但作者標注了兼容性問題，可能出現異常或功能失效。</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Bundled">內嵌提供</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Disabled">已禁用</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Installed">已安裝</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Missing">缺失</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.Optional">[可選]</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Dep.VersionMismatch">版本不符</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Empty.Message">當前實例的模組均無依賴聲明或內嵌模組，或模組列表尚未加載完成。</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Empty.Title">沒有可分析的模組關系</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Entry">模組關系</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Entry.ToolTip">查看模組的依賴關系、缺失前置與內嵌（Jar-in-Jar）結構</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Message">這里概覽模組間的依賴關系與內嵌結構。禁用或刪除模組時會提示受影響的依賴項。</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.ParsePending.Message">內嵌模組關系仍在后臺解析，此時禁用或刪除的連帶依賴檢測可能不完整，可能遺漏應一并處理的模組。是否仍要繼續？</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.ParsePending.Title">模組仍在解析</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Search.Hint">搜索模組：名稱 / ModId / 依賴</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Section.Bundled">內嵌模組</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Section.Conflicts">沖突關系</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Section.Relations">模組關系</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Section.Warnings">警告</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Warning.Disabled">{0} 的前置被禁用：{1}</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Warning.Missing">{0} 缺少前置：{1}</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Warning.VersionMismatch">{0} 前置版本不符：{1}</sys:String>
+    <sys:String x:Key="Instance.Resource.Mod.JarInJar.Warning.VersionMismatch.Detail">{0} {1}（檢測到：{2}）</sys:String>
+    <sys:String x:Key="Launch.Skin.Cape.Name.Aurora">極光披風</sys:String>
+    <sys:String x:Key="Launch.Skin.Cape.Name.Hero">英雄披風</sys:String>
+    <sys:String x:Key="Launch.Skin.Cape.Name.Twisted">扭曲披風</sys:String>
     <sys:String x:Key="Meta.Code">zh-TW</sys:String>
     <sys:String x:Key="Meta.Name">繁體中文（台灣）</sys:String>
 
@@ -2320,6 +2367,8 @@
 
     <!-- Select -->
 
+    <sys:String x:Key="Region.Feature.Restricted">Minecraft 下載、補全與整合包安裝功能在你所在的國家或地區不可用。</sys:String>
+    <sys:String x:Key="Region.Feature.Unknown">無法獲取區域信息，暫時無法使用 Minecraft 下載、補全與整合包安裝功能。</sys:String>
     <sys:String x:Key="Select.Error.OperationFailed">實例選擇操作失敗。請檢視錯誤詳情。</sys:String>
 
     <!-- Select.Folder -->
@@ -2617,8 +2666,33 @@
 
     <!-- Setup.GameManage -->
 
+    <sys:String x:Key="Setup.GameManage.Download.FileConnections">單文件最大連接數</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.FileConnections.ToolTip">大文件最多同時使用的連接數。提高該值可能加快被單連接限速的下載，但也有可能更容易被下載源限速。</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol">文件下載協議</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Auto">自動選擇（推薦）</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Auto.ToolTip">小文件和批量下載優先使用 HTTP/2；大文件分段下載使用 HTTP/1.1，以兼顧并發和兼容性。</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Http11">HTTP/1.1</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Http11.ToolTip">所有文件下載強制使用 HTTP/1.1。適合需要多條獨立連接提升大文件速度的網絡環境。</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Http2">優先使用 HTTP/2</sys:String>
+    <sys:String x:Key="Setup.GameManage.Download.HttpProtocol.Http2.ToolTip">所有文件下載優先使用 HTTP/2；如果下載源或代理不支持，會自動回退到 HTTP/1.1。</sys:String>
     <sys:String x:Key="Setup.GameManage.Error.InitFailed">初始化其他頁設定失敗</sys:String>
     <sys:String x:Key="Setup.GameManage.Initialized">已初始化其他頁設定！</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckDone">Download source check finished</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Checking">Checking download source connectivity...</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckNow">Check now</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckNow.ToolTip">Run a lightweight connectivity probe against each download source and refresh health status. No settings are changed.</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Cooldown">Cooling down · {0}s</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.FailCount">{0} recent failure(s)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Hint">Connectivity of download sources is shown here. Failures are tracked automatically: sources failing repeatedly are deprioritized in retry order and recover automatically after cooldown; you can also run a manual check.</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset">Reset health</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset.Success">Download source health has been reset</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset.ToolTip">Clear health records of all download sources; deprioritized sources immediately return to default order.</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Bmclapi">BMCLAPI (China mirror)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.CurseForge">CurseForge (official)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Mcim">MCIM mirror</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Modrinth">Modrinth (official)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Mojang">Mojang official</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Title">Network diagnostics</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.File">檔案下載源</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.PreferOfficialThenMirror">優先使用官方源，在載入緩慢時換用鏡像來源</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.Title">遊戲資源取得行為</sys:String>

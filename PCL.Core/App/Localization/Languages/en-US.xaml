@@ -2666,6 +2666,22 @@
 
     <sys:String x:Key="Setup.GameManage.Error.InitFailed">Failed to initialize game management settings</sys:String>
     <sys:String x:Key="Setup.GameManage.Initialized">Game management settings have been initialized!</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckDone">Download source check finished</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Checking">Checking download source connectivity...</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckNow">Check now</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.CheckNow.ToolTip">Run a lightweight connectivity probe against each download source and refresh health status. No settings are changed.</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Cooldown">Cooling down · {0}s</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.FailCount">{0} recent failure(s)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Hint">Connectivity of download sources is shown here. Failures are tracked automatically: sources failing repeatedly are deprioritized in retry order and recover automatically after cooldown; you can also run a manual check.</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset">Reset health</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset.Success">Download source health has been reset</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Reset.ToolTip">Clear health records of all download sources; deprioritized sources immediately return to default order.</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Bmclapi">BMCLAPI (China mirror)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.CurseForge">CurseForge (official)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Mcim">MCIM mirror</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Modrinth">Modrinth (official)</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Source.Mojang">Mojang official</sys:String>
+    <sys:String x:Key="Setup.GameManage.NetworkDiagnosis.Title">Network diagnostics</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.File">File download source</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.PreferOfficialThenMirror">Prefer official sources, fallback to mirrors when slow</sys:String>
     <sys:String x:Key="Setup.GameManage.Source.Title">Game resources</sys:String>
