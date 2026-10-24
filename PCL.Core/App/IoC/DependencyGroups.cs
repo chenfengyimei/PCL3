@@ -18,7 +18,9 @@ public static partial class DependencyGroups
         var targetGroups = new List<DependencyGroup>();
         foreach (var targetToTry in _TargetsToTry.Where(t => targets.HasFlag(t)))
         {
-            if (groups.GetValueOrDefault(targetToTry) is not { } group) return false;
+            // 该目标的收集组不存在 = 声明了收集器但当前没有任何匹配项（空集），跳过而非失败，
+            // 避免"Dependency injection failed"对合法空集的误报（如 rpc-property 暂无属性用法）
+            if (groups.GetValueOrDefault(targetToTry) is not { } group) continue;
             targetGroups.Add(group);
         }
         foreach (var group in targetGroups) group.InvokeInjection(injection);
