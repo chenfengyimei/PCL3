@@ -233,22 +233,23 @@ public partial class PageSetupGameManage
         // 各源并行轻量探测；只更新记账，不动用户配置
         ModBase.RunInThread(() =>
         {
-            foreach (var (host, _) in DiagnosticSources)
+            // 并行探测：串行 5 源 × 8s 超时最坏 40s 会让"正在检测"提示形同卡死
+            Parallel.ForEach(DiagnosticSources, source =>
             {
                 try
                 {
-                    Requester.FetchString(ProbeUrlOf(host), new RequestParam
+                    Requester.FetchString(ProbeUrlOf(source.Host), new RequestParam
                     {
                         Timeout = 8000,
                         UseBrowserUserAgent = true,
                     });
-                    SourceHealthTracker.RecordSuccess($"https://{host}/");
+                    SourceHealthTracker.RecordSuccess($"https://{source.Host}/");
                 }
                 catch
                 {
-                    SourceHealthTracker.RecordFailure($"https://{host}/");
+                    SourceHealthTracker.RecordFailure($"https://{source.Host}/");
                 }
-            }
+            });
             ModBase.RunInUi(RefreshSourceHealthPanel);
             HintService.Hint(Lang.Text("Setup.GameManage.NetworkDiagnosis.CheckDone"), HintType.Success);
         });
