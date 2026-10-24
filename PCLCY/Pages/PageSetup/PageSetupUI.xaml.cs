@@ -1095,35 +1095,7 @@ public partial class PageSetupUI
             }
 
             // 关于子页面 (FrmAboutLeft)：PCL CY Edition 将关于分类独立为主导航页
-            if (ModMain.frmAboutLeft is not null)
-            {
-                ModMain.frmAboutLeft.ItemAbout.Visibility =
-                    !HiddenForceShow && conf.SetupAbout ? Visibility.Collapsed : Visibility.Visible;
-                ModMain.frmAboutLeft.ItemUpdate.Visibility =
-                    !HiddenForceShow && conf.SetupUpdate ? Visibility.Collapsed : Visibility.Visible;
-                ModMain.frmAboutLeft.ItemFeedback.Visibility = !HiddenForceShow && conf.SetupFeedback
-                    ? Visibility.Collapsed
-                    : Visibility.Visible;
-                ModMain.frmAboutLeft.ItemLog.Visibility =
-                    !HiddenForceShow && conf.SetupLog ? Visibility.Collapsed : Visibility.Visible;
-
-                var aboutVisible = !(conf.SetupAbout && conf.SetupUpdate && conf.SetupFeedback && conf.SetupLog) || HiddenForceShow;
-                ModMain.frmAboutLeft.TextAboutCategory.Visibility = aboutVisible ? Visibility.Visible : Visibility.Collapsed;
-                if (aboutVisible)
-                    ModMain.frmAboutLeft.TextAboutCategory.Opacity = 0.6d;
-
-                var aboutCount = 0;
-                if (!conf.SetupAbout)
-                    aboutCount += 1;
-                if (!conf.SetupUpdate)
-                    aboutCount += 1;
-                if (!conf.SetupFeedback)
-                    aboutCount += 1;
-                if (!conf.SetupLog)
-                    aboutCount += 1;
-                ModMain.frmAboutLeft.PanItem.Visibility =
-                    aboutCount < 2 && !HiddenForceShow ? Visibility.Collapsed : Visibility.Visible;
-            }
+            ModMain.frmAboutLeft?.RefreshHidden(HiddenForceShow);
 
             // 工具子页面 (FrmToolsLeft)
             if (ModMain.frmToolsLeft is not null)

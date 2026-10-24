@@ -17,6 +17,8 @@ public partial class PageAboutLeft
 
     private void PageAboutLeft_Loaded(object sender, RoutedEventArgs e)
     {
+        // 同步隐藏配置（与设置页"个性化-功能隐藏"一致，修复首次进入关于页不刷新可见性的遗漏）
+        RefreshHidden(PageSetupUI.HiddenForceShow);
         if (isLoad)
             return;
         isLoad = true;
@@ -34,6 +36,34 @@ public partial class PageAboutLeft
             ItemLog.SetChecked(true, false, false);
         else
             ItemAbout.SetChecked(true, false, false);
+    }
+
+    /// <summary>
+    ///     按隐藏配置刷新四个子项与分类标题的可见性（供本页加载与设置页 HiddenRefresh 调用）。
+    /// </summary>
+    public void RefreshHidden(bool forceShow)
+    {
+        var conf = Config.Preference.Hide;
+        ItemAbout.Visibility = !forceShow && conf.SetupAbout ? Visibility.Collapsed : Visibility.Visible;
+        ItemUpdate.Visibility = !forceShow && conf.SetupUpdate ? Visibility.Collapsed : Visibility.Visible;
+        ItemFeedback.Visibility = !forceShow && conf.SetupFeedback ? Visibility.Collapsed : Visibility.Visible;
+        ItemLog.Visibility = !forceShow && conf.SetupLog ? Visibility.Collapsed : Visibility.Visible;
+
+        var aboutVisible = !(conf.SetupAbout && conf.SetupUpdate && conf.SetupFeedback && conf.SetupLog) || forceShow;
+        TextAboutCategory.Visibility = aboutVisible ? Visibility.Visible : Visibility.Collapsed;
+        if (aboutVisible)
+            TextAboutCategory.Opacity = 0.6d;
+
+        var aboutCount = 0;
+        if (!conf.SetupAbout)
+            aboutCount += 1;
+        if (!conf.SetupUpdate)
+            aboutCount += 1;
+        if (!conf.SetupFeedback)
+            aboutCount += 1;
+        if (!conf.SetupLog)
+            aboutCount += 1;
+        PanItem.Visibility = aboutCount < 2 && !forceShow ? Visibility.Collapsed : Visibility.Visible;
     }
 
     private void PageAboutLeft_Unloaded(object sender, RoutedEventArgs e)
