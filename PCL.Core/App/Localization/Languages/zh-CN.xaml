@@ -3609,6 +3609,18 @@
 
     <!-- Update -->
 
+    <sys:String x:Key="Unlimited.Debug.Applied">调试选项已更新</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Delay">启动时注入随机延迟</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Hint">这些选项与「设置 → 其他 → 调试」同源，此处集中暴露便于快速切换。</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Mode">调试模式（性能降级，输出更多日志）</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Restricted">允许受限功能（区域限制开关，本版本已恒放行）</sys:String>
+    <sys:String x:Key="Unlimited.Debug.SkipCopy">跳过复制检查</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Title">调试选项</sys:String>
+    <sys:String x:Key="Unlimited.Download.Connections">单文件连接数：</sys:String>
+    <sys:String x:Key="Unlimited.Download.Hint">突破常规设置页的上限（线程 256 / 连接 64 / 速度 1024 档）。速度 0 = 不限制。调高可能被源站限流，请酌情。</sys:String>
+    <sys:String x:Key="Unlimited.Download.Speed">速度限制：</sys:String>
+    <sys:String x:Key="Unlimited.Download.Threads">总线程上限：</sys:String>
+    <sys:String x:Key="Unlimited.Download.Title">下载极限</sys:String>
     <sys:String x:Key="Unlimited.Files.CavesHint">将 caves.txt 放入该文件夹即可自定义回声洞内容</sys:String>
     <sys:String x:Key="Unlimited.Files.Desc">回声洞与"你知道吗"支持外部自定义：在启动器旁的 PCL 文件夹放置 caves.txt / hints.txt（每行一条，UTF-8），将完全替换内置内容。</sys:String>
     <sys:String x:Key="Unlimited.Files.HintsHint">将 hints.txt 放入该文件夹即可自定义"你知道吗"内容</sys:String>
@@ -3628,6 +3640,14 @@
     <sys:String x:Key="Unlimited.Hints.ResetAll">全部重置</sys:String>
     <sys:String x:Key="Unlimited.Hints.ResetDone">已重置全部提示标记</sys:String>
     <sys:String x:Key="Unlimited.Hints.Title">提示与确认状态</sys:String>
+    <sys:String x:Key="Unlimited.Id.Desc">启动器识别码由机器指纹派生，用于今日人品的种子等匿名用途。重新生成后今日人品会换一个值。</sys:String>
+    <sys:String x:Key="Unlimited.Id.LauncherId">识别码：</sys:String>
+    <sys:String x:Key="Unlimited.Id.Regen.Confirm.Message">确定要重新生成识别码吗？今日人品会立即换值，且无法恢复原识别码。</sys:String>
+    <sys:String x:Key="Unlimited.Id.Regen.Confirm.Title">重新生成识别码</sys:String>
+    <sys:String x:Key="Unlimited.Id.Regen.Done">识别码已重新生成</sys:String>
+    <sys:String x:Key="Unlimited.Id.Regenerate">重新生成</sys:String>
+    <sys:String x:Key="Unlimited.Id.Regenerate.ToolTip">用随机数替换当前识别码（等价于换一台新机器），今日人品随之改变。</sys:String>
+    <sys:String x:Key="Unlimited.Id.Title">识别码</sys:String>
     <sys:String x:Key="Unlimited.Luck.Force.Invalid">请输入 0-100 之间的整数</sys:String>
     <sys:String x:Key="Unlimited.Luck.Force.Success">已指定下一次人品值：{0}</sys:String>
     <sys:String x:Key="Unlimited.Luck.Force.ToolTip">输入 0-100，下一次"今日人品"将直接显示该值，之后恢复自然随机。</sys:String>
@@ -3641,6 +3661,14 @@
     <sys:String x:Key="Unlimited.Presets.Desc">全部 20 个内置主页预设的名称与来源地址，可一键复制用于自定义主页。</sys:String>
     <sys:String x:Key="Unlimited.Presets.Local">（本地生成，无网络地址）</sys:String>
     <sys:String x:Key="Unlimited.Presets.Title">主页预设源</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Applied">已注入并持久化，立即生效</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Apply">注入</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.CfKey">CurseForge API Key：</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Desc">本地构建未注入密钥时，可在此运行时注入：立即生效并持久化（重启后自动恢复）。留空 = 恢复构建期默认值。</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.LinkServers">联机服务器（| 分隔）：</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.MsClient">微软登录 Client ID：</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Note">CurseForge Key 即时生效（新请求起）；微软 Client ID 对新的登录会话生效。密钥仅保存在本机配置中，不会上传。</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Title">构建密钥注入</sys:String>
     <sys:String x:Key="Unlimited.Stats.Edit">修改</sys:String>
     <sys:String x:Key="Unlimited.Stats.Hint">这些计数会影响里程碑行为（如更新提示节奏），可自由修改。</sys:String>
     <sys:String x:Key="Unlimited.Stats.InputHint">输入新的数值（非负整数）</sys:String>

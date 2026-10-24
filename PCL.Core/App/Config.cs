@@ -71,6 +71,22 @@ public static partial class Config
     }
 
     /// <summary>
+    /// 无限制中心的运行时密钥注入（持久化）。值在启动时预热进 EnvironmentInterop 的运行时覆盖，
+    /// 优先级高于构建期注入，相当于用户自行为本地构建补齐密钥。
+    /// </summary>
+    [ConfigGroup("Unlimited")] partial class UnlimitedConfigGroup
+    {
+        /// <summary>微软 OAuth Client ID 的运行时覆盖（留空 = 使用构建期值）。</summary>
+        [ConfigItem<string>("UnlimitedMsClientId", "")] public partial string MicrosoftClientId { get; set; }
+
+        /// <summary>CurseForge API Key 的运行时覆盖（留空 = 使用构建期值）。</summary>
+        [ConfigItem<string>("UnlimitedCurseforgeKey", "")] public partial string CurseforgeApiKey { get; set; }
+
+        /// <summary>联机根服务器地址的运行时覆盖，多个以 | 分隔（留空 = 使用构建期值）。</summary>
+        [ConfigItem<string>("UnlimitedLinkServers", "")] public partial string LinkServers { get; set; }
+    }
+
+    /// <summary>
     /// 下载配置。
     /// </summary>
     [ConfigGroup("Download")] partial class DownloadConfigGroup

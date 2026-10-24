@@ -3609,6 +3609,18 @@
 
     <!-- Update -->
 
+    <sys:String x:Key="Unlimited.Debug.Applied">Debug options updated</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Delay">Inject random delays at startup</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Hint">These mirror the debug options under Settings → Misc, exposed here for quick access.</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Mode">Debug mode (reduced performance, more logging)</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Restricted">Allow restricted features (already unrestricted in this build)</sys:String>
+    <sys:String x:Key="Unlimited.Debug.SkipCopy">Skip copy checks</sys:String>
+    <sys:String x:Key="Unlimited.Debug.Title">Debug options</sys:String>
+    <sys:String x:Key="Unlimited.Download.Connections">Connections per file: </sys:String>
+    <sys:String x:Key="Unlimited.Download.Hint">Breaks past the caps of the regular settings page (threads 256 / connections 64 / speed 1024). Speed 0 = unlimited. Higher values may be rate-limited by sources.</sys:String>
+    <sys:String x:Key="Unlimited.Download.Speed">Speed limit: </sys:String>
+    <sys:String x:Key="Unlimited.Download.Threads">Total threads: </sys:String>
+    <sys:String x:Key="Unlimited.Download.Title">Download limits</sys:String>
     <sys:String x:Key="Unlimited.Files.CavesHint">Place caves.txt in this folder to customize echo cave content</sys:String>
     <sys:String x:Key="Unlimited.Files.Desc">Echo cave and trivia hints support external customization: place caves.txt / hints.txt (one entry per line, UTF-8) in the PCL folder next to the exe to fully replace the built-in content.</sys:String>
     <sys:String x:Key="Unlimited.Files.HintsHint">Place hints.txt in this folder to customize trivia hints</sys:String>
@@ -3628,6 +3640,14 @@
     <sys:String x:Key="Unlimited.Hints.ResetAll">Reset all</sys:String>
     <sys:String x:Key="Unlimited.Hints.ResetDone">All hint flags reset</sys:String>
     <sys:String x:Key="Unlimited.Hints.Title">Hints &amp; confirmations</sys:String>
+    <sys:String x:Key="Unlimited.Id.Desc">The launcher ID is derived from hardware fingerprints and seeds the daily luck value, among other anonymous uses. Regenerating it rerolls your luck.</sys:String>
+    <sys:String x:Key="Unlimited.Id.LauncherId">ID: </sys:String>
+    <sys:String x:Key="Unlimited.Id.Regen.Confirm.Message">Regenerate the launcher ID? Your daily luck rerolls immediately and the original ID cannot be restored.</sys:String>
+    <sys:String x:Key="Unlimited.Id.Regen.Confirm.Title">Regenerate identity</sys:String>
+    <sys:String x:Key="Unlimited.Id.Regen.Done">Identity regenerated</sys:String>
+    <sys:String x:Key="Unlimited.Id.Regenerate">Regenerate</sys:String>
+    <sys:String x:Key="Unlimited.Id.Regenerate.ToolTip">Replaces the current ID with a random one (equivalent to a new machine); daily luck changes accordingly.</sys:String>
+    <sys:String x:Key="Unlimited.Id.Title">Identity</sys:String>
     <sys:String x:Key="Unlimited.Luck.Force.Invalid">Enter an integer between 0 and 100</sys:String>
     <sys:String x:Key="Unlimited.Luck.Force.Success">Next luck value forced to {0}</sys:String>
     <sys:String x:Key="Unlimited.Luck.Force.ToolTip">Enter 0-100. The next roll shows this value exactly, then natural randomness resumes.</sys:String>
@@ -3641,6 +3661,14 @@
     <sys:String x:Key="Unlimited.Presets.Desc">Names and source URLs of all 20 built-in homepage presets; copy any of them for your custom homepage.</sys:String>
     <sys:String x:Key="Unlimited.Presets.Local">(generated locally, no URL)</sys:String>
     <sys:String x:Key="Unlimited.Presets.Title">Homepage preset sources</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Applied">Injected and persisted, effective immediately</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Apply">Inject</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.CfKey">CurseForge API Key: </sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Desc">When a local build lacks baked-in secrets, inject them here: effective immediately and persisted across restarts. Leave blank to restore build-time defaults.</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.LinkServers">Lobby servers (| separated): </sys:String>
+    <sys:String x:Key="Unlimited.Secrets.MsClient">Microsoft Client ID: </sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Note">The CurseForge key applies to new requests immediately; the Microsoft Client ID applies to new login sessions. Secrets stay in local config only and are never uploaded.</sys:String>
+    <sys:String x:Key="Unlimited.Secrets.Title">Build secret injection</sys:String>
     <sys:String x:Key="Unlimited.Stats.Edit">Edit</sys:String>
     <sys:String x:Key="Unlimited.Stats.Hint">These counters drive milestone behaviour (e.g. update notice pacing) and can be edited freely.</sys:String>
     <sys:String x:Key="Unlimited.Stats.InputHint">Enter a new value (non-negative integer)</sys:String>

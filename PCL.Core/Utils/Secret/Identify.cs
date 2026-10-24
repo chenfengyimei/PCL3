@@ -9,8 +9,28 @@ namespace PCL.Core.Utils.Secret;
 
 public class Identify
 {
-    public static byte[] RawId { get => field ??= _GetRawId(); } = null!;
-    public static string LauncherId { get => field ??= _getLauncherId(); } = null!;
+    /// <summary>识别码替换种子（无限制中心"重新生成识别码"用）：非空时覆盖机器指纹派生值。</summary>
+    private static byte[]? _overrideRawId;
+
+    /// <summary>LauncherId 缓存字段（配合半自动属性手动管理，支持重新生成后失效）。</summary>
+    private static string? _launcherIdCache;
+
+    public static byte[] RawId => _overrideRawId ??= _GetRawId();
+
+    public static string LauncherId => _launcherIdCache ??= _getLauncherId();
+
+    /// <summary>
+    ///     重新生成识别码（无限制中心）。用随机数替换机器指纹派生的原始 ID，
+    ///     LauncherId 随之改变（今日人品种子、匿名标识等都会换新）。
+    /// </summary>
+    public static void Regenerate()
+    {
+        var random = new byte[64];
+        System.Security.Cryptography.RandomNumberGenerator.Fill(random);
+        _overrideRawId = System.Text.Encoding.UTF8.GetBytes(
+            PCL.Core.Utils.Hash.SHA512Provider.Instance.ComputeHash(random).ToHexString());
+        _launcherIdCache = null; // 清除缓存，下次访问按新 RawId 重算
+    }
 
     private static byte[] _GetRawId()
     {

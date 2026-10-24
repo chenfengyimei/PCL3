@@ -8,6 +8,125 @@
     PanScroll="{Binding ElementName=PanBack}">
     <local:MyScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" x:Name="PanBack">
         <StackPanel Margin="10,12,10,12">
+            <!-- 构建密钥注入 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Secrets.Title}">
+                <StackPanel Margin="25,42,25,20">
+                    <TextBlock Text="{DynamicResource Unlimited.Secrets.Desc}" Opacity="0.5" Margin="1,0,0,12"
+                               TextWrapping="Wrap" />
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="190" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,12,0"
+                                   Text="{DynamicResource Unlimited.Secrets.MsClient}" />
+                        <local:MyTextBox Grid.Column="1" x:Name="TextSecretMsClient" />
+                        <local:MyButton Grid.Column="2" x:Name="BtnSecretMsClient" Padding="13,0" Margin="12,0,0,0"
+                                        Text="{DynamicResource Unlimited.Secrets.Apply}" Click="BtnSecretMsClient_Click" />
+                    </Grid>
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="190" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,12,0"
+                                   Text="{DynamicResource Unlimited.Secrets.CfKey}" />
+                        <local:MyTextBox Grid.Column="1" x:Name="TextSecretCfKey" />
+                        <local:MyButton Grid.Column="2" x:Name="BtnSecretCfKey" Padding="13,0" Margin="12,0,0,0"
+                                        Text="{DynamicResource Unlimited.Secrets.Apply}" Click="BtnSecretCfKey_Click" />
+                    </Grid>
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="190" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,12,0"
+                                   Text="{DynamicResource Unlimited.Secrets.LinkServers}" />
+                        <local:MyTextBox Grid.Column="1" x:Name="TextSecretLinkServers" />
+                        <local:MyButton Grid.Column="2" x:Name="BtnSecretLinkServers" Padding="13,0" Margin="12,0,0,0"
+                                        Text="{DynamicResource Unlimited.Secrets.Apply}" Click="BtnSecretLinkServers_Click" />
+                    </Grid>
+                    <TextBlock Text="{DynamicResource Unlimited.Secrets.Note}" Opacity="0.4" Margin="1,8,0,0"
+                               TextWrapping="Wrap" FontSize="11" />
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 调试选项 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Debug.Title}">
+                <StackPanel Margin="25,42,25,20">
+                    <local:MyCheckBox x:Name="CheckDebugMode" Height="22" Margin="-1,0,0,5"
+                                      Text="{DynamicResource Unlimited.Debug.Mode}" Change="DebugFlag_Change" />
+                    <local:MyCheckBox x:Name="CheckDebugDelay" Height="22" Margin="-1,0,0,5"
+                                      Text="{DynamicResource Unlimited.Debug.Delay}" Change="DebugFlag_Change" />
+                    <local:MyCheckBox x:Name="CheckDebugSkipCopy" Height="22" Margin="-1,0,0,5"
+                                      Text="{DynamicResource Unlimited.Debug.SkipCopy}" Change="DebugFlag_Change" />
+                    <local:MyCheckBox x:Name="CheckDebugRestricted" Height="22" Margin="-1,0,0,5"
+                                      Text="{DynamicResource Unlimited.Debug.Restricted}" Change="DebugFlag_Change" />
+                    <TextBlock Text="{DynamicResource Unlimited.Debug.Hint}" Opacity="0.5" Margin="1,8,0,0"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 下载极限 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Download.Title}">
+                <StackPanel Margin="25,42,25,20">
+                    <Grid Height="28" Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource Unlimited.Download.Threads}" />
+                        <local:MySlider Grid.Column="1" x:Name="SliderDlThreads" MaxValue="256" ValueByKey="1"
+                                        Change="DlSlider_Change" Tag="DlThreads" />
+                    </Grid>
+                    <Grid Height="28" Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource Unlimited.Download.Connections}" />
+                        <local:MySlider Grid.Column="1" x:Name="SliderDlConnections" MaxValue="64" ValueByKey="1"
+                                        Change="DlSlider_Change" Tag="DlConnections" />
+                    </Grid>
+                    <Grid Height="28">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource Unlimited.Download.Speed}" />
+                        <local:MySlider Grid.Column="1" x:Name="SliderDlSpeed" MaxValue="1024" ValueByKey="8"
+                                        Change="DlSlider_Change" Tag="DlSpeed" />
+                    </Grid>
+                    <TextBlock Text="{DynamicResource Unlimited.Download.Hint}" Opacity="0.5" Margin="1,10,0,0"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </local:MyCard>
+
+            <!-- 识别码 -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Id.Title}">
+                <StackPanel Margin="25,42,25,20">
+                    <TextBlock Text="{DynamicResource Unlimited.Id.Desc}" Opacity="0.5" Margin="1,0,0,10"
+                               TextWrapping="Wrap" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,12,0"
+                                   Text="{DynamicResource Unlimited.Id.LauncherId}" />
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" x:Name="LabLauncherId"
+                                   TextTrimming="CharacterEllipsis" Opacity="0.7" />
+                        <local:MyButton Grid.Column="2" x:Name="BtnRegenId" Padding="13,0"
+                                        Text="{DynamicResource Unlimited.Id.Regenerate}" Click="BtnRegenId_Click"
+                                        ToolTip="{DynamicResource Unlimited.Id.Regenerate.ToolTip}" />
+                    </Grid>
+                </StackPanel>
+            </local:MyCard>
+
             <!-- 今日人品 -->
             <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Unlimited.Luck.Title}">
                 <StackPanel Margin="25,42,25,20">

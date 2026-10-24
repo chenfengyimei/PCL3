@@ -58,6 +58,8 @@ public partial class FormMain
     public FormMain()
     {
         ModBase.applicationStartTick = TimeUtils.GetTimeTick();
+        // 无限制中心：把用户在配置中持久化的密钥覆盖预热进运行时层（优先级高于构建期注入）
+        PageUnlimited.WarmupSecrets();
         // 刷新主题
         // ThemeCheckAll(False)
         // ThemeRefreshColor()

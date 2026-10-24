@@ -23,6 +23,25 @@ public partial class PageUnlimited
 
     public void Reload()
     {
+        // 构建密钥注入
+        TextSecretMsClient.Text = Config.Unlimited.MicrosoftClientId;
+        TextSecretCfKey.Text = Config.Unlimited.CurseforgeApiKey;
+        TextSecretLinkServers.Text = Config.Unlimited.LinkServers;
+
+        // 调试选项
+        CheckDebugMode.SetChecked(Config.Debug.Enabled, false);
+        CheckDebugDelay.SetChecked(Config.Debug.AddRandomDelay, false);
+        CheckDebugSkipCopy.SetChecked(Config.Debug.DontCopy, false);
+        CheckDebugRestricted.SetChecked(Config.Debug.AllowRestrictedFeature, false);
+
+        // 下载极限
+        SliderDlThreads.Value = Config.Download.ThreadLimit;
+        SliderDlConnections.Value = Config.Download.FileConnectionLimit;
+        SliderDlSpeed.Value = Config.Download.SpeedLimit;
+
+        // 识别码
+        LabLauncherId.Text = PCL.Core.Utils.Secret.Identify.LauncherId;
+
         // 今日人品
         var luckValue = new Random(PageToolsTest.GenerateDailySeed()).Next(0, 101);
         LabLuckToday.Text = $"{luckValue} ({PageToolsTest.GetRating(luckValue)})";
@@ -41,6 +60,100 @@ public partial class PageUnlimited
         // 主页预设源
         BuildPresetUrls();
     }
+
+    #region 构建密钥注入
+
+    /// <summary>
+    ///     把持久化的密钥覆盖预热进运行时覆盖层（优先级最高）。
+    ///     在 FormMain 启动早期与每次页面保存时调用。
+    /// </summary>
+    public static void WarmupSecrets()
+    {
+        try
+        {
+            var u = Config.Unlimited;
+            PCL.Core.Utils.OS.EnvironmentInterop.SetRuntimeSecret("MS_CLIENT_ID", u.MicrosoftClientId);
+            PCL.Core.Utils.OS.EnvironmentInterop.SetRuntimeSecret("CURSEFORGE_API_KEY", u.CurseforgeApiKey);
+            PCL.Core.Utils.OS.EnvironmentInterop.SetRuntimeSecret("LINK_SERVER_ROOT", u.LinkServers);
+        }
+        catch
+        {
+            // 配置尚未就绪时跳过，页面打开后会再次预热
+        }
+    }
+
+    private void BtnSecretMsClient_Click(object sender, MouseButtonEventArgs e)
+    {
+        Config.Unlimited.MicrosoftClientId = TextSecretMsClient.Text.Trim();
+        WarmupSecrets();
+        HintService.Hint(Lang.Text("Unlimited.Secrets.Applied"), HintType.Success);
+    }
+
+    private void BtnSecretCfKey_Click(object sender, MouseButtonEventArgs e)
+    {
+        Config.Unlimited.CurseforgeApiKey = TextSecretCfKey.Text.Trim();
+        WarmupSecrets();
+        HintService.Hint(Lang.Text("Unlimited.Secrets.Applied"), HintType.Success);
+    }
+
+    private void BtnSecretLinkServers_Click(object sender, MouseButtonEventArgs e)
+    {
+        Config.Unlimited.LinkServers = TextSecretLinkServers.Text.Trim();
+        WarmupSecrets();
+        HintService.Hint(Lang.Text("Unlimited.Secrets.Applied"), HintType.Success);
+    }
+
+    #endregion
+
+    #region 调试选项
+
+    private void DebugFlag_Change(object sender, bool user)
+    {
+        if (!user) return;
+        Config.Debug.Enabled = CheckDebugMode.Checked == true;
+        Config.Debug.AddRandomDelay = CheckDebugDelay.Checked == true;
+        Config.Debug.DontCopy = CheckDebugSkipCopy.Checked == true;
+        Config.Debug.AllowRestrictedFeature = CheckDebugRestricted.Checked == true;
+        HintService.Hint(Lang.Text("Unlimited.Debug.Applied"), HintType.Success);
+    }
+
+    #endregion
+
+    #region 下载极限
+
+    private void DlSlider_Change(object sender, bool user)
+    {
+        if (!user) return;
+        switch ((string)((MySlider)sender).Tag)
+        {
+            case "DlThreads":
+                Config.Download.ThreadLimit = (int)SliderDlThreads.Value;
+                break;
+            case "DlConnections":
+                Config.Download.FileConnectionLimit = (int)SliderDlConnections.Value;
+                break;
+            case "DlSpeed":
+                Config.Download.SpeedLimit = (int)SliderDlSpeed.Value;
+                break;
+        }
+    }
+
+    #endregion
+
+    #region 识别码
+
+    private void BtnRegenId_Click(object sender, MouseButtonEventArgs e)
+    {
+        if (ModMain.MyMsgBox(Lang.Text("Unlimited.Id.Regen.Confirm.Message"), Lang.Text("Unlimited.Id.Regen.Confirm.Title"),
+                Lang.Text("Common.Action.Confirm"), Lang.Text("Common.Action.Cancel"), isWarn: true) != 1) return;
+        // 识别码基于机器指纹派生，重新生成等价于换一台"新机器"：今日人品种子随之改变
+        PCL.Core.Utils.Secret.Identify.Regenerate();
+        LabLauncherId.Text = PCL.Core.Utils.Secret.Identify.LauncherId;
+        HintService.Hint(Lang.Text("Unlimited.Id.Regen.Done"), HintType.Success);
+        Reload();
+    }
+
+    #endregion
 
     #region 今日人品
 

@@ -9,6 +9,29 @@ public static partial class EnvironmentInterop
     private const string LogModule = "Environment";
 
     /// <summary>
+    ///     运行时密钥覆盖（无限制中心）。优先级最高：非空值直接生效，允许用户在不重新构建的情况下
+    ///     注入微软 Client ID、CurseForge Key、联机服务器等构建期密钥。
+    /// </summary>
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> RuntimeSecrets = new();
+
+    /// <summary>
+    ///     写入一条运行时密钥覆盖（空值删除覆盖，回落到构建期注入值）。
+    /// </summary>
+    public static void SetRuntimeSecret(string key, string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            RuntimeSecrets.TryRemove(key, out _);
+        else
+            RuntimeSecrets[key] = value;
+    }
+
+    /// <summary>
+    ///     读取运行时覆盖的密钥（不存在返回 null）。
+    /// </summary>
+    public static string? GetRuntimeSecret(string key)
+        => RuntimeSecrets.TryGetValue(key, out var value) ? value : null;
+
+    /// <summary>
     /// 读取环境变量并使用 <see cref="StringExtension.Convert{T}"/> 将其转换为指定类型并写入目标引用。
     /// </summary>
     /// <param name="key">环境变量名</param>
@@ -34,6 +57,9 @@ public static partial class EnvironmentInterop
 
     public static string? GetSecret(string key, bool readEnv = true, bool readEnvDebugOnly = false)
     {
+        // 无限制中心的运行时覆盖优先于构建期注入与环境变量
+        if (RuntimeSecrets.TryGetValue(key, out var runtimeValue))
+            return runtimeValue;
         if (!SecretDictionary.TryGetValue(key, out var value) &&
             readEnv &&
 #if !DEBUG
