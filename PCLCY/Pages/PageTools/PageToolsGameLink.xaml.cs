@@ -20,6 +20,9 @@ namespace PCL;
 
 public partial class PageToolsGameLink
 {
+    /// <summary>未配置联机服务器地址的提示是否已记录过（避免每次进入页面重复刷日志）。</summary>
+    private static bool _linkServerMissingLogged;
+
     static PageToolsGameLink()
     {
         initLoader = new ModLoader.LoaderCombo<int>(Lang.Text("Link.Mod.Task.InitLobby"),
@@ -399,7 +402,12 @@ public partial class PageToolsGameLink
                     .ToArray();
                 if (linkServers.Length == 0)
                 {
-                    LogWrapper.Warn("[Link] 未配置联机服务器地址，跳过公告获取");
+                    // 未配置联机服务器是常态（自建构建无该 Secret），仅首次提示，避免反复刷警告
+                    if (!_linkServerMissingLogged)
+                    {
+                        _linkServerMissingLogged = true;
+                        LogWrapper.Info("[Link] 未配置联机服务器地址，跳过公告获取");
+                    }
                     return;
                 }
 
