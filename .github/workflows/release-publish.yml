@@ -117,21 +117,24 @@ jobs:
         with:
           tag_name: ${{ env.RELEASE_TAG }}
 
-      - name: Trigger MirrorChyanUploading
-        run: |
-          MRC_CHANNEL="stable"
-          if echo "$RELEASE_TAG" | grep -qiE 'beta|rc'; then
-            MRC_CHANNEL="beta"
-          fi
-
-          for arch in x64 arm64; do
-            gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_uploading.yml -f channel=$MRC_CHANNEL -f arch=$arch
-          done
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Trigger MirrorChyanReleaseNote
-        run: |
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # MirrorChyan 上传与发布说明：渠道 ID（mirrorchyan_rid）仍为上游占位、
+      # MirrorChyanUploadToken 未配置，接入前触发只会产生失败运行。
+      # 配好 rid 与 Token 后取消下方注释即可启用。
+      # - name: Trigger MirrorChyanUploading
+      #   run: |
+      #     MRC_CHANNEL="stable"
+      #     if echo "$RELEASE_TAG" | grep -qiE 'beta|rc'; then
+      #       MRC_CHANNEL="beta"
+      #     fi
+      #
+      #     for arch in x64 arm64; do
+      #       gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_uploading.yml -f channel=$MRC_CHANNEL -f arch=$arch
+      #     done
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #
+      # - name: Trigger MirrorChyanReleaseNote
+      #   run: |
+      #     gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
