@@ -47,7 +47,8 @@ public partial class PageLoginProfile
         {
             foreach (var p in ProfileService.Profiles)
                 ProfileCollection.Add(new ProfileItem(p));
-            HintMicrosoft.Visibility = ProfileService.Profiles.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            // 按需求隐藏"首次正版验证"提示条：新建档案弹窗自身已提供"跳过"按钮，无需额外引导
+            HintMicrosoft.Visibility = Visibility.Collapsed;
             ModBase.Log("[Profile] 档案列表刷新完成");
         }
         catch (Exception ex)
