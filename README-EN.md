@@ -30,6 +30,7 @@ PCL CY Edition is a fully open-source, free public build with no feature restric
 ### Resources
 - Search, download and manage mods, modpacks, resource packs, shaders, datapacks and worlds
 - CurseForge and Modrinth sources with MCIM mirror acceleration
+- Download source health tracking and a network diagnostics panel: failing sources are automatically deprioritized, and source connectivity can be checked from settings
 - Mod conflict detection, dependency completion, disable management and local naming rules
 
 ### Accounts & Login
