@@ -163,6 +163,26 @@
                     </Grid>
                 </StackPanel>
             </local:MyCard>
+            <!-- 网络诊断：下载源健康状态（源健康记账的产品化展示） -->
+            <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Setup.GameManage.NetworkDiagnosis.Title}">
+                <StackPanel Margin="25,42,25,15">
+                    <TextBlock Text="{DynamicResource Setup.GameManage.NetworkDiagnosis.Hint}" Opacity="0.5"
+                               HorizontalAlignment="Left" Margin="0,0,0,8" TextWrapping="Wrap" />
+                    <StackPanel x:Name="PanSourceHealth" MinHeight="18" />
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <local:MyButton x:Name="BtnSourceHealthCheck" Text="{DynamicResource Setup.GameManage.NetworkDiagnosis.CheckNow}"
+                                        Padding="13,0" Margin="0,0,12,0" Click="BtnSourceHealthCheck_Click"
+                                        ToolTip="{DynamicResource Setup.GameManage.NetworkDiagnosis.CheckNow.ToolTip}" />
+                        <local:MyButton x:Name="BtnSourceHealthReset" Text="{DynamicResource Setup.GameManage.NetworkDiagnosis.Reset}"
+                                        Padding="13,0" Grid.Column="1" Click="BtnSourceHealthReset_Click"
+                                        ToolTip="{DynamicResource Setup.GameManage.NetworkDiagnosis.Reset.ToolTip}" />
+                    </Grid>
+                </StackPanel>
+            </local:MyCard>
             <local:MyCard Margin="0,0,0,15" Title="{DynamicResource Setup.GameManage.Accessibility.Title}">
                 <Grid Margin="25,40,25,17">
                     <Grid.ColumnDefinitions>

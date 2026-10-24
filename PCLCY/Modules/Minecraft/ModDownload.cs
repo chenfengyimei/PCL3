@@ -2043,6 +2043,9 @@ public static class ModDownload
                 }
             }
 
+        // 源健康记账：冷却中的源降权排后（不禁止，保留硬重试能力）
+        urls = [.. urls.OrderBy(SourceHealthScore)];
+
         var exs = "";
         foreach (var Source in urls)
             try
@@ -2052,13 +2055,14 @@ public static class ModDownload
                     Timeout = Source.Value * 1000,
                     UseBrowserUserAgent = true
                 });
+                SourceHealthTracker.RecordSuccess(Source.Key);
                 if (typeof(T) == typeof(string)) return (T)(object)json;
                 return (T)(object)ModBase.GetJson(json);
             }
             catch (Exception ex)
             {
-                // 镜像源可能随机爆炸，忽略就好
-                if (!ex.Message.ContainsF("mcimirror")) exs += ex.Message + "\r\n";
+                SourceHealthTracker.RecordFailure(Source.Key);
+                exs += $"[{Source.Key}] {ex.Message}\r\n";
             }
 
         throw new Exception(exs);
@@ -2109,6 +2113,9 @@ public static class ModDownload
                 }
             }
 
+        // 源健康记账：冷却中的源降权排后
+        urls = [.. urls.OrderBy(SourceHealthScore)];
+
         var exs = "";
         foreach (var Source in urls)
             try
@@ -2116,20 +2123,26 @@ public static class ModDownload
                 string json = Requester.Fetch(Source.Key, new FetchParam
                 {
                     Method = method,
-                    Content = data, 
+                    Content = data,
                     ContentType = contentType,
                     Timeout = Source.Value * 1000
                 });
+                SourceHealthTracker.RecordSuccess(Source.Key);
                 if (typeof(T) == typeof(string)) return (T)(object)json; // 沟槽的，为什么不能写 T is string
                 return (T)(object)ModBase.GetJson(json);
             }
             catch (Exception ex)
             {
-                if (!ex.Message.ContainsF("mcimirror")) exs += ex.Message + "\r\n";
+                SourceHealthTracker.RecordFailure(Source.Key);
+                exs += $"[{Source.Key}] {ex.Message}\r\n";
             }
 
         throw new Exception(exs);
     }
+
+    /// <summary>源健康排序键：冷却中的源排后（稳定排序保留原相对顺序）。</summary>
+    private static int SourceHealthScore(KeyValuePair<string, int> source) =>
+        SourceHealthTracker.Score(source.Key);
 
     #endregion
 
